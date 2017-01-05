@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DEE8D423-F366-4211-8058-01B752AA9091}</ProjectGuid>
+    <ProjectGuid>{8A173B67-8551-43D7-89F2-A72D14EB3A1D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NinjasVsZombies</RootNamespace>
-    <AssemblyName>NinjasVsZombies</AssemblyName>
+    <RootNamespace>GistAssignments</RootNamespace>
+    <AssemblyName>GistAssignments</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

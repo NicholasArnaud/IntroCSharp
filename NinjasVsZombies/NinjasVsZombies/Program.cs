@@ -3,28 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+  
 namespace NinjasVsZombies
 {
+    public class Player : Entity
+    {
+        public Player() { }
+        public Player(int h, int att) : base(h, att)
+        {
+
+        }
+        public override bool Attack(Entity enemy) { return true; }
+        public bool Defend() { return true; }
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
-
-            int num = 5;
-            Player p = new Player(1,1);
+      
+             int num = 5;
+            Player p = new Player(1, 1);
             Console.WriteLine(p.name);
-            while (true)
-            {
-               
-                Console.ReadLine();
-                num++;
-            }
+            //while (true)
+            //{
+
+            //    Console.ReadLine();
+            //    num++;
+            //}
+            Console.ReadLine();
 
         }
     }
 
-    class Entity
+    public class Entity
     {
         public Entity() { }
         public Entity(int h, int att)
@@ -54,22 +66,13 @@ namespace NinjasVsZombies
         public string name;
     }
 
-    class Zombie : Entity
+    public class Zombie : Entity
     {
         public Zombie() { }
         public Zombie(int h, int att) { }
         public override bool Attack(Entity enemy) { return true; }
     }
 
-    class Player : Entity
-    {
-        public Player() { }
-        public Player(int h, int att) : base(h,att)
-        {
-            
-        }
-        public override bool Attack(Entity enemy) { return true; }
-        public bool Defend() { return true; }
-    }
+
 
 }
