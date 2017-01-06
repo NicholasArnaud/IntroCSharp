@@ -10,6 +10,7 @@ namespace NinjasVsZombies
     {
         static void Main(string[] args)
         {
+
             Player TheLegend27 = new Player(200, 20);
             TheLegend27.Name = "Nick";
             TheLegend27.Speed = 15.0f;
@@ -33,11 +34,14 @@ namespace NinjasVsZombies
             Console.WriteLine("Welcome! There are 4 characters. \n  2 Ninjas: TheLegend27 and TheGuy \n  2 Zombies: NoobKilla and GetRekt \n");
             Console.WriteLine("You can select who to attack by typing the name of \nthe character you want to attack with and the character you want to attack.");
             Console.WriteLine("For example: Player attack Enemy \n");
-            Console.WriteLine("To Quit simply press 'q' and the 'enter' key \n");
+            Console.WriteLine("You can view all players current HP and attack stats by typing 'stats'");
+            Console.WriteLine("To Quit simply press 'q' and the 'enter' key");
+            Console.WriteLine("Press 'c' to clear screen at any time \n");
             string input;
             do
             {
                 input = Console.ReadLine();
+
 
                 //NINJA ATTACKS
                 if (input == "TheLegend27 attack NoobKilla")
@@ -54,7 +58,6 @@ namespace NinjasVsZombies
                         Console.WriteLine("NoobKilla is already dead \n");
                 }
 
-
                 if (input == "TheLegend27 attack GetRekt")
                 {
                     if (GetRekt.Health != 0)
@@ -69,7 +72,6 @@ namespace NinjasVsZombies
                         Console.WriteLine("GetRekt is already dead \n");
                 }
 
-
                 if (input == "TheGuy attack GetRekt")
                 {
                     if (GetRekt.Health != 0)
@@ -83,7 +85,6 @@ namespace NinjasVsZombies
                     else
                         Console.WriteLine("GetRekt is already dead \n");
                 }
-
 
                 if (input == "TheGuy attack NoobKilla")
                 {
@@ -176,6 +177,25 @@ namespace NinjasVsZombies
                         Console.WriteLine("TheGuy is already dead \n");
                 }
 
+                //CHECK STATS
+                if (input == "stat")
+                {
+                    Console.Clear();
+                    Console.WriteLine("THE NINJAS \n");
+                    Console.WriteLine("TheLegend27: \n" + "HP: " + TheLegend27.Health + "\n" + "BASE ATK: " + TheLegend27.AttackPower + "\nREAL NAME: " + TheLegend27.Name + "\n");
+                    Console.WriteLine("TheGuy: \n" + "HP: " + TheGuy.Health + "\n" + "BASE ATK: " + TheGuy.AttackPower + "\nREAL NAME: " + TheGuy.Name + "\n");
+                    Console.WriteLine("THE ZOMBIES \n");
+                    Console.WriteLine("NoobKilla: \n" + "HP: " + NoobKilla.Health + "\n" + "BASE ATK: " + NoobKilla.AttackPower + "\nREAL NAME: " + NoobKilla.Name + "\n");
+                    Console.WriteLine("GetRekt: \n" + "HP: " + GetRekt.Health + "\n" + "BASE ATK: " + GetRekt.AttackPower + "\nREAL NAME: " + GetRekt.Name + "\n");
+                    Console.ReadLine();
+                    Console.Clear();
+                    Console.WriteLine("Resume at any time by attacking \n");
+                }
+
+                //CLEAR
+                if (input == "c") { Console.Clear(); }
+
+
                 //FRIENDLY FIRE
                 if (input == "NoobKilla attack GetRekt")
                     Console.WriteLine("YOU CAN NOT ATTACK YOUR TEAMMATE \n");
@@ -240,7 +260,13 @@ namespace NinjasVsZombies
         public int Health
         {
             get { return health; }
-            set { health = value; }
+            set
+            {
+                if (value <= 0)
+                    health = 0;
+                else
+                    health = value;
+            }
         }
         public float Speed
         {
@@ -278,15 +304,8 @@ namespace NinjasVsZombies
         public override bool Attack(Entity enemy)
         {
             int e_pow = this.AttackPower;
-   
-            
-
 
             enemy.Health -= e_pow;
-            if (enemy.Health <= 0)
-            {
-                enemy.Health = 0;
-            }
             return true;
         }
         public bool Defend()
@@ -300,6 +319,8 @@ namespace NinjasVsZombies
             else
                 return false;
         }
+
+
     }
 
     public class Zombie : Entity
@@ -324,17 +345,15 @@ namespace NinjasVsZombies
                 Console.WriteLine("CRITICAL STRIKE!!");
 
             enemy.Health -= e_pow;
-            if (enemy.Health <= 0)
-            {
-                enemy.Health = 0;
-            }
 
             Random repost = new Random();
-            int counter = repost.Next(0, 2);
+            int counter = repost.Next(0, 3);
             if (counter <= 1)
             {
-                this.Health -= 10;
-                Console.WriteLine("Reposted! Took 10 dmg!");
+                Random reDmg = new Random();
+                int Dmg = reDmg.Next(1, 10);
+                this.Health -= Dmg;
+                Console.WriteLine("Reposted! Took " + Dmg + " damage!");
                 Console.WriteLine(this.Health);
             }
             return true;
