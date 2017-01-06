@@ -12,16 +12,16 @@ namespace NinjasVsZombies
         {
 
             Player TheLegend27 = new Player(200, 20);
-            TheLegend27.Name = "Nick";
+            TheLegend27.Name = "TheLegend27";
             TheLegend27.Speed = 15.0f;
             Player TheGuy = new Player(1, 100);
-            TheGuy.Name = "James";
+            TheGuy.Name = "TheGuy";
             TheGuy.Speed = 5.5f;
             Zombie NoobKilla = new Zombie(120, 20);
-            NoobKilla.Name = "Matthew";
+            NoobKilla.Name = "NoobKilla";
             NoobKilla.Speed = 10.5f;
             Zombie GetRekt = new Zombie(90, 40);
-            GetRekt.Name = "Brian";
+            GetRekt.Name = "GetRekt";
             GetRekt.Speed = 20.2f;
             List<Player> TeamA = new List<Player>();
             TeamA.Add(TheLegend27);
@@ -42,140 +42,32 @@ namespace NinjasVsZombies
             {
                 input = Console.ReadLine();
 
-
                 //NINJA ATTACKS
                 if (input == "TheLegend27 attack NoobKilla")
-                {
-                    if (NoobKilla.Health != 0)
-                    {
-                        TheLegend27.Attack(NoobKilla);
-                        Console.WriteLine("You attacked NoobKilla");
-                        Console.WriteLine(NoobKilla.Health);
-                        if (NoobKilla.Health <= 0)
-                            Console.WriteLine("YOU KILLED NOOBKILLA! \n");
-                    }
-                    else
-                        Console.WriteLine("NoobKilla is already dead \n");
-                }
+                    TheLegend27.Hits(NoobKilla);
 
                 if (input == "TheLegend27 attack GetRekt")
-                {
-                    if (GetRekt.Health != 0)
-                    {
-                        TheLegend27.Attack(GetRekt);
-                        Console.WriteLine("You attacked GetRekt");
-                        Console.WriteLine(GetRekt.Health);
-                        if (GetRekt.Health <= 0)
-                            Console.WriteLine("YOU KILLED GETREKT! \n");
-                    }
-                    else
-                        Console.WriteLine("GetRekt is already dead \n");
-                }
+                    TheLegend27.Hits(GetRekt);
 
                 if (input == "TheGuy attack GetRekt")
-                {
-                    if (GetRekt.Health != 0)
-                    {
-                        Console.WriteLine("You attacked GetRekt");
-                        TheGuy.Attack(GetRekt);
-                        Console.WriteLine(GetRekt.Health);
-                        if (GetRekt.Health <= 0)
-                            Console.WriteLine("YOU KILLED GETREKT! \n");
-                    }
-                    else
-                        Console.WriteLine("GetRekt is already dead \n");
-                }
+                    TheGuy.Hits(GetRekt);
 
                 if (input == "TheGuy attack NoobKilla")
-                {
-                    if (NoobKilla.Health != 0)
-                    {
-                        Console.WriteLine("You attacked NoobKilla");
-                        TheGuy.Attack(NoobKilla);
-                        Console.WriteLine(NoobKilla.Health);
-                        if (NoobKilla.Health <= 0)
-                            Console.WriteLine("YOU KILLED NOOBKILLA! \n");
-                    }
-                    else
-                        Console.WriteLine("NoobKilla is already dead \n");
-                }
+                    TheGuy.Hits(NoobKilla);
 
 
                 //ZOMBIE ATTACKS
                 if (input == "GetRekt attack TheGuy")
-                {
-                    Console.WriteLine("You attacked TheGuy");
-                    if (TheGuy.Health != 0)
-                    {
-                        if (TheGuy.Defend() == false)
-                        {
-                            GetRekt.Attack(TheGuy);
-                            Console.WriteLine(TheGuy.Health);
-                            if (TheGuy.Health <= 0)
-                                Console.WriteLine("YOU KILLED THEGUY! \n");
-                        }
-                        else
-                            Console.WriteLine("TheGuy dodged the attack!");
-                    }
-                    else
-                        Console.WriteLine("TheGuy is already dead \n");
-                }
+                    GetRekt.Hits(TheGuy);
 
                 if (input == "GetRekt attack TheLegend27")
-                {
-                    Console.WriteLine("You attacked TheLegend27");
-                    if (TheLegend27.Health != 0)
-                    {
-                        if (TheLegend27.Defend() == false)
-                        {
-                            GetRekt.Attack(TheLegend27);
-                            Console.WriteLine(TheLegend27.Health);
-                            if (TheLegend27.Health <= 0)
-                                Console.WriteLine("YOU KILLED TheLegend27! \n");
-                        }
-                        else
-                            Console.WriteLine("TheLegend27 dodged the attack!");
-                    }
-                    else
-                        Console.WriteLine("TheLegend27 is already dead \n");
-                }
+                    GetRekt.Hits(TheLegend27);
 
                 if (input == "NoobKilla attack TheLegend27")
-                {
-                    Console.WriteLine("You attacked TheLegend27");
-                    if (TheLegend27.Health != 0)
-                    {
-                        if (TheLegend27.Defend() == false)
-                        {
-                            NoobKilla.Attack(TheLegend27);
-                            Console.WriteLine(TheLegend27.Health);
-                            if (TheLegend27.Health <= 0)
-                                Console.WriteLine("YOU KILLED TheLegend27! \n");
-                        }
-                        else Console.WriteLine("TheLegend27 dodged the attack!");
-                    }
-                    else
-                        Console.WriteLine("TheLegend27 is already dead \n");
-                }
+                    NoobKilla.Hits(TheLegend27);
 
                 if (input == "NoobKilla attack TheGuy")
-                {
-                    Console.WriteLine("You attacked TheGuy");
-                    if (TheGuy.Health != 0)
-                    {
-                        if (TheLegend27.Defend() == false)
-                        {
-                            NoobKilla.Attack(TheGuy);
-                            Console.WriteLine(TheGuy.Health);
-                            if (TheGuy.Health <= 0)
-                                Console.WriteLine("YOU KILLED THEGUY! \n");
-                        }
-                        else
-                            Console.WriteLine("TheGuy dodged the attack!");
-                    }
-                    else
-                        Console.WriteLine("TheGuy is already dead \n");
-                }
+                    NoobKilla.Hits(TheGuy);
 
                 //CHECK STATS
                 if (input == "stat")
@@ -208,25 +100,13 @@ namespace NinjasVsZombies
 
                 //SUICIDE
                 if (input == "NoobKilla attack NoobKilla")
-                {
-                    Console.WriteLine("NoobKilla commited suicide \n");
-                    NoobKilla.Health = 0;
-                }
+                    NoobKilla.Hits(NoobKilla);
                 if (input == "GetRekt attack GetRekt")
-                {
-                    Console.WriteLine("GetRekt commited suicide \n");
-                    GetRekt.Health = 0;
-                }
+                    GetRekt.Hits(GetRekt);
                 if (input == "TheLegend27 attack TheLegend27")
-                {
-                    Console.WriteLine("TheLegend27 commited suicide \n");
-                    TheLegend27.Health = 0;
-                }
+                    TheLegend27.Hits(TheLegend27);
                 if (input == "TheGuy attack TheGuy")
-                {
-                    Console.WriteLine("TheGuy commited suicide \n");
-                    TheGuy.Health = 0;
-                }
+                    TheGuy.Hits(TheGuy);
 
                 //WINNING
                 if (TheLegend27.Health == 0 && TheGuy.Health == 0)
@@ -241,6 +121,7 @@ namespace NinjasVsZombies
                     Console.ReadLine();
                     input = "q";
                 }
+
             } while (input != "q");
             Console.Clear();
             Console.WriteLine("Thanks For Playing!");
@@ -304,7 +185,6 @@ namespace NinjasVsZombies
         public override bool Attack(Entity enemy)
         {
             int e_pow = this.AttackPower;
-
             enemy.Health -= e_pow;
             return true;
         }
@@ -319,8 +199,25 @@ namespace NinjasVsZombies
             else
                 return false;
         }
+        public void Hits(Entity enemy)
+        {
+            if (this.Name == enemy.Name)
+            {
+                Console.WriteLine(this.Name + " commited suicide \n");
+                this.Health = 0;
+            }
 
-
+            if (enemy.Health != 0)
+            {
+                this.Attack(enemy);
+                Console.WriteLine("You attacked " + enemy.Name);
+                Console.WriteLine("HP Left: " + enemy.Health);
+                if (enemy.Health <= 0)
+                    Console.WriteLine("YOU KILLED" + enemy.Name + " ! \n");
+            }
+            else
+                Console.WriteLine(enemy.Name + "is already dead \n");
+        }
     }
 
     public class Zombie : Entity
@@ -357,6 +254,19 @@ namespace NinjasVsZombies
                 Console.WriteLine(this.Health);
             }
             return true;
+        }
+        public void Hits(Entity enemy)
+        {
+            if (enemy.Health != 0)
+            {
+                this.Attack(enemy);
+                Console.WriteLine("You attacked " + enemy.Name);
+                Console.WriteLine("HP Left: " + enemy.Health);
+                if (enemy.Health <= 0)
+                    Console.WriteLine("YOU KILLED" + enemy.Name + " ! \n");
+            }
+            else
+                Console.WriteLine(enemy.Name + "is already dead \n");
         }
     }
 }
