@@ -16,10 +16,10 @@ namespace NinjasVsZombies
             Player TheGuy = new Player(1, 100);
             TheGuy.Name = "James";
             TheGuy.Speed = 5.5f;
-            Zombie NoobKilla = new Zombie(120, 15);
+            Zombie NoobKilla = new Zombie(120, 20);
             NoobKilla.Name = "Matthew";
             NoobKilla.Speed = 10.5f;
-            Zombie GetRekt = new Zombie(90, 20);
+            Zombie GetRekt = new Zombie(90, 40);
             GetRekt.Name = "Brian";
             GetRekt.Speed = 20.2f;
             List<Player> TeamA = new List<Player>();
@@ -31,7 +31,7 @@ namespace NinjasVsZombies
 
 
             Console.WriteLine("Welcome! There are 4 characters. \n  2 Ninjas: TheLegend27 and TheGuy \n  2 Zombies: NoobKilla and GetRekt \n");
-            Console.WriteLine("You can select who to attack by typing the name of \nthe character you want to attack and the character you want to attack.");
+            Console.WriteLine("You can select who to attack by typing the name of \nthe character you want to attack with and the character you want to attack.");
             Console.WriteLine("For example: Player attack Enemy \n");
             Console.WriteLine("To Quit simply press 'q' and the 'enter' key \n");
             string input;
@@ -199,13 +199,27 @@ namespace NinjasVsZombies
                 }
                 if (input == "TheLegend27 attack TheLegend27")
                 {
-                    Console.WriteLine("TheLegend commited suicide \n");
+                    Console.WriteLine("TheLegend27 commited suicide \n");
                     TheLegend27.Health = 0;
                 }
                 if (input == "TheGuy attack TheGuy")
                 {
                     Console.WriteLine("TheGuy commited suicide \n");
                     TheGuy.Health = 0;
+                }
+
+                //WINNING
+                if (TheLegend27.Health == 0 && TheGuy.Health == 0)
+                {
+                    Console.WriteLine("Congratulations Zombies! The Ninjas have been destroyed!");
+                    Console.ReadLine();
+                    input = "q";
+                }
+                if (GetRekt.Health == 0 && NoobKilla.Health == 0)
+                {
+                    Console.WriteLine("Congratulations Ninjas! The Zombies have been eraticated!");
+                    Console.ReadLine();
+                    input = "q";
                 }
             } while (input != "q");
             Console.Clear();
@@ -264,6 +278,10 @@ namespace NinjasVsZombies
         public override bool Attack(Entity enemy)
         {
             int e_pow = this.AttackPower;
+   
+            
+
+
             enemy.Health -= e_pow;
             if (enemy.Health <= 0)
             {
@@ -274,10 +292,10 @@ namespace NinjasVsZombies
         public bool Defend()
         {
             Random rnd = new Random();
-            int tralse = rnd.Next(0, 2);
-            if (tralse == 0)
+            int tralse = rnd.Next(0, 5);
+            if (tralse <= 3)
                 return false;
-            if (tralse == 1)
+            if (tralse >= 4)
                 return true;
             else
                 return false;
@@ -295,10 +313,29 @@ namespace NinjasVsZombies
         public override bool Attack(Entity enemy)
         {
             int e_pow = this.AttackPower;
+
+            Random rnd = new Random();
+            int crit = rnd.Next(0, 21);
+            e_pow += crit;
+            if (this.Name == "Brian")
+                crit += 5;
+
+            if (crit >= 15)
+                Console.WriteLine("CRITICAL STRIKE!!");
+
             enemy.Health -= e_pow;
-            if(enemy.Health <= 0)
+            if (enemy.Health <= 0)
             {
                 enemy.Health = 0;
+            }
+
+            Random repost = new Random();
+            int counter = repost.Next(0, 2);
+            if (counter <= 1)
+            {
+                this.Health -= 10;
+                Console.WriteLine("Reposted! Took 10 dmg!");
+                Console.WriteLine(this.Health);
             }
             return true;
         }
