@@ -29,7 +29,8 @@ namespace NinjasVsZombies
             List<Zombie> TeamZ = new List<Zombie>();
             TeamZ.Add(NoobKilla);
             TeamZ.Add(GetRekt);
-
+            int deathCounterN = 0;
+            int deathCounterZ = 0;
 
             Console.WriteLine("Welcome! There are 4 characters. \n  2 Ninjas: TheLegend27 and TheGuy \n  2 Zombies: NoobKilla and GetRekt \n");
             Console.WriteLine("You can select who to attack by typing the name of \nthe character you want to attack with and the character you want to attack.");
@@ -99,23 +100,61 @@ namespace NinjasVsZombies
                     Console.WriteLine("YOU CAN NOT ATTACK YOUR TEAMMATE \n");
 
                 //SUICIDE
+
+                
                 if (input == "NoobKilla attack NoobKilla")
+                {
                     NoobKilla.Hits(NoobKilla);
+                    deathCounterZ++;
+                }
                 if (input == "GetRekt attack GetRekt")
+                {
                     GetRekt.Hits(GetRekt);
+                    deathCounterZ++;
+                }
+
+                
                 if (input == "TheLegend27 attack TheLegend27")
+                {
                     TheLegend27.Hits(TheLegend27);
+                    deathCounterN++;
+                }
                 if (input == "TheGuy attack TheGuy")
+                {
                     TheGuy.Hits(TheGuy);
+                    deathCounterN++;
+                }
+                if (deathCounterN == 2)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Zombies proved to be too much for the Ninjas and the Ninjas chose the coward's way out...");
+                    Console.WriteLine("Zombies Win...");
+                    Console.ReadLine();
+                    input = "q";
+                }
+                if (deathCounterZ == 2)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Ninjas proved to be too much for the Zombies and the Zombies chose the coward's way out...\n");
+                    Console.WriteLine("What a very peculiar circumstance\n");
+                    Console.WriteLine("Ninjas Win...?");
+                    Console.ReadLine();
+                    input = "q";
+                }
+
+
+
+
 
                 //WINNING
+
                 if (TheLegend27.Health == 0 && TheGuy.Health == 0)
                 {
                     Console.WriteLine("Congratulations Zombies! The Ninjas have been destroyed!");
                     Console.ReadLine();
                     input = "q";
                 }
-                if (GetRekt.Health == 0 && NoobKilla.Health == 0)
+               if (GetRekt.Health == 0 && NoobKilla.Health == 0)
                 {
                     Console.WriteLine("Congratulations Ninjas! The Zombies have been eraticated!");
                     Console.ReadLine();
@@ -128,7 +167,6 @@ namespace NinjasVsZombies
             Console.Read();
         }
     }
-
     public class Entity
     {
         public Entity() { }
@@ -164,10 +202,15 @@ namespace NinjasVsZombies
             get { return attackPower; }
             set { attackPower = value; }
         }
+        public int DeathCounter
+        {
+            get { return deathCounter; }
+            set { deathCounter = value; }
+        }
         public virtual bool Attack(Entity enemy) { return true; }
 
 
-
+        private int deathCounter;
         private int attackPower;
         private string name;
         private int health;
@@ -181,6 +224,7 @@ namespace NinjasVsZombies
         {
             Health = h;
             AttackPower = att;
+
         }
         public override bool Attack(Entity enemy)
         {
@@ -201,13 +245,14 @@ namespace NinjasVsZombies
         }
         public void Hits(Entity enemy)
         {
+
             if (this.Name == enemy.Name)
             {
                 Console.WriteLine(this.Name + " commited suicide \n");
                 this.Health = 0;
             }
 
-            if (enemy.Health != 0)
+            else if (enemy.Health > 0)
             {
                 this.Attack(enemy);
                 Console.WriteLine("You attacked " + enemy.Name);
@@ -216,7 +261,7 @@ namespace NinjasVsZombies
                     Console.WriteLine("YOU KILLED" + enemy.Name + " ! \n");
             }
             else
-                Console.WriteLine(enemy.Name + "is already dead \n");
+                Console.WriteLine(enemy.Name + " is already dead \n");
         }
     }
 
@@ -257,7 +302,13 @@ namespace NinjasVsZombies
         }
         public void Hits(Entity enemy)
         {
-            if (enemy.Health != 0)
+            if (this.Name == enemy.Name)
+            {
+                Console.WriteLine(this.Name + " commited suicide \n");
+                this.Health = 0;
+            }
+
+            else if (enemy.Health > 0)
             {
                 this.Attack(enemy);
                 Console.WriteLine("You attacked " + enemy.Name);
