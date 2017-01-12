@@ -79,7 +79,6 @@ namespace WindowsForms
             p.LVL += 1;
             progressBar1.Maximum = (p.LVL * 100) / 2;
         }
-
         public void display(string textfile)
         {
             if (textfile == "textLvl")
