@@ -136,7 +136,7 @@
             this.ATKLeg.Text = "ATTACK";
             this.ATKLeg.UseVisualStyleBackColor = true;
             this.ATKLeg.Visible = false;
-            this.ATKLeg.Click += new System.EventHandler(this.ATKRekt_Click);
+            this.ATKLeg.Click += new System.EventHandler(this.ATKLeg_Click);
             // 
             // ATKKilla
             // 
@@ -158,15 +158,19 @@
             this.ATKRekt.Text = "ATTACK";
             this.ATKRekt.UseVisualStyleBackColor = true;
             this.ATKRekt.Visible = false;
-            this.ATKRekt.Click += new System.EventHandler(this.ATKLeg_Click);
+            this.ATKRekt.Click += new System.EventHandler(this.ATKRekt_Click);
             // 
             // LogBox
             // 
-            this.LogBox.Location = new System.Drawing.Point(376, 287);
+            this.LogBox.Cursor = System.Windows.Forms.Cursors.Default;
+            this.LogBox.Enabled = false;
+            this.LogBox.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.LogBox.Location = new System.Drawing.Point(436, 287);
             this.LogBox.Name = "LogBox";
             this.LogBox.ReadOnly = true;
-            this.LogBox.Size = new System.Drawing.Size(504, 20);
+            this.LogBox.Size = new System.Drawing.Size(358, 20);
             this.LogBox.TabIndex = 12;
+            this.LogBox.TextChanged += new System.EventHandler(this.LogBox_TextChanged);
             // 
             // Form1
             // 
@@ -187,8 +191,9 @@
             this.Controls.Add(this.KillaSelect);
             this.Controls.Add(this.LegSelect);
             this.Controls.Add(this.GuySelect);
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "NinjaVsZombie";
             this.ResumeLayout(false);
             this.PerformLayout();
 

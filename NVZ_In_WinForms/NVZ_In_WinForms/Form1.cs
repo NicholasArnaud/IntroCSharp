@@ -13,10 +13,10 @@ namespace NVZ_In_WinForms
 
     public partial class Form1 : Form
     {
-        Player TheLegend27 = new Player(200, 20);
-        Player TheGuy = new Player(1, 100);
-        Zombie NoobKilla = new Zombie(120, 20);
-        Zombie GetRekt = new Zombie(90, 40);
+        Player TheLegend27 = new Player("TheLegend27", 200, 20);
+        Player TheGuy = new Player("TheGuy", 1, 100);
+        Zombie NoobKilla = new Zombie("NoobKilla", 120, 20);
+        Zombie GetRekt = new Zombie("GetRekt", 90, 40);
         Entity Active = new Entity();
 
 
@@ -137,21 +137,30 @@ namespace NVZ_In_WinForms
             if (hits == "Legend")
             {
                 Active.Hits(TheLegend27);
+                LegendHealth.Value = TheLegend27.Health;
+                LogBox.Text = Active.Name+" attacked TheLegend27 for "+ Active.AttackPower+" damage! \n";
+
             }
 
             if (hits == "Guy")
             {
                 Active.Hits(TheGuy);
+                GuyHealth.Value = TheGuy.Health;
+                LogBox.Text = Active.Name + " attacked TheGuy for " + Active.AttackPower + " damage! \n";
             }
 
             if (hits == "Killa")
             {
                 Active.Hits(NoobKilla);
+                KillaHealth.Value = NoobKilla.Health;
+                LogBox.Text = Active.Name + " attacked NoobKilla for " + Active.AttackPower + " damage! \n";
             }
 
             if (hits == "Rekt")
             {
                 Active.Hits(GetRekt);
+                RektHealth.Value = GetRekt.Health;
+                LogBox.Text = Active.Name + " attacked GetRekt for " + Active.AttackPower + " damage! \n";
             }
 
         }
@@ -162,19 +171,19 @@ namespace NVZ_In_WinForms
                 LegendHealth.Maximum = TheLegend27.Health;
                 LegendHealth.Value = TheLegend27.Health;
             }
-            
+
             if (player == "Guy")
             {
                 GuyHealth.Maximum = TheGuy.Health;
                 GuyHealth.Value = TheGuy.Health;
             }
-            
+
             if (player == "Killa")
             {
                 KillaHealth.Maximum = NoobKilla.Health;
                 KillaHealth.Value = NoobKilla.Health;
             }
-            
+
             if (player == "Rekt")
             {
                 RektHealth.Maximum = GetRekt.Health;
@@ -182,7 +191,8 @@ namespace NVZ_In_WinForms
             }
 
         }
-       
+
+        private void LogBox_TextChanged(object sender, EventArgs e){ }
     }
 
 
@@ -190,7 +200,7 @@ namespace NVZ_In_WinForms
     public class Entity
     {
         public Entity() { }
-        public Entity(int h, int att)
+        public Entity(string name, int h, int att)
         {
             health = h;
             attackPower = att;
@@ -240,8 +250,9 @@ namespace NVZ_In_WinForms
     public class Player : Entity
     {
         public Player() { }
-        public Player(int h, int att) : base(h, att)
+        public Player(string name, int h, int att) : base(name, h, att)
         {
+            Name = name;
             Health = h;
             AttackPower = att;
 
@@ -280,8 +291,9 @@ namespace NVZ_In_WinForms
     public class Zombie : Entity
     {
         public Zombie() { }
-        public Zombie(int h, int att)
+        public Zombie(string name, int h, int att) : base(name, h, att)
         {
+            Name = name;
             Health = h;
             AttackPower = att;
         }
@@ -320,7 +332,7 @@ namespace NVZ_In_WinForms
             {
                 this.Attack(enemy);
             }
-   
+
         }
     }
 }
