@@ -27,6 +27,7 @@ namespace NVZ_In_WinForms
             SET_Health("Guy");
             SET_Health("Killa");
             SET_Health("Rekt");
+            LogBox.Text = "Choose a character to select and then choose who to attack!";
         }
 
         //CHARACTER SELECT
@@ -138,6 +139,7 @@ namespace NVZ_In_WinForms
             {
                 Active.Hits(TheLegend27);
                 LegendHealth.Value = TheLegend27.Health;
+               
                 LogBox.Text = Active.Name+" attacked TheLegend27 for "+ Active.AttackPower+" damage! \n";
 
             }
@@ -146,6 +148,7 @@ namespace NVZ_In_WinForms
             {
                 Active.Hits(TheGuy);
                 GuyHealth.Value = TheGuy.Health;
+              
                 LogBox.Text = Active.Name + " attacked TheGuy for " + Active.AttackPower + " damage! \n";
             }
 
@@ -153,14 +156,17 @@ namespace NVZ_In_WinForms
             {
                 Active.Hits(NoobKilla);
                 KillaHealth.Value = NoobKilla.Health;
-                LogBox.Text = Active.Name + " attacked NoobKilla for " + Active.AttackPower + " damage! \n";
+                Active.Crit(NoobKilla);
+                LogBox.Text = Active.Name + " attacked NoobKilla for " + Active.AttackPower + " damage and took "+Active.critAmount + " extra!";
             }
 
             if (hits == "Rekt")
             {
                 Active.Hits(GetRekt);
+                Active.Crit(GetRekt);
                 RektHealth.Value = GetRekt.Health;
-                LogBox.Text = Active.Name + " attacked GetRekt for " + Active.AttackPower + " damage! \n";
+            
+                LogBox.Text = Active.Name + " attacked GetRekt for " + Active.AttackPower + " damage! and took " + Active.critAmount + " extra!";
             }
 
         }
@@ -232,6 +238,15 @@ namespace NVZ_In_WinForms
             get { return attackPower; }
             set { attackPower = value; }
         }
+        public void Crit(Entity enemy)
+        {
+            Random rnd = new Random();
+            int crit = rnd.Next(0, 21);
+            if (this.Name == "NoobKilla")
+                crit += 5;
+            enemy.Health -= crit;
+            critAmount = crit;
+        }
         public int DeathCounter
         {
             get { return deathCounter; }
@@ -240,6 +255,7 @@ namespace NVZ_In_WinForms
         public virtual bool Attack(Entity enemy) { return true; }
         public virtual void Hits(Entity enemy) { }
 
+        public int critAmount;
         private int deathCounter;
         private int attackPower;
         private string name;
@@ -300,16 +316,6 @@ namespace NVZ_In_WinForms
         public override bool Attack(Entity enemy)
         {
             int e_pow = this.AttackPower;
-
-            //Random rnd = new Random();
-            //int crit = rnd.Next(0, 21);
-            //e_pow += crit;
-            //if (this.Name == "Brian")
-            //    crit += 5;
-
-            //if (crit >= 15)
-            //    Console.WriteLine("CRITICAL STRIKE!!");
-
             enemy.Health -= e_pow;
 
             Random repost = new Random();
@@ -322,6 +328,7 @@ namespace NVZ_In_WinForms
             }
             return true;
         }
+        
         public override void Hits(Entity enemy)
         {
             if (this.Name == enemy.Name)
