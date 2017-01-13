@@ -19,16 +19,19 @@ namespace PracticeFSM
         Player Aeris = new Player();
         Player Vincent = new Player();
         Player CaitSith = new Player();
-
         Player Active = new Player();
-
-
-
+        Party activeParty = new Party();
+        
         public Form1()
-        { InitializeComponent(); }
+        {
+            InitializeComponent();
+            activeParty.members.Add(Cloud);
+            activeParty.members.Add(Tifa);
+            activeParty.members.Add(Barett);
+            activeParty.members.Add(Aeris);
+        }
         private void Form1_Load(object sender, EventArgs e)
         { }
-
         public enum State
         {
             ENDTURN,
@@ -65,7 +68,6 @@ namespace PracticeFSM
 
 
         }
-
         //COMBAT
         private void Attack_Click(object sender, EventArgs e)
         {
@@ -79,8 +81,6 @@ namespace PracticeFSM
         {
             FSM(State.ENDTURN);
         }
-
-
         //CHARACTER SELECT
         private void CloudSelect_Click(object sender, EventArgs e)
         {
@@ -108,34 +108,4 @@ namespace PracticeFSM
             Active = CaitSith;
         }
     }
-
-
-
-
-    public class Party
-    {
-        public Party() { }
-        public List<Player> members;
-        Player current;
-        Player GetNext()
-        {
-            Player n = new Player();
-            return n;
-        }
-    }
-
-    public class Player : Party
-    {
-        public Player() { }
-        public void Attack() { }
-        public void Defend() { }
-        public void EndTurn() { }
-    }
-
-    public class Combat : Party
-    {
-        public Party Alpha;
-        public Party Bravo;
-    }
-
 }

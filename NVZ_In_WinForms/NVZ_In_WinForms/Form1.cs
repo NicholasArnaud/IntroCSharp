@@ -19,86 +19,139 @@ namespace NVZ_In_WinForms
         Zombie GetRekt = new Zombie("GetRekt", 90, 40);
         Entity Active = new Entity();
 
+        List<Player> TeamA = new List<Player>();
+        List<Zombie> TeamB = new List<Zombie>();
+
+        public bool fillParty()
+        {
+            TeamA.Add(TheLegend27);
+            TeamA.Add(TheGuy);
+            TeamB.Add(GetRekt);
+            TeamB.Add(NoobKilla);
+            return true;
+        }
 
         public Form1()
         {
             InitializeComponent();
+            fillParty();
             SET_Health("Legend");
             SET_Health("Guy");
             SET_Health("Killa");
             SET_Health("Rekt");
             LogBox.Text = "Choose a character to select and then choose who to attack!";
+            StartTurn();
         }
 
         //CHARACTER SELECT
         private void GuySelect_Click(object sender, EventArgs e)
         {
-            Select_Player("select");
             ATK_Visibility("select");
             Active = TheGuy;
         }
-
         private void LegSelect_Click(object sender, EventArgs e)
         {
-            Select_Player("select");
             ATK_Visibility("select");
             Active = TheLegend27;
         }
-
         private void KillaSelect_Click(object sender, EventArgs e)
         {
-            Select_Player("select");
             ATK_Visibility("select");
             Active = NoobKilla;
         }
-
         private void RektSelect_Click(object sender, EventArgs e)
         {
-            Select_Player("select");
             ATK_Visibility("select");
             Active = GetRekt;
         }
 
 
+        //TURNS
+        private void StartTurn()
+        {
+            Random rnd = new Random();
+            int firstTurn = rnd.Next(1, 10);
+            if (firstTurn >= 5)
+            {
+                GuySelect.Enabled = true;
+                LegSelect.Enabled = true;
+                KillaSelect.Enabled = false;
+                RektSelect.Enabled = false;
+            }
+            if (firstTurn < 5)
+            {
+                GuySelect.Enabled = false;
+                LegSelect.Enabled = false;
+                KillaSelect.Enabled = true;
+                RektSelect.Enabled = true;
 
-        //ATTACK BUTTON
+            }
+
+        }
+
+
+
+        //ATTACK BUTTONS
         private void ATKLeg_Click(object sender, EventArgs e)
         {
-            Select_Player("chose");
+
             ATK_Visibility("attack");
             ATK_DMG("Legend");
+
         }
         private void ATKGuy_Click(object sender, EventArgs e)
         {
-            Select_Player("chose");
+
             ATK_Visibility("attack");
             ATK_DMG("Guy");
+
         }
         private void ATKKilla_Click(object sender, EventArgs e)
         {
-            Select_Player("chose");
+
             ATK_Visibility("attack");
             ATK_DMG("Killa");
+
         }
         private void ATKRekt_Click(object sender, EventArgs e)
         {
-            Select_Player("chose");
+
             ATK_Visibility("attack");
             ATK_DMG("Rekt");
         }
 
 
-        //HEALTH BAR
+        //HEALTH BARS
+        /// <summary>
+        /// progress bar for GetRekt that represents health
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RektHealth_Click(object sender, EventArgs e) { }
-
+        /// <summary>
+        /// progress bar for NoobKilla that represents health
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void KillaHealth_Click(object sender, EventArgs e) { }
-
+        /// <summary>
+        /// progress bar for TheLegend27 that represents health
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LegendHealth_Click(object sender, EventArgs e) { }
-
+        /// <summary>
+        /// progress bar for TheGuy that represents health
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GuyHealth_Click(object sender, EventArgs e) { }
 
 
-
+        /// <summary>
+        /// Turns visibilty on and off for the attack buttons
+        /// </summary>
+        /// <param name="choose"></param>
         private void ATK_Visibility(string choose)
         {
             if (choose == "select")
@@ -116,40 +169,42 @@ namespace NVZ_In_WinForms
                 ATKRekt.Visible = false;
             }
         }
-        private void Select_Player(string choose)
-        {
-            if (choose == "select")
-            {
-                LegSelect.Enabled = false;
-                GuySelect.Enabled = false;
-                KillaSelect.Enabled = false;
-                RektSelect.Enabled = false;
-            }
-            if (choose == "chose")
-            {
-                LegSelect.Enabled = true;
-                GuySelect.Enabled = true;
-                KillaSelect.Enabled = true;
-                RektSelect.Enabled = true;
-            }
-        }
+        /// <summary>
+        /// Runs attack formulas
+        /// </summary>
+        /// <param name="hits"></param>
         private void ATK_DMG(string hits)
         {
             if (hits == "Legend")
             {
-                Active.Hits(TheLegend27);
-                LegendHealth.Value = TheLegend27.Health;
-               
-                LogBox.Text = Active.Name+" attacked TheLegend27 for "+ Active.AttackPower+" damage! \n";
+                bool def = TheLegend27.Defend();
+                if (def == false)
+                {
+                    Active.Hits(TheLegend27);
+                    LegendHealth.Value = TheLegend27.Health;
+
+                    LogBox.Text = Active.Name + " attacked TheLegend27 for " + Active.AttackPower + " damage! \n";
+                }
+                if (def == true)
+                {
+                    LogBox.Text = "TheLegend27 dodged the attack!";
+                }
 
             }
 
             if (hits == "Guy")
             {
-                Active.Hits(TheGuy);
-                GuyHealth.Value = TheGuy.Health;
-              
-                LogBox.Text = Active.Name + " attacked TheGuy for " + Active.AttackPower + " damage! \n";
+                bool def = TheLegend27.Defend();
+                if (def == false)
+                {
+                    Active.Hits(TheGuy);
+                    GuyHealth.Value = TheGuy.Health;
+                    LogBox.Text = Active.Name + " attacked TheGuy for " + Active.AttackPower + " damage! \n";
+                }
+                if (def == true)
+                {
+                    LogBox.Text = "TheGuy dodged the attack!";
+                }
             }
 
             if (hits == "Killa")
@@ -157,7 +212,7 @@ namespace NVZ_In_WinForms
                 Active.Hits(NoobKilla);
                 KillaHealth.Value = NoobKilla.Health;
                 Active.Crit(NoobKilla);
-                LogBox.Text = Active.Name + " attacked NoobKilla for " + Active.AttackPower + " damage and took "+Active.critAmount + " extra!";
+                LogBox.Text = Active.Name + " attacked NoobKilla for " + Active.AttackPower + " damage and took " + Active.critAmount + " extra!";
             }
 
             if (hits == "Rekt")
@@ -165,11 +220,15 @@ namespace NVZ_In_WinForms
                 Active.Hits(GetRekt);
                 Active.Crit(GetRekt);
                 RektHealth.Value = GetRekt.Health;
-            
+
                 LogBox.Text = Active.Name + " attacked GetRekt for " + Active.AttackPower + " damage! and took " + Active.critAmount + " extra!";
             }
 
         }
+        /// <summary>
+        /// Sets value of progress bar equal to health value
+        /// </summary>
+        /// <param name="player"></param>
         private void SET_Health(string player)
         {
             if (player == "Legend")
@@ -197,8 +256,26 @@ namespace NVZ_In_WinForms
             }
 
         }
+        //public bool NextPlayer()
+        //{
+        //    int i = 0;
+        //    if (i < 2)
+        //    {
+        //        for (; i <= TeamA.Count; i++)
+        //            TeamA.ElementAt(i);
+        //        TeamA.Reverse();
+        //    }
+        //    else
+        //    {
+        //        for (int j = 0; j <= TeamB.Count; j++)
+        //            TeamB.ElementAt(j);
+        //        TeamB.Reverse();
+        //    }
 
-        private void LogBox_TextChanged(object sender, EventArgs e){ }
+        //    return true;
+        //}
+
+        private void LogBox_TextChanged(object sender, EventArgs e) { }
     }
 
 
@@ -210,6 +287,8 @@ namespace NVZ_In_WinForms
         {
             health = h;
             attackPower = att;
+            onEndTurn += EndTurn;
+            onPartyEnd += EndParty;
         }
 
         public int Health
@@ -247,16 +326,41 @@ namespace NVZ_In_WinForms
             enemy.Health -= crit;
             critAmount = crit;
         }
-        public int DeathCounter
-        {
-            get { return deathCounter; }
-            set { deathCounter = value; }
-        }
         public virtual bool Attack(Entity enemy) { return true; }
         public virtual void Hits(Entity enemy) { }
+        public bool Defend()
+        {
+            Random rnd = new Random();
+            int tralse = rnd.Next(0, 5);
+            if (tralse <= 3)
+                return false;
+            if (tralse >= 4)
+                return true;
+            else
+                return false;
+        }
+
+
+        public delegate void OnPartyEnd();
+        public delegate void OnEndTurn();
+        public OnEndTurn onEndTurn;
+
+        public OnPartyEnd onPartyEnd;
+        void EndTurn()
+        {
+            if (onEndTurn != null)
+                onEndTurn.Invoke();
+        }
+
+
+        void EndParty()
+        {
+            if (onPartyEnd != null)
+                onPartyEnd.Invoke();
+        }
+
 
         public int critAmount;
-        private int deathCounter;
         private int attackPower;
         private string name;
         private int health;
@@ -279,17 +383,7 @@ namespace NVZ_In_WinForms
             enemy.Health -= e_pow;
             return true;
         }
-        public bool Defend()
-        {
-            Random rnd = new Random();
-            int tralse = rnd.Next(0, 5);
-            if (tralse <= 3)
-                return false;
-            if (tralse >= 4)
-                return true;
-            else
-                return false;
-        }
+
         public override void Hits(Entity enemy)
         {
             if (this.Name == enemy.Name)
@@ -328,7 +422,7 @@ namespace NVZ_In_WinForms
             }
             return true;
         }
-        
+
         public override void Hits(Entity enemy)
         {
             if (this.Name == enemy.Name)
