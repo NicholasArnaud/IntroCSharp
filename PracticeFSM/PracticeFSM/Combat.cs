@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PracticeFSM
 {
-   public class Combat
+    public class Combat
     {
 
     }

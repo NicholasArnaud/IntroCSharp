@@ -9,7 +9,11 @@ namespace PracticeFSM
     public class Party
     {
         public Party() { }
+        
         public List<Player> members;
+
+        public delegate void OnPartyEnd();
+        public OnPartyEnd onPartyEnd;
         public Player current;
         /// <summary>
         /// Adds a player to the list in order they attack
@@ -34,7 +38,14 @@ namespace PracticeFSM
             }
             return current;
         }
-
+        /// <summary>
+        /// Ends the turn of a team
+        /// </summary>
+        void EndParty()
+        {
+            if (onPartyEnd != null)
+                onPartyEnd.Invoke();
+        }
 
     }
 }

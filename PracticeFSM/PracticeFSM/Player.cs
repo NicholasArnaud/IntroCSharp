@@ -8,14 +8,19 @@ namespace PracticeFSM
 {
     public class Player
     {
-        public Player() { }
+        public Player(string namez)
+        {
+            Strength = 10;
+            Health = 100;
+            Name = namez;
+        }
 
-        public delegate void OnPartyEnd();
+
         public delegate void OnEndTurn();
         public OnEndTurn onEndTurn;
-        public OnPartyEnd onPartyEnd;
         private int strength;
         private int health;
+        private string name;
         public int Health
         {
             get
@@ -44,21 +49,19 @@ namespace PracticeFSM
                 strength = value;
             }
         }
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
         /// <summary>
         /// Ends the turn of a player
         /// </summary>
-        void EndTurn()
+        public void EndTurn()
         {
             if (onEndTurn != null)
                 onEndTurn.Invoke();
-        }
-        /// <summary>
-        /// Ends the turn of a team
-        /// </summary>
-        void EndParty()
-        {
-            if (onPartyEnd != null)
-                onPartyEnd.Invoke();
         }
         /// <summary>
         /// Attack enemy player
@@ -74,9 +77,7 @@ namespace PracticeFSM
         /// </summary>
         public void Defend()
         {
-
             this.EndTurn();
         }
-
     }
 }

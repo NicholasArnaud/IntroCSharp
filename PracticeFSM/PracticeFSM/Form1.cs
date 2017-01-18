@@ -13,17 +13,21 @@ namespace PracticeFSM
 
     public partial class Form1 : Form
     {
-        Player Cloud = new Player();
-        Player Tifa = new Player();
-        Player Barett = new Player();
-        Player Aeris = new Player();
-        Player Vincent = new Player();
-        Player CaitSith = new Player();
-        Player Active = new Player();
+        Player Cloud = new Player("Cloud");
+        Player Tifa = new Player("Tifa");
+        Player Barett = new Player("Barett");
+        Player Aeris = new Player("Aeris");
+        Player Vincent = new Player("Vincent");
+        Player CaitSith = new Player("CaitSith");
+        Player Active = new Player("Active");
+        Player Evil = new Player("Evil");
         Party activeParty = new Party();
+        
+        List<Player> members = new List<Player>();
         
         public Form1()
         {
+            activeParty.members = new List<Player>();
             InitializeComponent();
             activeParty.members.Add(Cloud);
             activeParty.members.Add(Tifa);
@@ -31,7 +35,8 @@ namespace PracticeFSM
             activeParty.members.Add(Aeris);
         }
         private void Form1_Load(object sender, EventArgs e)
-        { }
+        {
+        }
         public enum State
         {
             ENDTURN,
@@ -50,7 +55,7 @@ namespace PracticeFSM
 
                 case State.ATTACK:
                     {
-                        Active.Attack();
+                        Active.Attack(Evil);
                         goto case State.ENDTURN;
 
                     }
@@ -85,27 +90,36 @@ namespace PracticeFSM
         private void CloudSelect_Click(object sender, EventArgs e)
         {
             Active = Cloud;
-
+            textBox1.Text = Active.Name;
         }
         private void TifaSelect_Click(object sender, EventArgs e)
         {
             Active = Tifa;
+            textBox1.Text = Active.Name;
         }
         private void BarettSelect_Click(object sender, EventArgs e)
         {
             Active = Barett;
+            textBox1.Text = Active.Name;
         }
         private void AerisSelect_Click(object sender, EventArgs e)
         {
             Active = Aeris;
+            textBox1.Text = Active.Name;
         }
         private void VincentSelect_Click(object sender, EventArgs e)
         {
             Active = Vincent;
+            textBox1.Text = Active.Name;
         }
         private void CaitSithSelect_Click(object sender, EventArgs e)
         {
             Active = CaitSith;
+            textBox1.Text = Active.Name;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
         }
     }
 }

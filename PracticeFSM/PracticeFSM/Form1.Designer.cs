@@ -37,6 +37,7 @@
             this.AerisSelect = new System.Windows.Forms.Button();
             this.VincentSelect = new System.Windows.Forms.Button();
             this.CaitSithSelect = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // Attack
@@ -129,11 +130,20 @@
             this.CaitSithSelect.UseVisualStyleBackColor = true;
             this.CaitSithSelect.Click += new System.EventHandler(this.CaitSithSelect_Click);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(150, 176);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(186, 20);
+            this.textBox1.TabIndex = 9;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(463, 309);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.CaitSithSelect);
             this.Controls.Add(this.VincentSelect);
             this.Controls.Add(this.AerisSelect);
@@ -147,6 +157,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -161,6 +172,7 @@
         private System.Windows.Forms.Button AerisSelect;
         private System.Windows.Forms.Button VincentSelect;
         private System.Windows.Forms.Button CaitSithSelect;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
