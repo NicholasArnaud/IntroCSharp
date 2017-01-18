@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -19,6 +20,21 @@ namespace Serialization_Practice
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SaveData_Click(object sender, EventArgs e)
+        {
+            Student curStudent = new Student(this.StudentName.Text,)
+        }
+
+        private void LoadLast_Click(object sender, EventArgs e)
         {
 
         }
