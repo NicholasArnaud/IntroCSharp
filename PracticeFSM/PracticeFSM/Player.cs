@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace PracticeFSM
@@ -17,10 +19,15 @@ namespace PracticeFSM
 
 
         public delegate void OnEndTurn();
+
         public OnEndTurn onEndTurn;
+
         private int strength;
+
         private int health;
+
         private string name;
+
         public int Health
         {
             get
@@ -36,6 +43,7 @@ namespace PracticeFSM
                 health = value;
             }
         }
+
         public int Strength
         {
             get { return strength; }
@@ -49,6 +57,7 @@ namespace PracticeFSM
                 strength = value;
             }
         }
+
         public string Name
         {
             get { return name; }
@@ -63,6 +72,7 @@ namespace PracticeFSM
             if (onEndTurn != null)
                 onEndTurn.Invoke();
         }
+
         /// <summary>
         /// Attack enemy player
         /// </summary>
@@ -72,9 +82,11 @@ namespace PracticeFSM
             enemy.Health -= this.Strength;
             this.EndTurn();
         }
+
         /// <summary>
         /// Defends player from enemy attack
         /// </summary>
+        /// 
         public void Defend()
         {
             this.EndTurn();

@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.IO;
+using System.Threading.Tasks;
 
-
-namespace Serialization_Practice
+namespace PracticeFSM
 {
-
-    public static class DataManage<T>
+    class DataManager<T>
     {
         public static void Serialize(string filename, T data)
         {

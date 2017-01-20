@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Xml.Serialization;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -118,8 +120,16 @@ namespace PracticeFSM
             textBox1.Text = Active.Name;
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+       
+        //SAVE AND LOAD
+        private void SaveData_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void LoadData_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -7,23 +7,28 @@ using System.Threading.Tasks;
 
 namespace Serialization_Practice
 {
-    class Student
+    public class Student
     {
         private string mName;
+
         private int mAge;
+
         private string mID;
+
         Student() { }
-        public Student(string name,int age,string id)
+        public Student(string name, int age, string id)
         {
             mName = name;
             mAge = age;
-            id = mID;
+            mID = id;
         }
+
         public string Name
         {
             get { return mName; }
             set { mName = value; }
         }
+
         public int Age
         {
             get
@@ -32,13 +37,11 @@ namespace Serialization_Practice
             }
             set { mAge = value; }
         }
+
         public string ID
         {
             get { return mID; }
             set { mID = value; }
         }
-
-
-
     }
 }

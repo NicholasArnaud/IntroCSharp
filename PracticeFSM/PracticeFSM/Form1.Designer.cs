@@ -38,11 +38,13 @@
             this.VincentSelect = new System.Windows.Forms.Button();
             this.CaitSithSelect = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.SaveData = new System.Windows.Forms.Button();
+            this.LoadData = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Attack
             // 
-            this.Attack.Location = new System.Drawing.Point(82, 226);
+            this.Attack.Location = new System.Drawing.Point(12, 146);
             this.Attack.Name = "Attack";
             this.Attack.Size = new System.Drawing.Size(75, 23);
             this.Attack.TabIndex = 0;
@@ -52,7 +54,7 @@
             // 
             // Defend
             // 
-            this.Defend.Location = new System.Drawing.Point(205, 226);
+            this.Defend.Location = new System.Drawing.Point(145, 146);
             this.Defend.Name = "Defend";
             this.Defend.Size = new System.Drawing.Size(75, 23);
             this.Defend.TabIndex = 1;
@@ -62,7 +64,7 @@
             // 
             // End
             // 
-            this.End.Location = new System.Drawing.Point(322, 226);
+            this.End.Location = new System.Drawing.Point(279, 146);
             this.End.Name = "End";
             this.End.Size = new System.Drawing.Size(75, 23);
             this.End.TabIndex = 2;
@@ -72,7 +74,7 @@
             // 
             // CloudSelect
             // 
-            this.CloudSelect.Location = new System.Drawing.Point(62, 23);
+            this.CloudSelect.Location = new System.Drawing.Point(12, 23);
             this.CloudSelect.Name = "CloudSelect";
             this.CloudSelect.Size = new System.Drawing.Size(75, 23);
             this.CloudSelect.TabIndex = 3;
@@ -82,7 +84,7 @@
             // 
             // TifaSelect
             // 
-            this.TifaSelect.Location = new System.Drawing.Point(62, 71);
+            this.TifaSelect.Location = new System.Drawing.Point(12, 52);
             this.TifaSelect.Name = "TifaSelect";
             this.TifaSelect.Size = new System.Drawing.Size(75, 23);
             this.TifaSelect.TabIndex = 4;
@@ -92,7 +94,7 @@
             // 
             // BarettSelect
             // 
-            this.BarettSelect.Location = new System.Drawing.Point(62, 122);
+            this.BarettSelect.Location = new System.Drawing.Point(12, 81);
             this.BarettSelect.Name = "BarettSelect";
             this.BarettSelect.Size = new System.Drawing.Size(75, 23);
             this.BarettSelect.TabIndex = 5;
@@ -102,7 +104,7 @@
             // 
             // AerisSelect
             // 
-            this.AerisSelect.Location = new System.Drawing.Point(335, 23);
+            this.AerisSelect.Location = new System.Drawing.Point(279, 23);
             this.AerisSelect.Name = "AerisSelect";
             this.AerisSelect.Size = new System.Drawing.Size(75, 23);
             this.AerisSelect.TabIndex = 6;
@@ -112,7 +114,7 @@
             // 
             // VincentSelect
             // 
-            this.VincentSelect.Location = new System.Drawing.Point(335, 71);
+            this.VincentSelect.Location = new System.Drawing.Point(279, 52);
             this.VincentSelect.Name = "VincentSelect";
             this.VincentSelect.Size = new System.Drawing.Size(75, 23);
             this.VincentSelect.TabIndex = 7;
@@ -122,7 +124,7 @@
             // 
             // CaitSithSelect
             // 
-            this.CaitSithSelect.Location = new System.Drawing.Point(335, 122);
+            this.CaitSithSelect.Location = new System.Drawing.Point(279, 81);
             this.CaitSithSelect.Name = "CaitSithSelect";
             this.CaitSithSelect.Size = new System.Drawing.Size(75, 23);
             this.CaitSithSelect.TabIndex = 8;
@@ -132,17 +134,38 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(150, 176);
+            this.textBox1.Location = new System.Drawing.Point(90, 110);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(186, 20);
             this.textBox1.TabIndex = 9;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // SaveData
+            // 
+            this.SaveData.Location = new System.Drawing.Point(74, 186);
+            this.SaveData.Name = "SaveData";
+            this.SaveData.Size = new System.Drawing.Size(75, 23);
+            this.SaveData.TabIndex = 10;
+            this.SaveData.Text = "Save";
+            this.SaveData.UseVisualStyleBackColor = true;
+            this.SaveData.Click += new System.EventHandler(this.SaveData_Click);
+            // 
+            // LoadData
+            // 
+            this.LoadData.Location = new System.Drawing.Point(214, 186);
+            this.LoadData.Name = "LoadData";
+            this.LoadData.Size = new System.Drawing.Size(75, 23);
+            this.LoadData.TabIndex = 11;
+            this.LoadData.Text = "Load";
+            this.LoadData.UseVisualStyleBackColor = true;
+            this.LoadData.Click += new System.EventHandler(this.LoadData_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(463, 309);
+            this.ClientSize = new System.Drawing.Size(361, 221);
+            this.Controls.Add(this.LoadData);
+            this.Controls.Add(this.SaveData);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.CaitSithSelect);
             this.Controls.Add(this.VincentSelect);
@@ -173,6 +196,8 @@
         private System.Windows.Forms.Button VincentSelect;
         private System.Windows.Forms.Button CaitSithSelect;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button SaveData;
+        private System.Windows.Forms.Button LoadData;
     }
 }
 

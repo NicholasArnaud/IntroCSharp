@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace PracticeFSM
@@ -46,6 +48,5 @@ namespace PracticeFSM
             if (onPartyEnd != null)
                 onPartyEnd.Invoke();
         }
-
     }
 }

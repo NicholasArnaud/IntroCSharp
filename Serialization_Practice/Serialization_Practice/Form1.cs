@@ -24,19 +24,20 @@ namespace Serialization_Practice
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void SaveData_Click(object sender, EventArgs e)
         {
-            Student curStudent = new Student(this.StudentName.Text,)
+            Student curStudent = new Student(this.StudentName.Text, (int)this.StudentAge.Value, this.StudentID.Text);
+            DataManage<Student>.Serialize("Student", curStudent);
         }
 
         private void LoadLast_Click(object sender, EventArgs e)
         {
-
+            Student lastStudent = DataManage<Student>.Deserialize("Student");
+            this.StudentName.Text = lastStudent.Name;
+            this.StudentAge.Value = lastStudent.Age;
+            this.StudentID.Text = lastStudent.ID;
         }
+
+
     }
 }
