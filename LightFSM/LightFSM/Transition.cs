@@ -12,10 +12,5 @@ namespace LightFSM
         public string input{ get; private set;}
         public State destination { get; private set; }
         public Transition() { }
-        public Transition()
-        {
-
-        }
-
     }
 }
