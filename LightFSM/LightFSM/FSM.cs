@@ -38,7 +38,7 @@ namespace LightFSM
         public void Exit()
         {Console.WriteLine("Quit program");}
         //....
-
+        
        
 
         //   List<State> States = new List<State>();
@@ -56,6 +56,10 @@ namespace LightFSM
                 case State.RED:
                     current = State.RED;
                     RedLight();
+                    break;
+                case State.YELLOW:
+                    current = State.YELLOW;
+                    YellowLight();
                     break;
                     //...
             }
