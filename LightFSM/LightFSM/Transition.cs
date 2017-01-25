@@ -1,16 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Text;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace LightFSM
 {
+
     class Transition
     {
-        public string input{ get; private set;}
-        public State destination { get; private set; }
         public Transition() { }
+        private State destination;
+        private int m_condition;
+        public Transition(int token, State to)
+        {
+            m_condition = token;
+            destination = to;
+        }
+
     }
 }
