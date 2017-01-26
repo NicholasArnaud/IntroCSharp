@@ -256,24 +256,7 @@ namespace NVZ_In_WinForms
             }
 
         }
-        //public bool NextPlayer()
-        //{
-        //    int i = 0;
-        //    if (i < 2)
-        //    {
-        //        for (; i <= TeamA.Count; i++)
-        //            TeamA.ElementAt(i);
-        //        TeamA.Reverse();
-        //    }
-        //    else
-        //    {
-        //        for (int j = 0; j <= TeamB.Count; j++)
-        //            TeamB.ElementAt(j);
-        //        TeamB.Reverse();
-        //    }
-
-        //    return true;
-        //}
+      
 
         private void LogBox_TextChanged(object sender, EventArgs e) { }
     }

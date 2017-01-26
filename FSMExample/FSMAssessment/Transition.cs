@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace LightFSM
+namespace FSMAssessment
 {
 
     class Transition
@@ -18,6 +15,5 @@ namespace LightFSM
             m_condition = token;
             destination = to;
         }
-
     }
 }
