@@ -10,7 +10,7 @@ namespace NinjasVsZombies
     {
         static void Main(string[] args)
         {
-
+            #region Entity declerations
             Player TheLegend27 = new Player(200, 20);
             TheLegend27.Name = "TheLegend27";
             TheLegend27.Speed = 15.0f;
@@ -31,19 +31,24 @@ namespace NinjasVsZombies
             TeamZ.Add(GetRekt);
             int deathCounterN = 0;
             int deathCounterZ = 0;
+            #endregion
 
+            #region console rights
             Console.WriteLine("Welcome! There are 4 characters. \n  2 Ninjas: TheLegend27 and TheGuy \n  2 Zombies: NoobKilla and GetRekt \n");
             Console.WriteLine("You can select who to attack by typing the name of \nthe character you want to attack with and the character you want to attack.");
             Console.WriteLine("For example: Player attack Enemy \n");
             Console.WriteLine("You can view all players current HP and attack stats by typing 'stats'");
             Console.WriteLine("To Quit simply press 'q' and the 'enter' key");
             Console.WriteLine("Press 'c' to clear screen at any time \n");
+            #endregion
+
             string input;
             do
             {
                 input = Console.ReadLine();
 
                 //NINJA ATTACKS
+                #region Ninja Atk
                 if (input == "TheLegend27 attack NoobKilla")
                     TheLegend27.Hits(NoobKilla);
 
@@ -55,9 +60,10 @@ namespace NinjasVsZombies
 
                 if (input == "TheGuy attack NoobKilla")
                     TheGuy.Hits(NoobKilla);
-
+                #endregion
 
                 //ZOMBIE ATTACKS
+                #region Zom Atk
                 if (input == "GetRekt attack TheGuy")
                     GetRekt.Hits(TheGuy);
 
@@ -69,8 +75,10 @@ namespace NinjasVsZombies
 
                 if (input == "NoobKilla attack TheGuy")
                     NoobKilla.Hits(TheGuy);
+                #endregion
 
                 //CHECK STATS
+                #region stats
                 if (input == "stat")
                 {
                     Console.Clear();
@@ -84,12 +92,14 @@ namespace NinjasVsZombies
                     Console.Clear();
                     Console.WriteLine("Resume at any time by attacking \n");
                 }
+                #endregion
 
                 //CLEAR
                 if (input == "c") { Console.Clear(); }
 
 
                 //FRIENDLY FIRE
+                #region Freind Fire
                 if (input == "NoobKilla attack GetRekt")
                     Console.WriteLine("YOU CAN NOT ATTACK YOUR TEAMMATE \n");
                 if (input == "GetRekt attack NoobKilla")
@@ -98,10 +108,10 @@ namespace NinjasVsZombies
                     Console.WriteLine("YOU CAN NOT ATTACK YOUR TEAMMATE \n");
                 if (input == "TheGuy attack TheLegend27")
                     Console.WriteLine("YOU CAN NOT ATTACK YOUR TEAMMATE \n");
+                #endregion
 
                 //SUICIDE
-
-                
+                #region suicide    
                 if (input == "NoobKilla attack NoobKilla")
                 {
                     NoobKilla.Hits(NoobKilla);
@@ -113,7 +123,7 @@ namespace NinjasVsZombies
                     deathCounterZ++;
                 }
 
-                
+
                 if (input == "TheLegend27 attack TheLegend27")
                 {
                     TheLegend27.Hits(TheLegend27);
@@ -141,20 +151,17 @@ namespace NinjasVsZombies
                     Console.ReadLine();
                     input = "q";
                 }
-
-
-
-
+                #endregion
 
                 //WINNING
-
+                #region
                 if (TheLegend27.Health == 0 && TheGuy.Health == 0)
                 {
                     Console.WriteLine("Congratulations Zombies! The Ninjas have been destroyed!");
                     Console.ReadLine();
                     input = "q";
                 }
-               if (GetRekt.Health == 0 && NoobKilla.Health == 0)
+                if (GetRekt.Health == 0 && NoobKilla.Health == 0)
                 {
                     Console.WriteLine("Congratulations Ninjas! The Zombies have been eraticated!");
                     Console.ReadLine();
@@ -165,6 +172,7 @@ namespace NinjasVsZombies
             Console.Clear();
             Console.WriteLine("Thanks For Playing!");
             Console.Read();
+            #endregion
         }
     }
     public class Entity

@@ -90,7 +90,6 @@ namespace LightFSM
                     Exit();
                     break;
             }
-
         }
 
         //Calls the ChangeState function when a certain condition is met 
@@ -118,9 +117,7 @@ namespace LightFSM
                     if (stopWatch.Elapsed.Seconds >= 3)
                         ChangeState(State.YELLOW);
                     break;
-
             }
-
         }
 
         //Starts the bloody program at a particular state

@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-
-namespace CombatForms
+namespace InterfacePractice
 {
-    class Player
+    class Entity
     {
-        Player() { }
-        public Player(string name, int h, int att, float spd)
+        #region Constructors
+        public Entity() { }
+        public Entity(string name,int h, int att)
         {
-            Name = name;
+            Name = name; 
             Health = h;
             AttackPower = att;
-            Speed = spd;
         }
+        #endregion
 
-        #region getters,setters
+        #region getters & setters
         public int Health
         {
             get { return health; }
@@ -27,11 +29,6 @@ namespace CombatForms
                 else
                     health = value;
             }
-        }
-        public float Speed
-        {
-            get { return speed; }
-            set { speed = value; }
         }
         public string Name
         {
@@ -45,11 +42,9 @@ namespace CombatForms
         }
         #endregion
 
-        #region player variables
+        
         private int attackPower;
         private string name;
         private int health;
-        private float speed;
-        #endregion
     }
 }
