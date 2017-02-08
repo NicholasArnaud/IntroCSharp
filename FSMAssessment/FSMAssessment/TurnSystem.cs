@@ -14,14 +14,14 @@ namespace FSMAssessment
         ENDTURN =99,
 
     }
-    public class TurnSystem : ITurnManager
+    public class TurnSystem
     {
-        TurnSystem() { }
+        public TurnSystem() { }
         FSM<Turns> turnSystem;
 
         public void ToStartUp()
         {
-            throw new NotImplementedException();
+         
         }
 
         public void ToIdle()
@@ -36,7 +36,7 @@ namespace FSMAssessment
 
         public void ToEnterCombat(Player current)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void ToEndTurn()

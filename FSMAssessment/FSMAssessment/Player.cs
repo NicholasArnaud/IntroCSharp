@@ -14,6 +14,24 @@ namespace FSMAssessment
             health = Health;
             power = Power;
         }
+        public int Health
+        {
+            get { return health; }
+            set
+            {
+                if (value <= 0) health = value;
+                else health = 0;
+            }
+        }
+        public int Power
+        {
+            get { return power; }
+            set { power = value; }
+        }
+        public string Name
+        {
+            get { return name; }
+        }
 
         private string name;
         private int health;

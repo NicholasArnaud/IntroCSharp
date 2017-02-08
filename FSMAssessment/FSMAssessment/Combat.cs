@@ -3,40 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace FSMAssessment
 {
      class Combat 
     {
-        public Combat() { }
-        public void ToEnter(Player current)
+        public Combat()
         {
-            throw new NotImplementedException();
+
         }
 
-        public void ToAttack()
+        public void ToEnter(Player current, Player target)
         {
-            throw new NotImplementedException();
+            ToAttack(current, target);
         }
 
-        public void ToDeath()
+        public void ToAttack(Player current ,Player target)
         {
-            throw new NotImplementedException();
+            target.Health -= current.Power;
+
+            if (target.Health == 0)
+                ToDeath(target);
         }
 
-        public void ToTeamA()
+        public void ToDeath(Player dead)
         {
-            throw new NotImplementedException();
-        }
-
-        public void ToTeamB()
-        {
-            throw new NotImplementedException();
+            Debug.WriteLine("Player is Dead");
+            ToExit();
         }
 
         public void ToExit()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

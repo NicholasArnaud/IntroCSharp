@@ -10,8 +10,18 @@ using System.Windows.Forms;
 
 namespace FSMAssessment
 {
+    public enum State
+        {
+            INIT = 1,
+            PLAYERSELECT = 2,
+            ATK = 3,
+            CHKDEAD = 4,
+            ENDTURN =5,
+            EXIT = 9000,
+        }
     public partial class Form1 : Form
     {
+       
         public Form1()
         {
             InitializeComponent();
@@ -19,7 +29,9 @@ namespace FSMAssessment
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            FSM<State> fsm = new FSM<State>();
+          
+           
         }
     }
 }
