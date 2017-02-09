@@ -14,7 +14,12 @@ namespace FSMAssessment
        public FSM()
         {
               Dictionary<string,State> states = new Dictionary<string,State>();
-            states.Add("INIT", State.INIT);
+            var v = Enum.GetValues(typeof(T));
+            foreach(var e in v)
+            {
+                State s = new State(e as Enum);
+                states.Add(s.name, s);
+            }
         }
         TurnSystem Turn = new TurnSystem();
         Combat Battle = new Combat();
@@ -28,6 +33,7 @@ namespace FSMAssessment
 
         public void ChangeState(T State)
         {
+          
             switch (current)
             {
                 case State.INIT:
@@ -57,16 +63,16 @@ namespace FSMAssessment
             switch (current.ToString())
             {
                 case current.ToString().INIT:
-                    ChangeState(State.PLAYERSELECT);
+                    ChangeState(TurnStates.PLAYERSELECT);
                     break;
-                case State.ATK:
-                    ChangeState(State.CHKDEAD);
+                case TurnStates.ATK:
+                    ChangeState(TurnStates.CHKDEAD);
                     break;
-                case State.CHKDEAD:
-                    ChangeState(State.ENDTURN);
+                case TurnStates.CHKDEAD:
+                    ChangeState(TurnStates.ENDTURN);
                     break;
-                case State.ENDTURN:
-                    ChangeState(State.PLAYERSELECT);
+                case TurnStates.ENDTURN:
+                    ChangeState(TurnStates.PLAYERSELECT);
                     break;
             }
         }

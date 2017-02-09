@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace FSMAssessment
 {
-    public enum State
+    public enum TurnStates
         {
             INIT = 1,
             PLAYERSELECT = 2,
@@ -29,7 +29,7 @@ namespace FSMAssessment
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            FSM<State> fsm = new FSM<State>();
+            FSM<TurnStates> fsm = new FSM<TurnStates>();
           
            
         }
