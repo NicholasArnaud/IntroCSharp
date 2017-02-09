@@ -8,12 +8,14 @@ namespace FSMAssessment
 {
     public class Player
     {
-        Player(string Name, int Health, int Power )
+        public Player() { }
+        public Player(string Name, int Health, int Power)
         {
             name = Name;
             health = Health;
             power = Power;
         }
+
         public int Health
         {
             get { return health; }

@@ -11,8 +11,8 @@ namespace FSMAssessment
     {
         public Combat()
         {
-
         }
+       
 
         public void ToEnter(Player current, Player target)
         {
@@ -35,7 +35,7 @@ namespace FSMAssessment
 
         public void ToExit()
         {
-            
+
         }
     }
 }

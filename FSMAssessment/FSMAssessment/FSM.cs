@@ -11,72 +11,28 @@ namespace FSMAssessment
     {
 
 
-       public FSM()
+        public FSM()
         {
-              Dictionary<string,State> states = new Dictionary<string,State>();
+            states = new Dictionary<string, State>();
             var v = Enum.GetValues(typeof(T));
-            foreach(var e in v)
+            foreach (var e in v)
             {
                 State s = new State(e as Enum);
                 states.Add(s.name, s);
             }
         }
-        TurnSystem Turn = new TurnSystem();
-        Combat Battle = new Combat();
+        Dictionary<string, State> states;
+        string current;
 
-        public T current;
-        
-        public void Start()
+
+        public string Start()
         {
-            ChangeState(current.INIT);
+            return current = "INIT";
         }
 
-        public void ChangeState(T State)
+        public void ChangeState(string s)
         {
-          
-            switch (current)
-            {
-                case State.INIT:
-                    current = State.INIT;
-                    break;
-                case State.PLAYERSELECT:
-                    current = State.PLAYERSELECT;
-                    Turn.ToStartUp();
-                    break;
-                case Statem.ATK:
-                    current = State.ATK;
-                    break;
-                case State.CHKDEAD:
-                    current = State.CHKDEAD;
-                    break;
-                case State.ENDTURN:
-                    current = State.ENDTURN;
-                    break;
-                case State.EXIT:
-                    current = State.EXIT;
-                    break;
-            }
+            current = states[s].ToString();
         }
-
-        public void Update()
-        {
-            switch (current.ToString())
-            {
-                case current.ToString().INIT:
-                    ChangeState(TurnStates.PLAYERSELECT);
-                    break;
-                case TurnStates.ATK:
-                    ChangeState(TurnStates.CHKDEAD);
-                    break;
-                case TurnStates.CHKDEAD:
-                    ChangeState(TurnStates.ENDTURN);
-                    break;
-                case TurnStates.ENDTURN:
-                    ChangeState(TurnStates.PLAYERSELECT);
-                    break;
-            }
-        }
-
-
     }
 }

@@ -18,11 +18,16 @@ namespace FSMAssessment
         public delegate void OnEnter();
         public delegate void OnExit();
         public OnEnter onEnter;
-        public OnExit onExit;
+
 
         public void AddEnterFunction(Delegate d)
         {
             onEnter += d as OnEnter;
+        }
+
+        public override string ToString()
+        {
+            return name;
         }
     }
 }
