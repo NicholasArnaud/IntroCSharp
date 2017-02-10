@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using System.Diagnostics;
 
 namespace FSMAssessment
@@ -15,16 +11,15 @@ namespace FSMAssessment
 
         public void ToStartUp()
         {
-            ToIdle();
+            Debug.WriteLine("Start Up");
         }
-
-        public void ToIdle()
+        public void Idle()
         {
-            ToChoosePlayer();
+            Debug.WriteLine("Waiting...");
         }
-
         public void ToChoosePlayer()
         {
+            Debug.WriteLine("Choosing Player");
         }
     }
 }

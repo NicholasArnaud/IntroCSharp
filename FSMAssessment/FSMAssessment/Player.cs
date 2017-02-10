@@ -21,7 +21,8 @@ namespace FSMAssessment
             get { return health; }
             set
             {
-                if (value <= 0) health = value;
+                if (value >= 0)
+                    health = value;
                 else health = 0;
             }
         }
@@ -33,6 +34,7 @@ namespace FSMAssessment
         public string Name
         {
             get { return name; }
+            set { name = value; }
         }
 
         private string name;

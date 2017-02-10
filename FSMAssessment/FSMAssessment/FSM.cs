@@ -22,17 +22,14 @@ namespace FSMAssessment
             }
         }
         Dictionary<string, State> states;
-        string current;
-
-
         public string Start()
         {
-            return current = "INIT";
+            return GameManager.Instance.current = "INIT";
         }
 
         public void ChangeState(string s)
         {
-            current = states[s].ToString();
+            GameManager.Instance.current = states[s].ToString();
         }
     }
 }

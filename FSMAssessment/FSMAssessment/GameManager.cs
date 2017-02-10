@@ -24,6 +24,11 @@ namespace FSMAssessment
                 return instance;
             }
         }
+
+        public Combat combat;
+        public TurnSystem turnManager;
+        public Player Doomsday;
+        public Player Aries;
         public FSM<TurnStates> fsm;
         public string current;
     }

@@ -37,7 +37,5 @@ namespace Serialization_Practice
             this.StudentAge.Value = lastStudent.Age;
             this.StudentID.Text = lastStudent.ID;
         }
-
-
     }
 }
