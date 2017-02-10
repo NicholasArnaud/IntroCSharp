@@ -11,6 +11,7 @@ namespace FSMAssessment
         private static GameManager instance = null;
         private GameManager()
         {
+            //Constructor
         }
         public static GameManager Instance
         {
@@ -29,7 +30,8 @@ namespace FSMAssessment
         public TurnSystem turnManager;
         public Player Doomsday;
         public Player Aries;
+        public Player Swine;
         public FSM<TurnStates> fsm;
-        public string current;
+        public string currentState;
     }
 }

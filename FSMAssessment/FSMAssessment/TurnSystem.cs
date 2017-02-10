@@ -7,11 +7,15 @@ namespace FSMAssessment
     {
        
 
-        public TurnSystem() { }
+        public TurnSystem()
+        {
+            //Constructor
+        }
 
         public void ToStartUp()
         {
-            Debug.WriteLine("Start Up");
+            
+            Debug.WriteLine("Starting Up");
         }
         public void Idle()
         {

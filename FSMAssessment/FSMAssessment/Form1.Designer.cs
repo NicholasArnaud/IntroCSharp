@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.PlayerHealth = new System.Windows.Forms.ProgressBar();
             this.EnemyHealth = new System.Windows.Forms.ProgressBar();
             this.TextLog = new System.Windows.Forms.RichTextBox();
             this.AtkButton = new System.Windows.Forms.Button();
             this.LoadButton = new System.Windows.Forms.Button();
             this.SaveButton = new System.Windows.Forms.Button();
-            this.Player = new System.Windows.Forms.ToolTip(this.components);
-            this.Enemy = new System.Windows.Forms.ToolTip(this.components);
             this.ResetButton = new System.Windows.Forms.Button();
+            this.PlayerName = new System.Windows.Forms.MaskedTextBox();
+            this.EnemyName = new System.Windows.Forms.MaskedTextBox();
+            this.Potion = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // PlayerHealth
@@ -46,7 +46,6 @@
             this.PlayerHealth.Name = "PlayerHealth";
             this.PlayerHealth.Size = new System.Drawing.Size(100, 12);
             this.PlayerHealth.TabIndex = 0;
-            this.Player.SetToolTip(this.PlayerHealth, "Player\'s Health");
             this.PlayerHealth.Value = 100;
             this.PlayerHealth.Click += new System.EventHandler(this.PlayerHealth_Click);
             // 
@@ -56,7 +55,6 @@
             this.EnemyHealth.Name = "EnemyHealth";
             this.EnemyHealth.Size = new System.Drawing.Size(100, 12);
             this.EnemyHealth.TabIndex = 1;
-            this.Enemy.SetToolTip(this.EnemyHealth, "Enemy\'s Health");
             this.EnemyHealth.Value = 100;
             this.EnemyHealth.Click += new System.EventHandler(this.EnemyHealth_Click);
             // 
@@ -111,11 +109,42 @@
             this.ResetButton.UseVisualStyleBackColor = true;
             this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
+            // PlayerName
+            // 
+            this.PlayerName.Location = new System.Drawing.Point(12, 87);
+            this.PlayerName.Name = "PlayerName";
+            this.PlayerName.ReadOnly = true;
+            this.PlayerName.Size = new System.Drawing.Size(100, 20);
+            this.PlayerName.TabIndex = 7;
+            this.PlayerName.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.PlayerName_MaskInputRejected);
+            // 
+            // EnemyName
+            // 
+            this.EnemyName.Location = new System.Drawing.Point(249, 87);
+            this.EnemyName.Name = "EnemyName";
+            this.EnemyName.ReadOnly = true;
+            this.EnemyName.Size = new System.Drawing.Size(100, 20);
+            this.EnemyName.TabIndex = 8;
+            this.EnemyName.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.EnemyName_MaskInputRejected);
+            // 
+            // Potion
+            // 
+            this.Potion.Location = new System.Drawing.Point(12, 131);
+            this.Potion.Name = "Potion";
+            this.Potion.Size = new System.Drawing.Size(75, 23);
+            this.Potion.TabIndex = 9;
+            this.Potion.Text = "Potion";
+            this.Potion.UseVisualStyleBackColor = true;
+            this.Potion.Click += new System.EventHandler(this.Potion_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(368, 200);
+            this.Controls.Add(this.Potion);
+            this.Controls.Add(this.EnemyName);
+            this.Controls.Add(this.PlayerName);
             this.Controls.Add(this.ResetButton);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.LoadButton);
@@ -127,6 +156,7 @@
             this.Text = "KillSim";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -138,9 +168,10 @@
         private System.Windows.Forms.Button AtkButton;
         private System.Windows.Forms.Button LoadButton;
         private System.Windows.Forms.Button SaveButton;
-        private System.Windows.Forms.ToolTip Player;
-        private System.Windows.Forms.ToolTip Enemy;
         private System.Windows.Forms.Button ResetButton;
+        private System.Windows.Forms.MaskedTextBox PlayerName;
+        private System.Windows.Forms.MaskedTextBox EnemyName;
+        private System.Windows.Forms.Button Potion;
     }
 }
 

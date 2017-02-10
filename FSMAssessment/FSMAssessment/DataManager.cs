@@ -5,6 +5,7 @@ namespace FSMAssessment
 {
     class DataManager<T>
     {
+        //saves called data into an xml file
         public static void Serialize(string filename, T data)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T));
@@ -12,6 +13,8 @@ namespace FSMAssessment
             serializer.Serialize(writter, data);
             writter.Close();
         }
+
+        //retrieves saved data
         public static T Deserialize(string filename)
         {
             T data;

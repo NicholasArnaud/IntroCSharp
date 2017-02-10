@@ -6,7 +6,9 @@ namespace FSMAssessment
     class State
     {
         public State()
-        { }
+        {
+            //Constructor
+        }
         public State(Enum e)
         {
             name = e.ToString();

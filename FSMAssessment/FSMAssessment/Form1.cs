@@ -16,14 +16,17 @@ namespace FSMAssessment
     }
     public partial class Form1 : Form
     {
+        int limit = 0;
 
         public Form1()
         {
             InitializeComponent();
-            GameManager.Instance.current = GameManager.Instance.fsm.Start();
+            GameManager.Instance.currentState = GameManager.Instance.fsm.Start();
             EnemyHealth.Value = GameManager.Instance.Doomsday.Health;
             PlayerHealth.Value = GameManager.Instance.Aries.Health;
-            
+            PlayerName.Text = GameManager.Instance.Aries.Name;
+            EnemyName.Text = GameManager.Instance.Doomsday.Name;
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -42,8 +45,15 @@ namespace FSMAssessment
             Debug.WriteLine("Started Combat state...");
             GameManager.Instance.fsm.ChangeState("ATK");
             StateFunctions();
-            EnemyHealth.Value = GameManager.Instance.Doomsday.Health;
+            if (GameManager.Instance.Doomsday.Health != 0)
+                EnemyHealth.Value = GameManager.Instance.Doomsday.Health;
             PlayerHealth.Value = GameManager.Instance.Aries.Health;
+            if (GameManager.Instance.Doomsday.Health == 0)
+            {
+                EnemyName.Text = GameManager.Instance.Swine.Name;
+                EnemyHealth.Value = (int)(((float)GameManager.Instance.Swine.Health / (float)GameManager.Instance.Swine.MaxHealth) * 100f);
+            }
+
             GameManager.Instance.fsm.ChangeState("ENDTURN");
             StateFunctions();
         }
@@ -51,19 +61,19 @@ namespace FSMAssessment
 
         private void StateFunctions()
         {
-            if(GameManager.Instance.current == "INIT")
+            if (GameManager.Instance.currentState == "INIT")
             {
                 GameManager.Instance.turnManager.ToStartUp();
             }
-            if(GameManager.Instance.current=="IDLE")
+            if (GameManager.Instance.currentState == "IDLE")
             {
                 GameManager.Instance.turnManager.Idle();
             }
-            if (GameManager.Instance.current == "ATK")
+            if (GameManager.Instance.currentState == "ATK")
             {
                 GameManager.Instance.combat.ToEnter();
             }
-            if (GameManager.Instance.current == "ENDTURN")
+            if (GameManager.Instance.currentState == "ENDTURN")
             {
                 TextLog.Text += "End of Turn" + "\n";
                 TextLog.SelectionStart = TextLog.Text.Length;
@@ -84,25 +94,76 @@ namespace FSMAssessment
         private void LoadButton_Click(object sender, EventArgs e)
         {
             Debug.WriteLine("Loading previous save...");
-            GameManager.Instance.Aries = DataManager<Player>.Deserialize("FriendlyPLayers");
-            GameManager.Instance.Doomsday = DataManager<Player>.Deserialize("EnemyPLayers");
+
+            GameManager.Instance.Aries = DataManager<Player>.Deserialize("AriesPlayer");
+            GameManager.Instance.Doomsday = DataManager<Player>.Deserialize("DoomsdayPlayer");
+            GameManager.Instance.Swine = DataManager<Player>.Deserialize("SwinePlayer");
             TextLog.Text = DataManager<string>.Deserialize("TextLog");
             PlayerHealth.Value = GameManager.Instance.Aries.Health;
-            EnemyHealth.Value = GameManager.Instance.Doomsday.Health;
+            if (GameManager.Instance.Doomsday.Health != 0)
+            {
+                EnemyName.Text = GameManager.Instance.Doomsday.Name;
+                EnemyHealth.Maximum = GameManager.Instance.Doomsday.Health;
+                EnemyHealth.Value = GameManager.Instance.Doomsday.Health;
+            }
+            else if (GameManager.Instance.Swine.Health != 0)
+            {
+                EnemyName.Text = GameManager.Instance.Swine.Name;
+                EnemyHealth.Maximum = GameManager.Instance.Swine.Health;
+                EnemyHealth.Value = GameManager.Instance.Swine.Health;
+            }
+
+
+
             Debug.WriteLine("Previous Save Loaded");
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
             Debug.WriteLine("Saving current progress...");
-            DataManager<Player>.Serialize("FriendlyPlayers", GameManager.Instance.Aries);
-            DataManager<Player>.Serialize("EnemyPlayers", GameManager.Instance.Doomsday);
+
+            DataManager<Player>.Serialize("DoomsdayPlayer", GameManager.Instance.Doomsday);
+
+            DataManager<Player>.Serialize("SwinePlayer", GameManager.Instance.Swine);
+
+            DataManager<Player>.Serialize("AriesPlayer", GameManager.Instance.Aries);
+            
             DataManager<string>.Serialize("TextLog", TextLog.Text);
         }
 
         private void ResetButton_Click(object sender, EventArgs e)
         {
             Debug.WriteLine("Not Doing anything ATM...");
+        }
+
+        private void PlayerName_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void EnemyName_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void Potion_Click(object sender, EventArgs e)
+        {
+
+            limit = DataManager<int>.Deserialize("PotionUse");
+
+            if (limit <= 3)
+            {
+                DataManager<int>.Serialize("PotionUse", limit);
+                GameManager.Instance.Aries.Health = GameManager.Instance.Aries.MaxHealth;
+                PlayerHealth.Value = GameManager.Instance.Aries.Health;
+                limit++;
+            }
+
+            else
+            {
+                Potion.Enabled = false;
+            }
+
         }
     }
 }

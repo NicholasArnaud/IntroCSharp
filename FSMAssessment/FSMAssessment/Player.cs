@@ -8,37 +8,53 @@ namespace FSMAssessment
 {
     public class Player
     {
-        public Player() { }
-        public Player(string Name, int Health, int Power)
+        public Player()
+        { //Constructor
+        }
+        public Player(string Name, int Health, int Power, float Speed)
         {
-            name = Name;
-            health = Health;
-            power = Power;
+            m_name = Name;
+            m_health = Health;
+            m_power = Power;
+            m_speed = Speed;
+            m_maxHealth = m_health;
         }
 
+        public int MaxHealth
+        {
+            get { return m_maxHealth; }
+            set { m_maxHealth = value; }
+        }
         public int Health
         {
-            get { return health; }
+            get { return m_health; }
             set
             {
                 if (value >= 0)
-                    health = value;
-                else health = 0;
+                    m_health = value;
+                else m_health = 0;
             }
         }
         public int Power
         {
-            get { return power; }
-            set { power = value; }
+            get { return m_power; }
+            set { m_power = value; }
         }
         public string Name
         {
-            get { return name; }
-            set { name = value; }
+            get { return m_name; }
+            set { m_name = value; }
+        }
+        public float Speed
+        {
+            get { return m_speed; }
+            set { m_speed = value; }
         }
 
-        private string name;
-        private int health;
-        private int power;
+        private int m_maxHealth;
+        private string m_name;
+        private int m_health;
+        private int m_power;
+        private float m_speed;
     }
 }
