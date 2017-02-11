@@ -42,7 +42,7 @@
             // 
             // PlayerHealth
             // 
-            this.PlayerHealth.Location = new System.Drawing.Point(12, 113);
+            this.PlayerHealth.Location = new System.Drawing.Point(12, 131);
             this.PlayerHealth.Name = "PlayerHealth";
             this.PlayerHealth.Size = new System.Drawing.Size(100, 12);
             this.PlayerHealth.TabIndex = 0;
@@ -51,7 +51,7 @@
             // 
             // EnemyHealth
             // 
-            this.EnemyHealth.Location = new System.Drawing.Point(249, 113);
+            this.EnemyHealth.Location = new System.Drawing.Point(249, 131);
             this.EnemyHealth.Name = "EnemyHealth";
             this.EnemyHealth.Size = new System.Drawing.Size(100, 12);
             this.EnemyHealth.TabIndex = 1;
@@ -64,14 +64,14 @@
             this.TextLog.Name = "TextLog";
             this.TextLog.ReadOnly = true;
             this.TextLog.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.TextLog.Size = new System.Drawing.Size(337, 43);
+            this.TextLog.Size = new System.Drawing.Size(337, 86);
             this.TextLog.TabIndex = 2;
             this.TextLog.Text = "";
             this.TextLog.TextChanged += new System.EventHandler(this.TextLog_TextChanged);
             // 
             // AtkButton
             // 
-            this.AtkButton.Location = new System.Drawing.Point(139, 113);
+            this.AtkButton.Location = new System.Drawing.Point(139, 131);
             this.AtkButton.Name = "AtkButton";
             this.AtkButton.Size = new System.Drawing.Size(75, 23);
             this.AtkButton.TabIndex = 3;
@@ -81,7 +81,7 @@
             // 
             // LoadButton
             // 
-            this.LoadButton.Location = new System.Drawing.Point(12, 165);
+            this.LoadButton.Location = new System.Drawing.Point(12, 178);
             this.LoadButton.Name = "LoadButton";
             this.LoadButton.Size = new System.Drawing.Size(75, 23);
             this.LoadButton.TabIndex = 4;
@@ -91,7 +91,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(274, 165);
+            this.SaveButton.Location = new System.Drawing.Point(274, 178);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 23);
             this.SaveButton.TabIndex = 5;
@@ -101,7 +101,7 @@
             // 
             // ResetButton
             // 
-            this.ResetButton.Location = new System.Drawing.Point(139, 165);
+            this.ResetButton.Location = new System.Drawing.Point(139, 178);
             this.ResetButton.Name = "ResetButton";
             this.ResetButton.Size = new System.Drawing.Size(75, 23);
             this.ResetButton.TabIndex = 6;
@@ -111,7 +111,7 @@
             // 
             // PlayerName
             // 
-            this.PlayerName.Location = new System.Drawing.Point(12, 87);
+            this.PlayerName.Location = new System.Drawing.Point(12, 105);
             this.PlayerName.Name = "PlayerName";
             this.PlayerName.ReadOnly = true;
             this.PlayerName.Size = new System.Drawing.Size(100, 20);
@@ -120,7 +120,7 @@
             // 
             // EnemyName
             // 
-            this.EnemyName.Location = new System.Drawing.Point(249, 87);
+            this.EnemyName.Location = new System.Drawing.Point(249, 105);
             this.EnemyName.Name = "EnemyName";
             this.EnemyName.ReadOnly = true;
             this.EnemyName.Size = new System.Drawing.Size(100, 20);
@@ -129,7 +129,7 @@
             // 
             // Potion
             // 
-            this.Potion.Location = new System.Drawing.Point(12, 131);
+            this.Potion.Location = new System.Drawing.Point(12, 149);
             this.Potion.Name = "Potion";
             this.Potion.Size = new System.Drawing.Size(75, 23);
             this.Potion.TabIndex = 9;
@@ -141,7 +141,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(368, 200);
+            this.ClientSize = new System.Drawing.Size(368, 213);
             this.Controls.Add(this.Potion);
             this.Controls.Add(this.EnemyName);
             this.Controls.Add(this.PlayerName);

@@ -21,12 +21,28 @@ namespace FSMAssessment
         public Form1()
         {
             InitializeComponent();
+            _Form1 = this;
             GameManager.Instance.currentState = GameManager.Instance.fsm.Start();
             EnemyHealth.Value = GameManager.Instance.Doomsday.Health;
             PlayerHealth.Value = GameManager.Instance.Aries.Health;
             PlayerName.Text = GameManager.Instance.Aries.Name;
             EnemyName.Text = GameManager.Instance.Doomsday.Name;
-
+            DataManager<int>.Serialize("PotionUse", limit);
+        }
+        public static Form1 _Form1;
+        public void updateLog(string message)
+        {
+            TextLog.AppendText("\n" + message);
+        }
+        public void Buttonenabler(string buttonname)
+        {
+            if(buttonname == AtkButton.Name)
+            {
+                if (AtkButton.Enabled == true)
+                    AtkButton.Enabled = false;
+                else
+                    AtkButton.Enabled = true;
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -75,7 +91,7 @@ namespace FSMAssessment
             }
             if (GameManager.Instance.currentState == "ENDTURN")
             {
-                TextLog.Text += "End of Turn" + "\n";
+                TextLog.Text += "\n" + "End of Turn" + "\n";
                 TextLog.SelectionStart = TextLog.Text.Length;
                 TextLog.ScrollToCaret();
             }
@@ -113,8 +129,8 @@ namespace FSMAssessment
                 EnemyHealth.Value = GameManager.Instance.Swine.Health;
             }
 
-
-
+            AtkButton.Enabled = true;
+            TextLog.AppendText("Previous Save Loaded... \n");
             Debug.WriteLine("Previous Save Loaded");
         }
 
@@ -127,7 +143,7 @@ namespace FSMAssessment
             DataManager<Player>.Serialize("SwinePlayer", GameManager.Instance.Swine);
 
             DataManager<Player>.Serialize("AriesPlayer", GameManager.Instance.Aries);
-            
+
             DataManager<string>.Serialize("TextLog", TextLog.Text);
         }
 
@@ -151,12 +167,14 @@ namespace FSMAssessment
 
             limit = DataManager<int>.Deserialize("PotionUse");
 
-            if (limit <= 3)
+            if (limit <= 2)
             {
+                TextLog.AppendText("Player has healed and now has used " + (limit + 1) + " potions. \n");
+                limit += 1;
                 DataManager<int>.Serialize("PotionUse", limit);
                 GameManager.Instance.Aries.Health = GameManager.Instance.Aries.MaxHealth;
                 PlayerHealth.Value = GameManager.Instance.Aries.Health;
-                limit++;
+
             }
 
             else

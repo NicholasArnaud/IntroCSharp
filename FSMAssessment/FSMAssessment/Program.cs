@@ -15,7 +15,7 @@ namespace FSMAssessment
         static void Main()
         {
             Player Swine = new Player("Infested Swine", 120, 22, 3.4f);
-            Player Doomsday = new Player("Doomsday", 100, 10, 5.5f);
+            Player Doomsday = new Player("Doomsday", 100, 1, 5.5f);
             Player Aries = new Player("Aries", 100, 3, 7.8f);
             FSM<TurnStates> fsm = new FSM<TurnStates>();
 
