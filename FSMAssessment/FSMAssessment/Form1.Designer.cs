@@ -37,7 +37,8 @@
             this.ResetButton = new System.Windows.Forms.Button();
             this.PlayerName = new System.Windows.Forms.MaskedTextBox();
             this.EnemyName = new System.Windows.Forms.MaskedTextBox();
-            this.Potion = new System.Windows.Forms.Button();
+            this.PotionButton = new System.Windows.Forms.Button();
+            this.EndTurn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // PlayerHealth
@@ -71,7 +72,7 @@
             // 
             // AtkButton
             // 
-            this.AtkButton.Location = new System.Drawing.Point(139, 131);
+            this.AtkButton.Location = new System.Drawing.Point(139, 102);
             this.AtkButton.Name = "AtkButton";
             this.AtkButton.Size = new System.Drawing.Size(75, 23);
             this.AtkButton.TabIndex = 3;
@@ -129,20 +130,31 @@
             // 
             // Potion
             // 
-            this.Potion.Location = new System.Drawing.Point(12, 149);
-            this.Potion.Name = "Potion";
-            this.Potion.Size = new System.Drawing.Size(75, 23);
-            this.Potion.TabIndex = 9;
-            this.Potion.Text = "Potion";
-            this.Potion.UseVisualStyleBackColor = true;
-            this.Potion.Click += new System.EventHandler(this.Potion_Click);
+            this.PotionButton.Location = new System.Drawing.Point(12, 149);
+            this.PotionButton.Name = "Potion";
+            this.PotionButton.Size = new System.Drawing.Size(75, 23);
+            this.PotionButton.TabIndex = 9;
+            this.PotionButton.Text = "Potion";
+            this.PotionButton.UseVisualStyleBackColor = true;
+            this.PotionButton.Click += new System.EventHandler(this.Potion_Click);
+            // 
+            // EndTurn
+            // 
+            this.EndTurn.Location = new System.Drawing.Point(139, 149);
+            this.EndTurn.Name = "EndTurn";
+            this.EndTurn.Size = new System.Drawing.Size(75, 23);
+            this.EndTurn.TabIndex = 10;
+            this.EndTurn.Text = "Pass Turn";
+            this.EndTurn.UseVisualStyleBackColor = true;
+            this.EndTurn.Click += new System.EventHandler(this.EndTurn_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(368, 213);
-            this.Controls.Add(this.Potion);
+            this.Controls.Add(this.EndTurn);
+            this.Controls.Add(this.PotionButton);
             this.Controls.Add(this.EnemyName);
             this.Controls.Add(this.PlayerName);
             this.Controls.Add(this.ResetButton);
@@ -171,7 +183,8 @@
         private System.Windows.Forms.Button ResetButton;
         private System.Windows.Forms.MaskedTextBox PlayerName;
         private System.Windows.Forms.MaskedTextBox EnemyName;
-        private System.Windows.Forms.Button Potion;
+        private System.Windows.Forms.Button PotionButton;
+        private System.Windows.Forms.Button EndTurn;
     }
 }
 

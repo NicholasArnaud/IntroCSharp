@@ -10,6 +10,7 @@ namespace FSMAssessment
     public class FSM<T>
     {
 
+        Dictionary<string, State> states;
 
         public FSM()
         {
@@ -21,7 +22,7 @@ namespace FSMAssessment
                 states.Add(s.name, s);
             }
         }
-        Dictionary<string, State> states;
+
         public string Start()
         {
             return GameManager.Instance.currentState = "INIT";
