@@ -143,6 +143,7 @@ namespace FSMAssessment
 
         private void LoadButton_Click(object sender, EventArgs e)
         {
+            //Loads previously saved information assuming files have been already created
             Debug.WriteLine("Loading previous save...");
 
             GameManager.Instance.Aries = DataManager<Player>.Deserialize("AriesPlayer");
@@ -151,17 +152,20 @@ namespace FSMAssessment
             TextLog.Text = DataManager<string>.Deserialize("TextLog");
             PlayerHealth.Value = GameManager.Instance.Aries.Health;
 
+            //loads the information for the enemy if save was created when "Doomsday" player was still alive
             if (GameManager.Instance.Doomsday.Health != 0 && EnemyHealth.Maximum != GameManager.Instance.Swine.MaxHealth)
             {
                 EnemyName.Text = GameManager.Instance.Doomsday.Name;
                 EnemyHealth.Value = GameManager.Instance.Doomsday.Health;
             }
+            //loads the information for the enemy if save was created before "Swine" player was active but 
             else if (GameManager.Instance.Doomsday.Health != 0 && EnemyHealth.Maximum == GameManager.Instance.Swine.MaxHealth)
             {
                 EnemyName.Text = GameManager.Instance.Doomsday.Name;
                 EnemyHealth.Maximum = GameManager.Instance.Doomsday.Health;
                 EnemyHealth.Value = GameManager.Instance.Doomsday.Health;
             }
+            //loads the information for the enemy if save was created when "Doomsday" player was still alive
             else if (GameManager.Instance.Swine.Health != 0 && EnemyHealth.Maximum == GameManager.Instance.Doomsday.MaxHealth)
             {
                 EnemyName.Text = GameManager.Instance.Swine.Name;
@@ -177,6 +181,7 @@ namespace FSMAssessment
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            //Saves information on an xml file to be read later to be loaded
             Debug.WriteLine("Saving current progress...");
 
             DataManager<Player>.Serialize("DoomsdayPlayer", GameManager.Instance.Doomsday);
@@ -200,7 +205,7 @@ namespace FSMAssessment
             DataManager<int>.Serialize("PotionUse", potionlimit = 0);
 
 
-            //Loads default data
+            //Loads the reseted data
             PlayerHealth.Value = GameManager.Instance.Aries.Health = DataManager<int>.Deserialize("AriesPlayer");
             EnemyHealth.Maximum = GameManager.Instance.Doomsday.MaxHealth;
             EnemyHealth.Value = GameManager.Instance.Doomsday.Health = DataManager<int>.Deserialize("DoomsdayPlayer");
@@ -215,6 +220,7 @@ namespace FSMAssessment
 
         private void Potion_Click(object sender, EventArgs e)
         {
+            //restores health a limited amount of times
             if (potionlimit <= 2)
             {
                 TextLog.AppendText("Player has healed and now has used " + (potionlimit + 1) + " potions. \n");
@@ -222,7 +228,6 @@ namespace FSMAssessment
                 GameManager.Instance.Aries.Health = GameManager.Instance.Aries.MaxHealth;
                 PlayerHealth.Value = GameManager.Instance.Aries.Health;
             }
-
             else
             {
                 PotionButton.Enabled = false;
@@ -232,27 +237,32 @@ namespace FSMAssessment
 
         private void EndTurn_Click(object sender, EventArgs e)
         {
+            //created bool variable to check if the end turn button was pressed
             buttonWasClicked = true;
+            //enters combat turn for the enemy
             GameManager.Instance.combat.ToEnter();
-
+            //enters the end turn state
             GameManager.Instance.fsm.ChangeState("ENDTURN");
+
+            //Runs public function that sets the "buttonWasClicked" to false
             checkEndButton();
+
+            //Checks for enemy death and if so then a new enemy will be added
             if (GameManager.Instance.Doomsday.Health != 0)
             {
                 EnemyHealth.Value = GameManager.Instance.Doomsday.Health;
                 PlayerHealth.Value = GameManager.Instance.Aries.Health;
             }
-
             else
             {
                 EnemyName.Text = GameManager.Instance.Swine.Name;
                 EnemyHealth.Value = (int)(((float)GameManager.Instance.Swine.Health / (float)GameManager.Instance.Swine.MaxHealth) * 100f);
             }
-
+            //Moves to the next state
             StateFunctions();
         }
 
-
+        //player nametags
         private void PlayerName_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
 

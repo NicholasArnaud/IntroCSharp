@@ -13,6 +13,7 @@ namespace FSMAssessment
         }
         public Player(string Name, int Health, int Power, float Speed)
         {
+            //sets all variables for the player on creation
             m_name = Name;
             m_health = Health;
             m_power = Power;
@@ -20,6 +21,8 @@ namespace FSMAssessment
             m_maxHealth = m_health;
         }
 
+
+        //getters and setters for variables outside the class for public use
         public int MaxHealth
         {
             get { return m_maxHealth; }
@@ -50,7 +53,8 @@ namespace FSMAssessment
             get { return m_speed; }
             set { m_speed = value; }
         }
-
+        
+      
         private int m_maxHealth;
         private string m_name;
         private int m_health;

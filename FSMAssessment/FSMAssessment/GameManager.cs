@@ -8,6 +8,7 @@ namespace FSMAssessment
 {
     class GameManager
     {
+        //Singleton class
         private static GameManager instance = null;
         private GameManager()
         {
