@@ -10,7 +10,8 @@ namespace FSMAssessment
     {
         INIT = 1,
         IDLE = 2,
-        ATK = 3,
+        TURN = 3,
+        ATK = 4,
         ENDTURN = 5,
         EXIT = 9000,
     }
@@ -37,6 +38,7 @@ namespace FSMAssessment
             TextLog.AppendText("\n" + message);
         }
 
+        //Enables a button press if diabled and disables a button press if enabled when called depending on string name given
         public void ButtonEnable(string buttonname)
         {
             string value = buttonname;
@@ -55,7 +57,7 @@ namespace FSMAssessment
                     PotionButton.Enabled = true;
             }
         }
-
+        //Changes if a button was clicked 
         public bool checkEndButton()
         {
             if (buttonWasClicked == true)
@@ -67,6 +69,7 @@ namespace FSMAssessment
                 return false;
         }
 
+        //Certain function is called depending on current state
         private void StateFunctions()
         {
             if (GameManager.Instance.currentState == "INIT")
@@ -76,6 +79,10 @@ namespace FSMAssessment
             if (GameManager.Instance.currentState == "IDLE")
             {
                 GameManager.Instance.turnManager.Idle();
+            }
+            if(GameManager.Instance.currentState == "TURN")
+            {
+                GameManager.Instance.turnManager.ToChoosePlayer();
             }
             if (GameManager.Instance.currentState == "ATK")
             {
@@ -105,6 +112,9 @@ namespace FSMAssessment
 
         private void AtkButton_Click(object sender, EventArgs e)
         {
+            GameManager.Instance.fsm.ChangeState("TURN");
+            StateFunctions();
+
             Debug.WriteLine("Started Combat state...");
             GameManager.Instance.fsm.ChangeState("ATK");
             StateFunctions();
@@ -119,8 +129,6 @@ namespace FSMAssessment
                 EnemyHealth.Value = GameManager.Instance.Doomsday.Health;
                 PlayerHealth.Value = GameManager.Instance.Aries.Health;
             }
-
-
             else
             {
                 EnemyName.Text = GameManager.Instance.Swine.Name;
@@ -141,6 +149,11 @@ namespace FSMAssessment
 
         }
 
+        /// <summary>
+        /// Loads data from saved xml document
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoadButton_Click(object sender, EventArgs e)
         {
             //Loads previously saved information assuming files have been already created
@@ -179,6 +192,11 @@ namespace FSMAssessment
             Debug.WriteLine("Previous Save Loaded");
         }
 
+        /// <summary>
+        /// Saves needed data into an xml format
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveButton_Click(object sender, EventArgs e)
         {
             //Saves information on an xml file to be read later to be loaded
@@ -195,6 +213,11 @@ namespace FSMAssessment
             DataManager<string>.Serialize("TextLog", TextLog.Text);
         }
 
+        /// <summary>
+        /// Resets needed data as if starting a new game
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ResetButton_Click(object sender, EventArgs e)
         {
             //Resets data
@@ -234,7 +257,6 @@ namespace FSMAssessment
             }
 
         }
-
         private void EndTurn_Click(object sender, EventArgs e)
         {
             //created bool variable to check if the end turn button was pressed

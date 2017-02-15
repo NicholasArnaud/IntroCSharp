@@ -19,7 +19,7 @@ namespace FSMAssessment
             Player Doomsday = new Player("Doomsday", 100, 1, 5.5f);
             Player Aries = new Player("Aries", 100, 3, 7.8f);
             FSM<TurnStates> fsm = new FSM<TurnStates>();
-            Combat combat = new Combat();
+
             TurnSystem turnManager = new TurnSystem();
 
             //sets information into singleton
@@ -28,6 +28,9 @@ namespace FSMAssessment
             GameManager.Instance.Doomsday = Doomsday;
             GameManager.Instance.Swine = Swine;
             GameManager.Instance.turnManager = turnManager;
+
+
+            Combat combat = new Combat();
             GameManager.Instance.combat = combat;
 
             //Default

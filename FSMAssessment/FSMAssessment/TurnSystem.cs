@@ -5,8 +5,6 @@ namespace FSMAssessment
 {
     public class TurnSystem
     {
-       
-
         public TurnSystem()
         {
             //Constructor
@@ -14,7 +12,7 @@ namespace FSMAssessment
 
         public void ToStartUp()
         {
-            
+            GameManager.Instance.currentState = "IDLE";
             Debug.WriteLine("Starting Up");
         }
 
@@ -30,7 +28,7 @@ namespace FSMAssessment
 
         public void ToEndTurn()
         {
-            Form1._Form1.updateLog( "\n" + "End of Turn");
+            Form1._Form1.updateLog("\n" + "End of Turn" +"\n");
             Debug.WriteLine("Ending Turn");
         }
     }

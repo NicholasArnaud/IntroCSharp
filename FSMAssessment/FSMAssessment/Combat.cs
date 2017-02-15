@@ -53,6 +53,7 @@ namespace FSMAssessment
             }
             else
             {
+
                 //checks to make sure current player isnt dead
                 if (current.Health != 0)
                 {
