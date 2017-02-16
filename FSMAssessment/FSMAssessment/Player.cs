@@ -11,6 +11,7 @@ namespace FSMAssessment
         public Player()
         { //Constructor
         }
+         
         public Player(string Name, int Health, int Power, float Speed)
         {
             //sets all variables for the player on creation
@@ -19,6 +20,7 @@ namespace FSMAssessment
             m_power = Power;
             m_speed = Speed;
             m_maxHealth = m_health;
+            GameManager.Instance.Players.Add(this);
         }
 
 
@@ -53,8 +55,11 @@ namespace FSMAssessment
             get { return m_speed; }
             set { m_speed = value; }
         }
-        
-      
+        public override string ToString()
+        {
+            return m_name;
+        }
+
         private int m_maxHealth;
         private string m_name;
         private int m_health;

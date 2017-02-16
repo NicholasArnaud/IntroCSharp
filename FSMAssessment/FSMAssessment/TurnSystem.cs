@@ -23,12 +23,14 @@ namespace FSMAssessment
 
         public void ToChoosePlayer()
         {
-            Debug.WriteLine("Choosing Player");
+            Debug.WriteLine("Choosing Player Turns");
+            Debug.WriteLine("Turn Order: ");
+            GameManager.Instance.Players.ForEach((x => Debug.WriteLine(GameManager.Instance.Players.IndexOf(x) + " " + x.ToString())));
         }
 
         public void ToEndTurn()
         {
-            Form1._Form1.updateLog("\n" + "End of Turn" +"\n");
+            Form1._Form1.updateLog("\n" + "End of Turn" + "\n");
             Debug.WriteLine("Ending Turn");
         }
     }

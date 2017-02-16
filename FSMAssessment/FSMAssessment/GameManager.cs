@@ -27,6 +27,7 @@ namespace FSMAssessment
             }
         }
 
+        
         public Combat combat;
         public TurnSystem turnManager;
         public Player Doomsday;
@@ -34,5 +35,6 @@ namespace FSMAssessment
         public Player Swine;
         public FSM<TurnStates> fsm;
         public string currentState;
+        public List<Player> Players;
     }
 }

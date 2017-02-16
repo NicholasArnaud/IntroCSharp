@@ -10,8 +10,6 @@ namespace FSMAssessment
     class Combat
     {
         //sets turn manager variables
-        private float enemycharge = GameManager.Instance.Doomsday.Speed;
-        private float playercharge = GameManager.Instance.Aries.Speed;
         private int turntoken = 0;
 
         public Combat()
@@ -64,7 +62,11 @@ namespace FSMAssessment
                 }
                 //runs death function if the current player is dead or the enemy is dead
                 if (target.Health == 0)
+                {
+                    current.Health = current.MaxHealth;
                     ToDeath(target);
+                }
+
                 else if (current.Health == 0)
                     ToDeath(current);
 
@@ -76,9 +78,9 @@ namespace FSMAssessment
                     Form1._Form1.updateLog(target.Name + " has attacked " + current.Name + " for " + (enemyCrit + target.Power).ToString() + " damage");
                 }
                 Debug.WriteLine("Attacked");
-
-
             }
+
+
             //goes to the exit combat function if the current player isnt dead
             if (current.Health != 0)
                 ToExit();

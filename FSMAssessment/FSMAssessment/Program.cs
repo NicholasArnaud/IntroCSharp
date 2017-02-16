@@ -14,6 +14,7 @@ namespace FSMAssessment
         [STAThread]
         static void Main()
         {
+            GameManager.Instance.Players = new List<Player>();
             //creates all the needed entities on the start of the process
             Player Swine = new Player("Infested Swine", 120, 22, 3.4f);
             Player Doomsday = new Player("Doomsday", 100, 1, 5.5f);
@@ -32,6 +33,7 @@ namespace FSMAssessment
 
             Combat combat = new Combat();
             GameManager.Instance.combat = combat;
+            
 
             //Default
             Application.EnableVisualStyles();

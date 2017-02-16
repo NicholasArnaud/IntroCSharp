@@ -31,6 +31,8 @@ namespace FSMAssessment
             PlayerName.Text = GameManager.Instance.Aries.Name;
             EnemyName.Text = GameManager.Instance.Doomsday.Name;
             DataManager<int>.Serialize("PotionUse", potionlimit);
+            GameManager.Instance.Players.Sort((emp1,emp2) =>emp1.Speed.CompareTo(emp2.Speed));
+            GameManager.Instance.Players.Reverse();
         }
 
         public void updateLog(string message)
@@ -38,7 +40,11 @@ namespace FSMAssessment
             TextLog.AppendText("\n" + message);
         }
 
-        //Enables a button press if diabled and disables a button press if enabled when called depending on string name given
+        /// <summary>
+        /// Enables a button press if diabled and disables a button press 
+        /// if enabled when called depending on string name given
+        /// </summary>
+        /// <param name="buttonname"></param>
         public void ButtonEnable(string buttonname)
         {
             string value = buttonname;
@@ -57,7 +63,10 @@ namespace FSMAssessment
                     PotionButton.Enabled = true;
             }
         }
-        //Changes if a button was clicked 
+        /// <summary>
+        /// Changes if a button was clicked 
+        /// </summary>
+        /// <returns></returns>
         public bool checkEndButton()
         {
             if (buttonWasClicked == true)
@@ -125,13 +134,13 @@ namespace FSMAssessment
                 {
                     PlayerHealth.Value = GameManager.Instance.Aries.MaxHealth;
                 }
-
                 EnemyHealth.Value = GameManager.Instance.Doomsday.Health;
                 PlayerHealth.Value = GameManager.Instance.Aries.Health;
             }
             else
             {
                 EnemyName.Text = GameManager.Instance.Swine.Name;
+                PlayerHealth.Value = GameManager.Instance.Aries.Health;
                 EnemyHealth.Value = (int)(((float)GameManager.Instance.Swine.Health / (float)GameManager.Instance.Swine.MaxHealth) * 100f);
             }
 
@@ -232,6 +241,7 @@ namespace FSMAssessment
             PlayerHealth.Value = GameManager.Instance.Aries.Health = DataManager<int>.Deserialize("AriesPlayer");
             EnemyHealth.Maximum = GameManager.Instance.Doomsday.MaxHealth;
             EnemyHealth.Value = GameManager.Instance.Doomsday.Health = DataManager<int>.Deserialize("DoomsdayPlayer");
+            EnemyName.Text = GameManager.Instance.Doomsday.Name;
             GameManager.Instance.Swine.Health = DataManager<int>.Deserialize("SwinePlayer");
             potionlimit = DataManager<int>.Deserialize("PotionUse");
             TextLog.Text = DataManager<string>.Deserialize("TextLog");
