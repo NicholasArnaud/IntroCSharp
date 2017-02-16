@@ -16,18 +16,10 @@ namespace FSMAssessment
         }
         public static GameManager Instance
         {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new GameManager();
-
-                }
-                return instance;
-            }
+            get { if (instance == null) { instance = new GameManager(); } return instance; }
         }
 
-        
+
         public Combat combat;
         public TurnSystem turnManager;
         public Player CurrentPlayer;

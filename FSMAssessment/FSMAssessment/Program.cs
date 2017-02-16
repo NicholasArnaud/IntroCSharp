@@ -18,7 +18,7 @@ namespace FSMAssessment
             //creates all the needed entities on the start of the process
             Player Swine = new Player("Infested Swine", 120, 22, 3.4f);
             Player Doomsday = new Player("Doomsday", 100, 1, 5.5f);
-            Player Aries = new Player("Aries", 100, 3, 7.8f);
+            Player Aries = new Player("Aries", 100, 10, 7.8f);
             Player Jingles = new Player("Jester", 72, 25, 10.3f);
             Player CurrentPlayer = new Player();
             FSM<TurnStates> fsm = new FSM<TurnStates>();

@@ -21,10 +21,16 @@ namespace FSMAssessment
         {
             //enters the attack function depending on which enemy is active
             Debug.WriteLine("Entering Attack...");
-            if (GameManager.Instance.Doomsday.Health != 0)
+            if (GameManager.Instance.Doomsday.Health != 0 && GameManager.Instance.Aries.Health != 0)
                 ToAttack(GameManager.Instance.Aries, GameManager.Instance.Doomsday);
-            else
+            else if (GameManager.Instance.Swine.Health != 0 && GameManager.Instance.Aries.Health != 0)
                 ToAttack(GameManager.Instance.Aries, GameManager.Instance.Swine);
+            else if (GameManager.Instance.Doomsday.Health != 0 && GameManager.Instance.Jingles.Health != 0)
+                ToAttack(GameManager.Instance.Jingles, GameManager.Instance.Doomsday);
+            else if (GameManager.Instance.Swine.Health != 0 && GameManager.Instance.Jingles.Health != 0)
+                ToAttack(GameManager.Instance.Jingles, GameManager.Instance.Swine);
+            else
+                return;
         }
 
         public void ToAttack(Player current, Player target)
@@ -37,15 +43,19 @@ namespace FSMAssessment
             int enemyCrit = rnd.Next(0, 22);
 
             //first checks to see if player decided to just end his turn by pressing the "Pass Turn" button
-            if (Form1._Form1.checkEndButton() == true)
+            if (Form1._Form1.CheckEndButton() == true)
             {
                 //Runs just the enemy's attack 
                 current.Health -= (enemyCrit + target.Power);
                 turntoken = 0;
-                Form1._Form1.updateLog(target.Name + " has attacked " + current.Name + " for " + (enemyCrit + target.Power).ToString() + " damage");
+                Form1._Form1.UpdateLog(target.Name + " has attacked " + current.Name + " for " + (enemyCrit + target.Power).ToString() + " damage");
+                Form1._Form1.UpdateHealthBar(current, "PlayerHealth");
                 Debug.WriteLine("Attacked");
                 if (current.Health == 0)
+                {
                     ToDeath(current);
+                    return;
+                }
             }
             else
             {
@@ -54,30 +64,33 @@ namespace FSMAssessment
                 {
                     dmg += crit;
                     target.Health -= dmg;
-                    Form1._Form1.updateLog(current.Name + " has attacked " + target.Name + " for " + dmg.ToString() + " damage");
+                    Form1._Form1.UpdateLog(current.Name + " has attacked " + target.Name + " for " + dmg.ToString() + " damage");
                     turntoken += 1;
-                } 
+                }
 
                 //runs the enemy's turn to attack
-                
                 if (turntoken >= 1)
                 {
                     current.Health -= (enemyCrit + target.Power);
                     turntoken = 0;
-                    Form1._Form1.updateLog(target.Name + " has attacked " + current.Name + " for " + (enemyCrit + target.Power).ToString() + " damage");
+                    Form1._Form1.UpdateLog(target.Name + " has attacked " + current.Name + " for " + (enemyCrit + target.Power).ToString() + " damage");
                 }
+                Form1._Form1.UpdateHealthBar(current, "PlayerHealth");
+                Debug.WriteLine("Attacked");
+
+
                 //runs death function if the current player is dead or the enemy is dead
                 if (target.Health == 0)
                 {
                     current.Health = current.MaxHealth;
                     ToDeath(target);
+                    return;
                 }
                 else if (current.Health == 0)
+                {
                     ToDeath(current);
-
-               
-
-                Debug.WriteLine("Attacked");
+                    return;
+                }
             }
 
 
@@ -89,18 +102,8 @@ namespace FSMAssessment
         public void ToDeath(Player current)
         {
             Debug.WriteLine("A player is Dead");
-            Form1._Form1.updateLog(current.Name + " is dead");
-
-            //If player is dead, it disables the atk button
-            if (current.Name == "Aries")
-            {
-                Form1._Form1.ButtonEnable("AtkButton");
-                Form1._Form1.ButtonEnable("Potion");
-            }
+            Form1._Form1.UpdateLog(current.Name + " is dead");
             GameManager.Instance.Players.Remove(current);
-
-            Form1._Form1.updateHealthBar(GameManager.Instance.Aries, "PlayerHealth");
-            Form1._Form1.updateHealthBar(GameManager.Instance.Doomsday, "EnemyHealth");
             //Goes to function to leave the combat state
             ToExit();
         }
@@ -108,7 +111,7 @@ namespace FSMAssessment
         public void ToExit()
         {
             //simply states that the combat state is over
-            Form1._Form1.updateLog("End of combat turn...");
+            Form1._Form1.UpdateLog("End of combat turn...");
             Debug.WriteLine("End of Combat");
         }
     }

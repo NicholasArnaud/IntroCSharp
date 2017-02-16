@@ -31,45 +31,48 @@ namespace FSMAssessment
             PlayerName.Text = GameManager.Instance.Aries.Name;
             EnemyName.Text = GameManager.Instance.Doomsday.Name;
             DataManager<int>.Serialize("PotionUse", potionlimit);
-            GameManager.Instance.Players.Sort((emp1,emp2) =>emp1.Speed.CompareTo(emp2.Speed));
+            GameManager.Instance.Players.Sort((emp1, emp2) => emp1.Speed.CompareTo(emp2.Speed));
             GameManager.Instance.Players.Reverse();
         }
+
         /// <summary>
         /// Enables the ability to add a message on the rich text document anywhere in the project
         /// </summary>
         /// <param name="message"></param>
-        public void updateLog(string message)
+        public void UpdateLog(string message)
         {
             TextLog.AppendText("\n" + message);
         }
+
         /// <summary>
         /// Enables a button press if diabled and disables a button press 
         /// if enabled when called depending on string name given
         /// </summary>
         /// <param name="buttonname"></param>
-        public void ButtonEnable(string buttonname)
+        public void ButtonEnable(string buttonname, string active)
         {
             string value = buttonname;
             if (buttonname == AtkButton.Name)
             {
-                if (AtkButton.Enabled == true)
+                if (active == "Disable")
                     AtkButton.Enabled = false;
                 else
                     AtkButton.Enabled = true;
             }
             if (buttonname == PotionButton.Name)
             {
-                if (PotionButton.Enabled == true)
+                if (active == "Disable")
                     PotionButton.Enabled = false;
                 else
                     PotionButton.Enabled = true;
             }
         }
+
         /// <summary>
         /// Changes if a button was clicked 
         /// </summary>
         /// <returns></returns>
-        public bool checkEndButton()
+        public bool CheckEndButton()
         {
             if (buttonWasClicked == true)
             {
@@ -79,28 +82,57 @@ namespace FSMAssessment
             else
                 return false;
         }
+
         /// <summary>
         /// Enables to sync the heath bars of players anywhere else in the project
         /// </summary>
-        /// <param name="current"></param>
+        /// <param name="player"></param>
         /// <param name="healthbarname"></param>
-        public void updateHealthBar(Player current,string healthbarname)
+        public void UpdateHealthBar(Player player, string healthbarname)
         {
-            //var name = PlayerHealth.Name;
-            //var ename = EnemyHealth.Name;
             if (healthbarname == EnemyHealth.Name)
+                EnemyHealth.Value = player.Health;
+            else if (healthbarname == PlayerHealth.Name)
+                PlayerHealth.Value = player.Health;
+            else
+                return;
+        }
+
+        public void SetMaxHealthBar(Player player, string healthbarname)
+        {
+            if (healthbarname == EnemyHealth.Name)
+                EnemyHealth.Maximum = player.MaxHealth;
+            else if (healthbarname == PlayerHealth.Name)
+                PlayerHealth.Maximum = player.MaxHealth;
+            else
+                return;
+        }
+
+        /// <summary>
+        /// Restores a player's health a limited amount of times
+        /// </summary>
+        /// <param name="player"></param>
+        public void PotionUse(string player)
+        {
+            if (PlayerName.Name == player)
             {
-                EnemyHealth.Value = current.Health;
-            }
-            else if(healthbarname == PlayerHealth.Name)
-            {
-                PlayerHealth.Value = current.Health;
+                if (potionlimit <= 2)
+                {
+                    TextLog.AppendText("Player has healed and now has used " + (potionlimit + 1) + " potions. \n");
+                    potionlimit += 1;
+                    GameManager.Instance.Aries.Health = GameManager.Instance.Aries.MaxHealth;
+                    UpdateHealthBar(GameManager.Instance.Aries, "PlayerHealth");
+                }
+                else
+                    PotionButton.Enabled = false;
             }
             else
                 return;
         }
 
-        //Certain function is called depending on current state
+        /// <summary>
+        /// Certain function is called depending on current state
+        /// </summary>
         private void StateFunctions()
         {
             if (GameManager.Instance.currentState == "INIT")
@@ -111,7 +143,7 @@ namespace FSMAssessment
             {
                 GameManager.Instance.turnManager.Idle();
             }
-            if(GameManager.Instance.currentState == "TURN")
+            if (GameManager.Instance.currentState == "TURN")
             {
                 GameManager.Instance.turnManager.ToChoosePlayer();
             }
@@ -126,6 +158,7 @@ namespace FSMAssessment
                 TextLog.ScrollToCaret();
             }
         }
+
         /// <summary>
         /// Default loading function
         /// </summary>
@@ -138,12 +171,15 @@ namespace FSMAssessment
             GameManager.Instance.fsm.ChangeState("IDLE");
         }
 
-        //Battle log
+        /// <summary>
+        /// Updates Battle log
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TextLog_TextChanged(object sender, EventArgs e)
         {
 
         }
-
 
         /// <summary>
         /// Runs attack function when pressed and continues the process of the fsm 
@@ -158,21 +194,41 @@ namespace FSMAssessment
             Debug.WriteLine("Started Combat state...");
             GameManager.Instance.fsm.ChangeState("ATK");
             StateFunctions();
-
-            if (GameManager.Instance.Doomsday.Health != 0)
+            if (GameManager.Instance.Aries.Health != 0)
             {
-                updateHealthBar(GameManager.Instance.Aries, "PlayerHealth");
-                updateHealthBar(GameManager.Instance.Doomsday, "EnemyHealth");
+                if (GameManager.Instance.Doomsday.Health != 0)
+                {
+                    UpdateHealthBar(GameManager.Instance.Doomsday, "EnemyHealth");
+                }
+                else
+                {
+                    EnemyName.Text = GameManager.Instance.Swine.Name;
+                    SetMaxHealthBar(GameManager.Instance.Swine, "EnemyHealth");
+                    UpdateHealthBar(GameManager.Instance.Swine, "EnemyHealth");
+                }
+                UpdateHealthBar(GameManager.Instance.Aries, "PlayerHealth");
+                GameManager.Instance.fsm.ChangeState("ENDTURN");
+                StateFunctions();
             }
             else
             {
-                EnemyName.Text = GameManager.Instance.Swine.Name;
-                updateHealthBar(GameManager.Instance.Aries, "PlayerHealth");
-                EnemyHealth.Value = (int)(((float)GameManager.Instance.Swine.Health / (float)GameManager.Instance.Swine.MaxHealth) * 100f);
+                PlayerName.Text = GameManager.Instance.Jingles.Name;
+                SetMaxHealthBar(GameManager.Instance.Jingles, "PlayerHealth");
+                if (GameManager.Instance.Doomsday.Health != 0)
+                {
+                    UpdateHealthBar(GameManager.Instance.Doomsday, "EnemyHealth");
+                }
+                else
+                {
+                    EnemyName.Text = GameManager.Instance.Swine.Name;
+                    SetMaxHealthBar(GameManager.Instance.Swine, "EnemyHealth");
+                    UpdateHealthBar(GameManager.Instance.Swine, "EnemyHealth");
+                }
+                PlayerName.Text = GameManager.Instance.Jingles.Name;
+                UpdateHealthBar(GameManager.Instance.Jingles, "PlayerHealth");
+                GameManager.Instance.fsm.ChangeState("ENDTURN");
+                StateFunctions();
             }
-            updateHealthBar(GameManager.Instance.Aries, "PlayerHealth");
-            GameManager.Instance.fsm.ChangeState("ENDTURN");
-            StateFunctions();
         }
 
         //Player and Enemy health bars
@@ -194,36 +250,37 @@ namespace FSMAssessment
         {
             //Loads previously saved information assuming files have been already created
             Debug.WriteLine("Loading previous save...");
-
             GameManager.Instance.Aries = DataManager<Player>.Deserialize("AriesPlayer");
             GameManager.Instance.Doomsday = DataManager<Player>.Deserialize("DoomsdayPlayer");
             GameManager.Instance.Swine = DataManager<Player>.Deserialize("SwinePlayer");
+            GameManager.Instance.Jingles = DataManager<Player>.Deserialize("JesterPlayer");
             TextLog.Text = DataManager<string>.Deserialize("TextLog");
-            PlayerHealth.Value = GameManager.Instance.Aries.Health;
+            UpdateHealthBar(GameManager.Instance.Aries, "PlayerHealth");
 
             //loads the information for the enemy if save was created when "Doomsday" player was still alive
             if (GameManager.Instance.Doomsday.Health != 0 && EnemyHealth.Maximum != GameManager.Instance.Swine.MaxHealth)
             {
                 EnemyName.Text = GameManager.Instance.Doomsday.Name;
-                EnemyHealth.Value = GameManager.Instance.Doomsday.Health;
+                UpdateHealthBar(GameManager.Instance.Doomsday, "EnemyHealth");
             }
-            //loads the information for the enemy if save was created before "Swine" player was active but 
+            //loads the information for the enemy if save was created when fighting "Doomsday" player but is currently fighting the "Swine" 
             else if (GameManager.Instance.Doomsday.Health != 0 && EnemyHealth.Maximum == GameManager.Instance.Swine.MaxHealth)
             {
                 EnemyName.Text = GameManager.Instance.Doomsday.Name;
-                EnemyHealth.Maximum = GameManager.Instance.Doomsday.Health;
-                EnemyHealth.Value = GameManager.Instance.Doomsday.Health;
+                SetMaxHealthBar(GameManager.Instance.Doomsday, "EnemyHealth");
+                UpdateHealthBar(GameManager.Instance.Doomsday, "EnemyHealth");
             }
             //loads the information for the enemy if save was created when "Doomsday" player was still alive
             else if (GameManager.Instance.Swine.Health != 0 && EnemyHealth.Maximum == GameManager.Instance.Doomsday.MaxHealth)
             {
                 EnemyName.Text = GameManager.Instance.Swine.Name;
-                EnemyHealth.Maximum = GameManager.Instance.Swine.Health;
-                EnemyHealth.Value = GameManager.Instance.Swine.Health;
+                SetMaxHealthBar(GameManager.Instance.Swine, "EnemyHealth");
+                UpdateHealthBar(GameManager.Instance.Swine, "EnemyHealth");
             }
             //Reloads how many potions have been used and reallows the ability to attack
             potionlimit = DataManager<int>.Deserialize("PotionUse");
             AtkButton.Enabled = true;
+            if (potionlimit <= 2) PotionButton.Enabled = true;
 
             TextLog.AppendText("Previous Save Loaded... \n");
             Debug.WriteLine("Previous Save Loaded");
@@ -240,15 +297,11 @@ namespace FSMAssessment
             Debug.WriteLine("Saving current progress...");
 
             DataManager<Player>.Serialize("DoomsdayPlayer", GameManager.Instance.Doomsday);
-
             DataManager<Player>.Serialize("SwinePlayer", GameManager.Instance.Swine);
-
             DataManager<Player>.Serialize("AriesPlayer", GameManager.Instance.Aries);
-
             DataManager<Player>.Serialize("Jester", GameManager.Instance.Jingles);
 
             DataManager<int>.Serialize("PotionUse", potionlimit);
-
             DataManager<string>.Serialize("TextLog", TextLog.Text);
         }
 
@@ -266,7 +319,6 @@ namespace FSMAssessment
             DataManager<string>.Serialize("Textlog", TextLog.Text = "");
             DataManager<int>.Serialize("PotionUse", potionlimit = 0);
 
-
             //Loads the reseted data
             PlayerHealth.Value = GameManager.Instance.Aries.Health = DataManager<int>.Deserialize("AriesPlayer");
             EnemyHealth.Maximum = GameManager.Instance.Doomsday.MaxHealth;
@@ -280,6 +332,7 @@ namespace FSMAssessment
             TextLog.Text = "Data has been reset...";
             Debug.WriteLine("Data has reset...");
         }
+
         /// <summary>
         /// Function that gives user full health and keeps track of how many are left
         /// </summary>
@@ -287,20 +340,9 @@ namespace FSMAssessment
         /// <param name="e"></param>
         private void Potion_Click(object sender, EventArgs e)
         {
-            //restores health a limited amount of times
-            if (potionlimit <= 2)
-            {
-                TextLog.AppendText("Player has healed and now has used " + (potionlimit + 1) + " potions. \n");
-                potionlimit += 1;
-                GameManager.Instance.Aries.Health = GameManager.Instance.Aries.MaxHealth;
-                PlayerHealth.Value = GameManager.Instance.Aries.Health;
-            }
-            else
-            {
-                PotionButton.Enabled = false;
-            }
-
+            PotionUse(PlayerName.Name);
         }
+
         /// <summary>
         /// Function that ends the user's turn without attacking 
         /// </summary>
@@ -308,28 +350,23 @@ namespace FSMAssessment
         /// <param name="e"></param>
         private void EndTurn_Click(object sender, EventArgs e)
         {
-            //created bool variable to check if the end turn button was pressed
             buttonWasClicked = true;
-            //enters combat turn for the enemy
             GameManager.Instance.combat.ToEnter();
-            //enters the end turn state
             GameManager.Instance.fsm.ChangeState("ENDTURN");
-
-            //Runs public function that sets the "buttonWasClicked" to false
-            checkEndButton();
 
             //Checks for enemy death and if so then a new enemy will be added
             if (GameManager.Instance.Doomsday.Health != 0)
             {
-                EnemyHealth.Value = GameManager.Instance.Doomsday.Health;
-                PlayerHealth.Value = GameManager.Instance.Aries.Health;
+                UpdateHealthBar(GameManager.Instance.Doomsday, "EnemyHealth");
+                UpdateHealthBar(GameManager.Instance.Aries, "PlayerHealth");
             }
             else
             {
                 EnemyName.Text = GameManager.Instance.Swine.Name;
-                EnemyHealth.Value = (int)(((float)GameManager.Instance.Swine.Health / (float)GameManager.Instance.Swine.MaxHealth) * 100f);
+                UpdateHealthBar(GameManager.Instance.Swine, "EnemyHealth");
             }
-            //Moves to the next state
+            if (GameManager.Instance.Aries.Health == 0)
+                PlayerName.Text = GameManager.Instance.Jingles.Name;
             StateFunctions();
         }
 
