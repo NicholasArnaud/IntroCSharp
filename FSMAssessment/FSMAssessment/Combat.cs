@@ -44,21 +44,27 @@ namespace FSMAssessment
                 turntoken = 0;
                 Form1._Form1.updateLog(target.Name + " has attacked " + current.Name + " for " + (enemyCrit + target.Power).ToString() + " damage");
                 Debug.WriteLine("Attacked");
-                if (target.Health == 0)
-                    ToDeath(target);
                 if (current.Health == 0)
                     ToDeath(current);
             }
             else
             {
-
-                //checks to make sure current player isnt dead
-                if (current.Health != 0)
+                //checks to make sure current player and target enemy isn't dead
+                if (current.Health != 0 && target.Health != 0)
                 {
                     dmg += crit;
                     target.Health -= dmg;
                     Form1._Form1.updateLog(current.Name + " has attacked " + target.Name + " for " + dmg.ToString() + " damage");
                     turntoken += 1;
+                } 
+
+                //runs the enemy's turn to attack
+                
+                if (turntoken >= 1)
+                {
+                    current.Health -= (enemyCrit + target.Power);
+                    turntoken = 0;
+                    Form1._Form1.updateLog(target.Name + " has attacked " + current.Name + " for " + (enemyCrit + target.Power).ToString() + " damage");
                 }
                 //runs death function if the current player is dead or the enemy is dead
                 if (target.Health == 0)
@@ -66,17 +72,11 @@ namespace FSMAssessment
                     current.Health = current.MaxHealth;
                     ToDeath(target);
                 }
-
                 else if (current.Health == 0)
                     ToDeath(current);
 
-                //runs the enemy's turn to attack
-                if (turntoken >= 1)
-                {
-                    current.Health -= (enemyCrit + target.Power);
-                    turntoken = 0;
-                    Form1._Form1.updateLog(target.Name + " has attacked " + current.Name + " for " + (enemyCrit + target.Power).ToString() + " damage");
-                }
+               
+
                 Debug.WriteLine("Attacked");
             }
 
@@ -97,6 +97,10 @@ namespace FSMAssessment
                 Form1._Form1.ButtonEnable("AtkButton");
                 Form1._Form1.ButtonEnable("Potion");
             }
+            GameManager.Instance.Players.Remove(current);
+
+            Form1._Form1.updateHealthBar(GameManager.Instance.Aries, "PlayerHealth");
+            Form1._Form1.updateHealthBar(GameManager.Instance.Doomsday, "EnemyHealth");
             //Goes to function to leave the combat state
             ToExit();
         }

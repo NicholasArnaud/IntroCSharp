@@ -19,21 +19,25 @@ namespace FSMAssessment
             Player Swine = new Player("Infested Swine", 120, 22, 3.4f);
             Player Doomsday = new Player("Doomsday", 100, 1, 5.5f);
             Player Aries = new Player("Aries", 100, 3, 7.8f);
+            Player Jingles = new Player("Jester", 72, 25, 10.3f);
+            Player CurrentPlayer = new Player();
             FSM<TurnStates> fsm = new FSM<TurnStates>();
 
             TurnSystem turnManager = new TurnSystem();
 
             //sets information into singleton
             GameManager.Instance.fsm = fsm;
+            GameManager.Instance.CurrentPlayer = CurrentPlayer;
             GameManager.Instance.Aries = Aries;
             GameManager.Instance.Doomsday = Doomsday;
             GameManager.Instance.Swine = Swine;
+            GameManager.Instance.Jingles = Jingles;
             GameManager.Instance.turnManager = turnManager;
 
 
             Combat combat = new Combat();
             GameManager.Instance.combat = combat;
-            
+
 
             //Default
             Application.EnableVisualStyles();

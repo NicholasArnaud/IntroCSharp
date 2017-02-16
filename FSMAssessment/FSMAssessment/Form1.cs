@@ -34,12 +34,14 @@ namespace FSMAssessment
             GameManager.Instance.Players.Sort((emp1,emp2) =>emp1.Speed.CompareTo(emp2.Speed));
             GameManager.Instance.Players.Reverse();
         }
-
+        /// <summary>
+        /// Enables the ability to add a message on the rich text document anywhere in the project
+        /// </summary>
+        /// <param name="message"></param>
         public void updateLog(string message)
         {
             TextLog.AppendText("\n" + message);
         }
-
         /// <summary>
         /// Enables a button press if diabled and disables a button press 
         /// if enabled when called depending on string name given
@@ -77,6 +79,26 @@ namespace FSMAssessment
             else
                 return false;
         }
+        /// <summary>
+        /// Enables to sync the heath bars of players anywhere else in the project
+        /// </summary>
+        /// <param name="current"></param>
+        /// <param name="healthbarname"></param>
+        public void updateHealthBar(Player current,string healthbarname)
+        {
+            //var name = PlayerHealth.Name;
+            //var ename = EnemyHealth.Name;
+            if (healthbarname == EnemyHealth.Name)
+            {
+                EnemyHealth.Value = current.Health;
+            }
+            else if(healthbarname == PlayerHealth.Name)
+            {
+                PlayerHealth.Value = current.Health;
+            }
+            else
+                return;
+        }
 
         //Certain function is called depending on current state
         private void StateFunctions()
@@ -104,7 +126,11 @@ namespace FSMAssessment
                 TextLog.ScrollToCaret();
             }
         }
-
+        /// <summary>
+        /// Default loading function
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
             Debug.WriteLine("Starting Up files...");
@@ -112,13 +138,18 @@ namespace FSMAssessment
             GameManager.Instance.fsm.ChangeState("IDLE");
         }
 
+        //Battle log
         private void TextLog_TextChanged(object sender, EventArgs e)
         {
 
         }
 
 
-
+        /// <summary>
+        /// Runs attack function when pressed and continues the process of the fsm 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AtkButton_Click(object sender, EventArgs e)
         {
             GameManager.Instance.fsm.ChangeState("TURN");
@@ -130,29 +161,25 @@ namespace FSMAssessment
 
             if (GameManager.Instance.Doomsday.Health != 0)
             {
-                if (EnemyHealth.Maximum == GameManager.Instance.Doomsday.MaxHealth)
-                {
-                    PlayerHealth.Value = GameManager.Instance.Aries.MaxHealth;
-                }
-                EnemyHealth.Value = GameManager.Instance.Doomsday.Health;
-                PlayerHealth.Value = GameManager.Instance.Aries.Health;
+                updateHealthBar(GameManager.Instance.Aries, "PlayerHealth");
+                updateHealthBar(GameManager.Instance.Doomsday, "EnemyHealth");
             }
             else
             {
                 EnemyName.Text = GameManager.Instance.Swine.Name;
-                PlayerHealth.Value = GameManager.Instance.Aries.Health;
+                updateHealthBar(GameManager.Instance.Aries, "PlayerHealth");
                 EnemyHealth.Value = (int)(((float)GameManager.Instance.Swine.Health / (float)GameManager.Instance.Swine.MaxHealth) * 100f);
             }
-
+            updateHealthBar(GameManager.Instance.Aries, "PlayerHealth");
             GameManager.Instance.fsm.ChangeState("ENDTURN");
             StateFunctions();
         }
 
+        //Player and Enemy health bars
         private void PlayerHealth_Click(object sender, EventArgs e)
         {
 
         }
-
         private void EnemyHealth_Click(object sender, EventArgs e)
         {
 
@@ -194,9 +221,10 @@ namespace FSMAssessment
                 EnemyHealth.Maximum = GameManager.Instance.Swine.Health;
                 EnemyHealth.Value = GameManager.Instance.Swine.Health;
             }
-
+            //Reloads how many potions have been used and reallows the ability to attack
             potionlimit = DataManager<int>.Deserialize("PotionUse");
             AtkButton.Enabled = true;
+
             TextLog.AppendText("Previous Save Loaded... \n");
             Debug.WriteLine("Previous Save Loaded");
         }
@@ -216,6 +244,8 @@ namespace FSMAssessment
             DataManager<Player>.Serialize("SwinePlayer", GameManager.Instance.Swine);
 
             DataManager<Player>.Serialize("AriesPlayer", GameManager.Instance.Aries);
+
+            DataManager<Player>.Serialize("Jester", GameManager.Instance.Jingles);
 
             DataManager<int>.Serialize("PotionUse", potionlimit);
 
@@ -250,7 +280,11 @@ namespace FSMAssessment
             TextLog.Text = "Data has been reset...";
             Debug.WriteLine("Data has reset...");
         }
-
+        /// <summary>
+        /// Function that gives user full health and keeps track of how many are left
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Potion_Click(object sender, EventArgs e)
         {
             //restores health a limited amount of times
@@ -267,6 +301,11 @@ namespace FSMAssessment
             }
 
         }
+        /// <summary>
+        /// Function that ends the user's turn without attacking 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EndTurn_Click(object sender, EventArgs e)
         {
             //created bool variable to check if the end turn button was pressed

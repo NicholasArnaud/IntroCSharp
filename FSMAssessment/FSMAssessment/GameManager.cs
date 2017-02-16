@@ -30,9 +30,11 @@ namespace FSMAssessment
         
         public Combat combat;
         public TurnSystem turnManager;
+        public Player CurrentPlayer;
         public Player Doomsday;
         public Player Aries;
         public Player Swine;
+        public Player Jingles;
         public FSM<TurnStates> fsm;
         public string currentState;
         public List<Player> Players;

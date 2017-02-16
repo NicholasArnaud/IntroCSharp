@@ -5,6 +5,7 @@ namespace FSMAssessment
 {
     public class TurnSystem
     {
+        int i = 0;
         public TurnSystem()
         {
             //Constructor
@@ -19,13 +20,18 @@ namespace FSMAssessment
         public void Idle()
         {
             Debug.WriteLine("Waiting...");
+            GameManager.Instance.CurrentPlayer = GameManager.Instance.Players[0];
         }
 
         public void ToChoosePlayer()
         {
+            i++;
+            if (i == GameManager.Instance.Players.Count) i = 0;
             Debug.WriteLine("Choosing Player Turns");
             Debug.WriteLine("Turn Order: ");
             GameManager.Instance.Players.ForEach((x => Debug.WriteLine(GameManager.Instance.Players.IndexOf(x) + " " + x.ToString())));
+            GameManager.Instance.CurrentPlayer = GameManager.Instance.Players[i];
+            
         }
 
         public void ToEndTurn()
