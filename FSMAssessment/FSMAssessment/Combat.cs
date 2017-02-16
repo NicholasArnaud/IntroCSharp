@@ -92,8 +92,6 @@ namespace FSMAssessment
                     return;
                 }
             }
-
-
             //goes to the exit combat function if the current player isnt dead
             if (current.Health != 0)
                 ToExit();

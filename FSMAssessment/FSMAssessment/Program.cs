@@ -21,7 +21,7 @@ namespace FSMAssessment
             Player Aries = new Player("Aries", 100, 10, 7.8f);
             Player Jingles = new Player("Jester", 72, 25, 10.3f);
             Player CurrentPlayer = new Player();
-            FSM<TurnStates> fsm = new FSM<TurnStates>();
+            StateSystem<TurnStates> fsm = new StateSystem<TurnStates>();
 
             TurnSystem turnManager = new TurnSystem();
 

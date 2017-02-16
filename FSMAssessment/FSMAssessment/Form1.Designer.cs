@@ -39,6 +39,7 @@
             this.EnemyName = new System.Windows.Forms.MaskedTextBox();
             this.PotionButton = new System.Windows.Forms.Button();
             this.EndTurn = new System.Windows.Forms.Button();
+            this.HelpButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // PlayerHealth
@@ -128,10 +129,10 @@
             this.EnemyName.TabIndex = 8;
             this.EnemyName.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.EnemyName_MaskInputRejected);
             // 
-            // Potion
+            // PotionButton
             // 
             this.PotionButton.Location = new System.Drawing.Point(12, 149);
-            this.PotionButton.Name = "Potion";
+            this.PotionButton.Name = "PotionButton";
             this.PotionButton.Size = new System.Drawing.Size(75, 23);
             this.PotionButton.TabIndex = 9;
             this.PotionButton.Text = "Potion";
@@ -148,11 +149,22 @@
             this.EndTurn.UseVisualStyleBackColor = true;
             this.EndTurn.Click += new System.EventHandler(this.EndTurn_Click);
             // 
+            // HelpButton
+            // 
+            this.HelpButton.Location = new System.Drawing.Point(274, 149);
+            this.HelpButton.Name = "HelpButton";
+            this.HelpButton.Size = new System.Drawing.Size(75, 23);
+            this.HelpButton.TabIndex = 11;
+            this.HelpButton.Text = "Help";
+            this.HelpButton.UseVisualStyleBackColor = true;
+            this.HelpButton.Click += new System.EventHandler(this.HelpButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(368, 213);
+            this.Controls.Add(this.HelpButton);
             this.Controls.Add(this.EndTurn);
             this.Controls.Add(this.PotionButton);
             this.Controls.Add(this.EnemyName);
@@ -185,6 +197,7 @@
         private System.Windows.Forms.MaskedTextBox EnemyName;
         private System.Windows.Forms.Button PotionButton;
         private System.Windows.Forms.Button EndTurn;
+        private System.Windows.Forms.Button HelpButton;
     }
 }
 

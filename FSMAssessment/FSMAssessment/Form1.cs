@@ -36,6 +36,22 @@ namespace FSMAssessment
         }
 
         /// <summary>
+        /// Displays about the game
+        /// </summary>
+        public void HelpText()
+        {
+            UpdateLog("Welcome to Brightest Dungeon!");
+            UpdateLog("This is much simplier than Darkest Dungeon...");
+            UpdateLog("HOW TO PLAY:");
+            UpdateLog("You are the player on the left and your enemy is on the right.");
+            UpdateLog("To Attack your enemy, just press the attack button in the center.");
+            UpdateLog("You can also choose to pass your turn and not attack.");
+            UpdateLog("To heal your currrent player, just press the potion button to heal");
+            UpdateLog("To save or load the game, you can press the 2 buttom buttons on the far left and right.");
+            UpdateLog("Or you can restart your current game by pressing the reset button.");
+        }
+
+        /// <summary>
         /// Enables the ability to add a message on the rich text document anywhere in the project
         /// </summary>
         /// <param name="message"></param>
@@ -135,27 +151,27 @@ namespace FSMAssessment
         /// </summary>
         private void StateFunctions()
         {
-            if (GameManager.Instance.currentState == "INIT")
+            GameManager gm = GameManager.Instance;
+            switch (GameManager.Instance.currentState)
             {
-                GameManager.Instance.turnManager.ToStartUp();
-            }
-            if (GameManager.Instance.currentState == "IDLE")
-            {
-                GameManager.Instance.turnManager.Idle();
-            }
-            if (GameManager.Instance.currentState == "TURN")
-            {
-                GameManager.Instance.turnManager.ToChoosePlayer();
-            }
-            if (GameManager.Instance.currentState == "ATK")
-            {
-                GameManager.Instance.combat.ToEnter();
-            }
-            if (GameManager.Instance.currentState == "ENDTURN")
-            {
-                GameManager.Instance.turnManager.ToEndTurn();
-                TextLog.SelectionStart = TextLog.Text.Length;
-                TextLog.ScrollToCaret();
+                case "INIT":
+                    HelpText();
+                    gm.turnManager.ToStartUp();
+                    break;
+                case "IDLE":
+                    gm.turnManager.Idle();
+                    break;
+                case "TURN":
+                    gm.turnManager.ToChoosePlayer();
+                    break;
+                case "ATK":
+                    gm.combat.ToEnter();
+                    break;
+                case "ENDTURN":
+                    gm.turnManager.ToEndTurn();
+                    TextLog.SelectionStart = TextLog.Text.Length;
+                    TextLog.ScrollToCaret();
+                    break;
             }
         }
 
@@ -379,6 +395,11 @@ namespace FSMAssessment
         private void EnemyName_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
 
+        }
+
+        private void HelpButton_Click(object sender, EventArgs e)
+        {
+            HelpText();
         }
     }
 }

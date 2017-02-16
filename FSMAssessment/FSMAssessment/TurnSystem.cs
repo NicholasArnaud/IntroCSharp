@@ -13,8 +13,8 @@ namespace FSMAssessment
 
         public void ToStartUp()
         {
-            GameManager.Instance.currentState = "IDLE";
             Debug.WriteLine("Starting Up");
+            GameManager.Instance.currentState = "IDLE";
         }
 
         public void Idle()

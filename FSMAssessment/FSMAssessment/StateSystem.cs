@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace FSMAssessment
 {
 
-    public class FSM<T>
+    public class StateSystem<T>
     {
 
         Dictionary<string, State> states;
 
-        public FSM()
+        public StateSystem()
         {
             states = new Dictionary<string, State>();
             var v = Enum.GetValues(typeof(T));
