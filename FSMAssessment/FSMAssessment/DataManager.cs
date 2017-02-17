@@ -27,7 +27,7 @@ namespace FSMAssessment
         {
             T data;
             XmlSerializer serializer = new XmlSerializer(typeof(T));
-            TextReader reader = new StreamReader(folderName + filename + ".xml");
+            TextReader reader = new StreamReader(folderName + filename  + ".xml");
             data = (T)serializer.Deserialize(reader);
             reader.Close();
             return data;

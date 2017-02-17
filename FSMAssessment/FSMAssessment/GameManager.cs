@@ -17,12 +17,12 @@ namespace FSMAssessment
         public static GameManager Instance
         {
             get { if (instance == null) { instance = new GameManager(); } return instance; }
-        }
-
+        }        
 
         public Combat combat;
         public TurnManager turnManager;
         public Player CurrentPlayer;
+        public Player CurrentEnemy;
         public Player Doomsday;
         public Player Aries;
         public Player Swine;

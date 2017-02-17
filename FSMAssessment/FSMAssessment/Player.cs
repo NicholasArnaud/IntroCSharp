@@ -11,8 +11,8 @@ namespace FSMAssessment
         public Player()
         { //Constructor
         }
-         
-        public Player(string Name, int Health, int Power, float Speed)
+
+        public Player(string Name, int Health, int Power, float Speed, int CritMax)
         {
             //sets all variables for the player on creation
             m_name = Name;
@@ -20,6 +20,7 @@ namespace FSMAssessment
             m_power = Power;
             m_speed = Speed;
             m_maxHealth = m_health;
+            m_critMax = CritMax;
             GameManager.Instance.Players.Add(this);
         }
 
@@ -55,11 +56,49 @@ namespace FSMAssessment
             get { return m_speed; }
             set { m_speed = value; }
         }
+        public int CritMax
+        {
+            get { return m_critMax; }
+            set { m_critMax = value; }
+        }
+        public bool IsDead
+        {
+            get { return m_isDead; }
+            set { m_isDead = value; }
+        }
+
         public override string ToString()
         {
             return m_name;
         }
 
+        public void TakeDamage(int amount)
+        {
+            m_health -= amount;
+            if (m_health <= 0)
+            {
+                m_health = 0;
+                IsDead = true;
+            }
+
+        }
+
+        public void Heal(int amount)
+        {
+            m_health += amount;
+        }
+
+        public void Attack(Player target)
+        {
+            Random rnd = new Random();
+             crit = rnd.Next(0, CritMax);
+            int damage = m_power + crit;
+            target.TakeDamage(damage);
+        }
+
+        public int crit;
+        private int m_critMax;
+        private bool m_isDead;
         private int m_maxHealth;
         private string m_name;
         private int m_health;

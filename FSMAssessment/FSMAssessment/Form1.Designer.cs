@@ -49,7 +49,6 @@
             this.PlayerHealth.Size = new System.Drawing.Size(100, 12);
             this.PlayerHealth.TabIndex = 0;
             this.PlayerHealth.Value = 100;
-            this.PlayerHealth.Click += new System.EventHandler(this.PlayerHealth_Click);
             // 
             // EnemyHealth
             // 
@@ -58,7 +57,6 @@
             this.EnemyHealth.Size = new System.Drawing.Size(100, 12);
             this.EnemyHealth.TabIndex = 1;
             this.EnemyHealth.Value = 100;
-            this.EnemyHealth.Click += new System.EventHandler(this.EnemyHealth_Click);
             // 
             // TextLog
             // 
@@ -69,7 +67,6 @@
             this.TextLog.Size = new System.Drawing.Size(395, 86);
             this.TextLog.TabIndex = 2;
             this.TextLog.Text = "";
-            this.TextLog.TextChanged += new System.EventHandler(this.TextLog_TextChanged);
             // 
             // AtkButton
             // 
@@ -117,8 +114,7 @@
             this.PlayerName.Name = "PlayerName";
             this.PlayerName.ReadOnly = true;
             this.PlayerName.Size = new System.Drawing.Size(100, 20);
-            this.PlayerName.TabIndex = 7;
-            this.PlayerName.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.PlayerName_MaskInputRejected);
+            this.PlayerName.TabIndex = 7;            
             // 
             // EnemyName
             // 
@@ -126,8 +122,7 @@
             this.EnemyName.Name = "EnemyName";
             this.EnemyName.ReadOnly = true;
             this.EnemyName.Size = new System.Drawing.Size(100, 20);
-            this.EnemyName.TabIndex = 8;
-            this.EnemyName.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.EnemyName_MaskInputRejected);
+            this.EnemyName.TabIndex = 8;            
             // 
             // PotionButton
             // 

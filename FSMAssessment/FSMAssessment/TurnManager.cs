@@ -16,15 +16,21 @@ namespace FSMAssessment
             Debug.WriteLine("Starting Up");
             GameManager.Instance.currentState = "IDLE";
             GameManager.Instance.CurrentPlayer = GameManager.Instance.Aries;
+            GameManager.Instance.CurrentEnemy = GameManager.Instance.Doomsday;
         }
 
         public void ToIdle()
         {
             Debug.WriteLine("Waiting...");
-            if(GameManager.Instance.CurrentPlayer.Health == 0)
+            if(GameManager.Instance.CurrentPlayer.IsDead)
             {
-                GameManager.Instance.CurrentPlayer = GameManager.Instance.Jingles;
-               // GameManager.Instance.CurrentPlayer = GameManager.Instance.Players[i];
+                GameManager.Instance.combat.ChangePlayer(GameManager.Instance.Jingles);
+                Form1._Form1.SetMaxHealthBar();
+            }
+            if(GameManager.Instance.CurrentEnemy.IsDead)
+            {
+                GameManager.Instance.combat.ChangeEnemy(GameManager.Instance.Swine);
+                Form1._Form1.SetMaxHealthBar();
             }
         }
 
@@ -34,18 +40,20 @@ namespace FSMAssessment
             if (i == GameManager.Instance.Players.Count) i = 0;
             Debug.WriteLine("Choosing Player Turns");
             Debug.WriteLine("Turn Order: ");
-            // Lambda function to iterate through the entire length of the list and prints the order of players in the debugger
-            GameManager.Instance.Players.ForEach((x => Debug.WriteLine(GameManager.Instance.Players.IndexOf(x) + " " + x.ToString())));
-           // GameManager.Instance.CurrentPlayer = GameManager.Instance.Players[i];
+            // Lambda function to iterate through the entire length of the list and prints the order of 
+            //players in the debugger
+            GameManager.Instance.Players.ForEach((x => 
+                Debug.WriteLine(GameManager.Instance.Players.IndexOf(x) + " " + x.ToString())));
             Debug.WriteLine("Current Player is: " + GameManager.Instance.CurrentPlayer.Name);
+            Debug.WriteLine("Current Player is: " + GameManager.Instance.CurrentEnemy.Name);
         }
 
         public void ToEndTurn()
         {
             GameManager.Instance.currentState = "IDLE";
+            ToIdle();
             Form1._Form1.UpdateLog("\n" + "End of Turn" + "\n");
-            Debug.WriteLine("Ending Turn");
-            
+            Debug.WriteLine("Ending Turn");            
         }
     }
 }
