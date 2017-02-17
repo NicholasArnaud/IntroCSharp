@@ -16,10 +16,10 @@ namespace FSMAssessment
         {
             GameManager.Instance.Players = new List<Player>();
             //creates all the needed entities on the start of the process
-            Player Swine = new Player("Infested Swine", 120, 22, 3.4f, 15);
+            Player Swine = new Player("Infested Swine", 100, 22, 3.4f, 15);
             Player Doomsday = new Player("Doomsday", 100, 10, 5.5f, 10);
             Player Aries = new Player("Aries", 100, 12, 7.8f, 13);
-            Player Jingles = new Player("Jester", 72, 25, 10.3f, 25);
+            Player Jingles = new Player("Jester", 100, 25, 10.3f, 25);
             Player CurrentPlayer = new Player();
             StateSystem<TurnStates> fsm = new StateSystem<TurnStates>();
 
@@ -28,10 +28,6 @@ namespace FSMAssessment
             //sets information into singleton
             GameManager.Instance.stateSystem = fsm;
             GameManager.Instance.CurrentPlayer = CurrentPlayer;
-            GameManager.Instance.Aries = Aries;
-            GameManager.Instance.Doomsday = Doomsday;
-            GameManager.Instance.Swine = Swine;
-            GameManager.Instance.Jingles = Jingles;
             GameManager.Instance.turnManager = turnManager;
 
 

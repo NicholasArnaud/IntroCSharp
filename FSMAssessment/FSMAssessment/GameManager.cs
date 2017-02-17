@@ -23,10 +23,6 @@ namespace FSMAssessment
         public TurnManager turnManager;
         public Player CurrentPlayer;
         public Player CurrentEnemy;
-        public Player Doomsday;
-        public Player Aries;
-        public Player Swine;
-        public Player Jingles;
         public StateSystem<TurnStates> stateSystem;
         public string currentState;
         public List<Player> Players;

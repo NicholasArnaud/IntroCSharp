@@ -15,8 +15,8 @@ namespace FSMAssessment
         {
             Debug.WriteLine("Starting Up");
             GameManager.Instance.currentState = "IDLE";
-            GameManager.Instance.CurrentPlayer = GameManager.Instance.Aries;
-            GameManager.Instance.CurrentEnemy = GameManager.Instance.Doomsday;
+            GameManager.Instance.CurrentPlayer = GameManager.Instance.Players[0];
+            GameManager.Instance.CurrentEnemy = GameManager.Instance.Players[1];
         }
 
         public void ToIdle()
@@ -24,12 +24,12 @@ namespace FSMAssessment
             Debug.WriteLine("Waiting...");
             if(GameManager.Instance.CurrentPlayer.IsDead)
             {
-                GameManager.Instance.combat.ChangePlayer(GameManager.Instance.Jingles);
+                GameManager.Instance.combat.ChangePlayer(GameManager.Instance.Players[2]);
                 Form1._Form1.SetMaxHealthBar();
             }
             if(GameManager.Instance.CurrentEnemy.IsDead)
             {
-                GameManager.Instance.combat.ChangeEnemy(GameManager.Instance.Swine);
+                GameManager.Instance.combat.ChangeEnemy(GameManager.Instance.Players[3]);
                 Form1._Form1.SetMaxHealthBar();
             }
         }

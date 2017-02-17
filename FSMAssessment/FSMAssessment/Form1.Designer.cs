@@ -193,7 +193,7 @@
         private System.Windows.Forms.MaskedTextBox EnemyName;
         private System.Windows.Forms.Button PotionButton;
         private System.Windows.Forms.Button PassTurn;
-        private System.Windows.Forms.Button HelpButton;
+        private new System.Windows.Forms.Button HelpButton;
     }
 }
 

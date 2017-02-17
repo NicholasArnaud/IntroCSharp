@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.IO;
 using System.Diagnostics;
@@ -63,8 +64,8 @@ namespace FSMAssessment
 
         public void SetMaxHealthBar()
         {
-            PlayerHealth.Maximum = (GameManager.Instance.CurrentPlayer.MaxHealth * 100) / 100;
-            EnemyHealth.Maximum = (GameManager.Instance.CurrentEnemy.MaxHealth * 100) / 100;
+            PlayerHealth.Maximum = GameManager.Instance.CurrentPlayer.MaxHealth;
+            EnemyHealth.Maximum = GameManager.Instance.CurrentEnemy.MaxHealth;
         }
 
         public void UpdateNames()
@@ -224,7 +225,7 @@ namespace FSMAssessment
             if (!gm.CurrentEnemy.IsDead)
                 gm.combat.PassAttack(gm.CurrentPlayer, gm.CurrentEnemy);
             else
-                gm.combat.PassAttack(gm.CurrentPlayer, gm.Swine);
+                gm.combat.PassAttack(gm.CurrentPlayer, gm.CurrentEnemy);
             gm.stateSystem.ChangeState("ENDTURN");
             StateFunctions();
 
@@ -246,8 +247,8 @@ namespace FSMAssessment
 
             //Loads previously saved information assuming files have been already created
             Debug.WriteLine("Loading previous save...");
-            gm.Players.ForEach(x => DataManager<Player>.Deserialize(x.Name));
-            
+            // gm.Players.ForEach(x =>DataManager<Player>.Deserialize(x.Name));
+            gm.Players = DataManager<List<Player>>.Deserialize("ListofPlayers");
             //Reloads how many potions have been used and reallows the ability to attack
             potionlimit = DataManager<int>.Deserialize("PotionUse");
             if (potionlimit <= 2) PotionButton.Enabled = true;
@@ -270,7 +271,8 @@ namespace FSMAssessment
 
             //Saves information on an xml file to be read later to be loaded
             Debug.WriteLine("Saving current progress...");
-            gm.Players.ForEach(x => DataManager<Player>.Serialize(x.Name, x));
+            DataManager<List<Player>>.Serialize("ListofPlayers", gm.Players);
+            // gm.Players.ForEach(x => DataManager<Player>.Serialize(x.Name, x));
 
             DataManager<int>.Serialize("PotionUse", potionlimit);
             DataManager<string>.Serialize("TextLog", TextLog.Text);
