@@ -3,10 +3,10 @@ using System.Diagnostics;
 
 namespace FSMAssessment
 {
-    public class TurnSystem
+    public class TurnManager
     {
         int i = 0;
-        public TurnSystem()
+        public TurnManager()
         {
             //Constructor
         }
@@ -18,7 +18,7 @@ namespace FSMAssessment
             GameManager.Instance.CurrentPlayer = GameManager.Instance.Aries;
         }
 
-        public void Idle()
+        public void ToIdle()
         {
             Debug.WriteLine("Waiting...");
             if(GameManager.Instance.CurrentPlayer.Health == 0)

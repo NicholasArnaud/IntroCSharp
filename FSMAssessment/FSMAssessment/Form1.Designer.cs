@@ -53,7 +53,7 @@
             // 
             // EnemyHealth
             // 
-            this.EnemyHealth.Location = new System.Drawing.Point(249, 131);
+            this.EnemyHealth.Location = new System.Drawing.Point(307, 130);
             this.EnemyHealth.Name = "EnemyHealth";
             this.EnemyHealth.Size = new System.Drawing.Size(100, 12);
             this.EnemyHealth.TabIndex = 1;
@@ -66,14 +66,14 @@
             this.TextLog.Name = "TextLog";
             this.TextLog.ReadOnly = true;
             this.TextLog.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.TextLog.Size = new System.Drawing.Size(337, 86);
+            this.TextLog.Size = new System.Drawing.Size(395, 86);
             this.TextLog.TabIndex = 2;
             this.TextLog.Text = "";
             this.TextLog.TextChanged += new System.EventHandler(this.TextLog_TextChanged);
             // 
             // AtkButton
             // 
-            this.AtkButton.Location = new System.Drawing.Point(139, 102);
+            this.AtkButton.Location = new System.Drawing.Point(168, 119);
             this.AtkButton.Name = "AtkButton";
             this.AtkButton.Size = new System.Drawing.Size(75, 23);
             this.AtkButton.TabIndex = 3;
@@ -83,7 +83,7 @@
             // 
             // LoadButton
             // 
-            this.LoadButton.Location = new System.Drawing.Point(12, 178);
+            this.LoadButton.Location = new System.Drawing.Point(12, 212);
             this.LoadButton.Name = "LoadButton";
             this.LoadButton.Size = new System.Drawing.Size(75, 23);
             this.LoadButton.TabIndex = 4;
@@ -93,7 +93,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(274, 178);
+            this.SaveButton.Location = new System.Drawing.Point(332, 212);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 23);
             this.SaveButton.TabIndex = 5;
@@ -103,7 +103,7 @@
             // 
             // ResetButton
             // 
-            this.ResetButton.Location = new System.Drawing.Point(139, 178);
+            this.ResetButton.Location = new System.Drawing.Point(168, 212);
             this.ResetButton.Name = "ResetButton";
             this.ResetButton.Size = new System.Drawing.Size(75, 23);
             this.ResetButton.TabIndex = 6;
@@ -122,7 +122,7 @@
             // 
             // EnemyName
             // 
-            this.EnemyName.Location = new System.Drawing.Point(249, 105);
+            this.EnemyName.Location = new System.Drawing.Point(307, 104);
             this.EnemyName.Name = "EnemyName";
             this.EnemyName.ReadOnly = true;
             this.EnemyName.Size = new System.Drawing.Size(100, 20);
@@ -141,7 +141,7 @@
             // 
             // EndTurn
             // 
-            this.EndTurn.Location = new System.Drawing.Point(139, 149);
+            this.EndTurn.Location = new System.Drawing.Point(168, 166);
             this.EndTurn.Name = "EndTurn";
             this.EndTurn.Size = new System.Drawing.Size(75, 23);
             this.EndTurn.TabIndex = 10;
@@ -151,7 +151,7 @@
             // 
             // HelpButton
             // 
-            this.HelpButton.Location = new System.Drawing.Point(274, 149);
+            this.HelpButton.Location = new System.Drawing.Point(332, 149);
             this.HelpButton.Name = "HelpButton";
             this.HelpButton.Size = new System.Drawing.Size(75, 23);
             this.HelpButton.TabIndex = 11;
@@ -163,7 +163,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(368, 213);
+            this.ClientSize = new System.Drawing.Size(419, 247);
             this.Controls.Add(this.HelpButton);
             this.Controls.Add(this.EndTurn);
             this.Controls.Add(this.PotionButton);
@@ -176,8 +176,9 @@
             this.Controls.Add(this.TextLog);
             this.Controls.Add(this.EnemyHealth);
             this.Controls.Add(this.PlayerHealth);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Form1";
-            this.Text = "KillSim";
+            this.Text = "Brightest Dungeon";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -21,7 +21,7 @@ namespace FSMAssessment
 
 
         public Combat combat;
-        public TurnSystem turnManager;
+        public TurnManager turnManager;
         public Player CurrentPlayer;
         public Player Doomsday;
         public Player Aries;

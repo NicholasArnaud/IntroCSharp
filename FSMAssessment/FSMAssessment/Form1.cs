@@ -43,12 +43,12 @@ namespace FSMAssessment
             UpdateLog("Welcome to Brightest Dungeon!");
             UpdateLog("This is much simplier than Darkest Dungeon...");
             UpdateLog("HOW TO PLAY:");
-            UpdateLog("You are the player on the left and your enemy is on the right.");
-            UpdateLog("To Attack your enemy, just press the attack button in the center.");
-            UpdateLog("You can also choose to pass your turn and not attack.");
-            UpdateLog("To heal your currrent player, just press the potion button to heal");
-            UpdateLog("To save or load the game, you can press the 2 buttom buttons on the far left and right.");
-            UpdateLog("Or you can restart your current game by pressing the reset button.");
+            UpdateLog("-You are the player on the left and your enemy is on the right.");
+            UpdateLog("-To Attack your enemy, just press the attack button in the center.");
+            UpdateLog("-You can also choose to pass your turn and not attack.");
+            UpdateLog("-To heal your currrent player, just press the potion button to heal");
+            UpdateLog("-To save or load the game, you can press the 2 buttom buttons on the far left and right");
+            UpdateLog("-You can also restart your current game by pressing the reset button.");
         }
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace FSMAssessment
                     gm.turnManager.ToStartUp();
                     break;
                 case "IDLE":
-                    gm.turnManager.Idle();
+                    gm.turnManager.ToIdle();
                     TextLog.SelectionStart = TextLog.Text.Length;
                     TextLog.ScrollToCaret();
                     break;
@@ -398,12 +398,14 @@ namespace FSMAssessment
             DataManager<int>.Serialize("AriesPlayer", gm.Aries.MaxHealth);
             DataManager<int>.Serialize("DoomsdayPlayer", gm.Doomsday.MaxHealth);
             DataManager<int>.Serialize("SwinePlayer", gm.Swine.MaxHealth);
+            DataManager<int>.Serialize("CurrentPlayer", gm.CurrentPlayer.MaxHealth);
             DataManager<string>.Serialize("Textlog", TextLog.Text = "");
             DataManager<int>.Serialize("PotionUse", potionlimit = 0);
 
             //Loads the reseted data
-            PlayerHealth.Value = gm.Aries.Health = DataManager<int>.Deserialize("AriesPlayer");
-            EnemyHealth.Maximum = gm.Doomsday.MaxHealth;
+            PlayerHealth.Maximum = gm.CurrentPlayer.MaxHealth = DataManager<int>.Deserialize("CurrentPlayer");
+            PlayerHealth.Value = gm.CurrentPlayer.Health = DataManager<int>.Deserialize("CurrentPlayer");
+            EnemyHealth.Maximum = gm.Doomsday.MaxHealth = DataManager<int>.Deserialize("Doomsday");
             EnemyHealth.Value = gm.Doomsday.Health = DataManager<int>.Deserialize("DoomsdayPlayer");
             EnemyName.Text = gm.Doomsday.Name;
             gm.Swine.Health = DataManager<int>.Deserialize("SwinePlayer");

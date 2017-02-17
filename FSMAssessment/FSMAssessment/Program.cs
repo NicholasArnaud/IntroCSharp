@@ -23,7 +23,7 @@ namespace FSMAssessment
             Player CurrentPlayer = new Player();
             StateSystem<TurnStates> fsm = new StateSystem<TurnStates>();
 
-            TurnSystem turnManager = new TurnSystem();
+            TurnManager turnManager = new TurnManager();
 
             //sets information into singleton
             GameManager.Instance.stateSystem = fsm;

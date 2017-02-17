@@ -20,20 +20,20 @@ namespace FSMAssessment
 
         public void ToEnter()
         {
+            GameManager gm = GameManager.Instance;
             //enters the attack function depending on which enemy is active
             Debug.WriteLine("Entering Attack...");
-            if (GameManager.Instance.Doomsday.Health != 0 && GameManager.Instance.Aries.Health != 0)
-                ToAttack(GameManager.Instance.Aries, GameManager.Instance.Doomsday);
-            else if (GameManager.Instance.Swine.Health != 0 && GameManager.Instance.Aries.Health != 0)
-                ToAttack(GameManager.Instance.Aries, GameManager.Instance.Swine);
-            else if (GameManager.Instance.Doomsday.Health != 0 && GameManager.Instance.Jingles.Health != 0)
-                ToAttack(GameManager.Instance.Jingles, GameManager.Instance.Doomsday);
-            else if (GameManager.Instance.Swine.Health != 0 && GameManager.Instance.Jingles.Health != 0)
-                ToAttack(GameManager.Instance.Jingles, GameManager.Instance.Swine);
+            if (gm.Doomsday.Health != 0 && gm.CurrentPlayer.Health != 0)
+                ToAttack(gm.CurrentPlayer, gm.Doomsday);
+            else if (gm.Swine.Health != 0 && gm.CurrentPlayer.Health != 0)
+                ToAttack(gm.CurrentPlayer, gm.Swine);
+            //else if (GameManager.Instance.Doomsday.Health != 0 && GameManager.Instance.Jingles.Health != 0)
+            //    ToAttack(GameManager.Instance.Jingles, GameManager.Instance.Doomsday);
+            //else if (GameManager.Instance.Swine.Health != 0 && GameManager.Instance.Jingles.Health != 0)
+            //    ToAttack(GameManager.Instance.Jingles, GameManager.Instance.Swine);
             else
                 return;
         }
-
         public void PassAttack(Player player, Player enemy)
         {
             //Runs just the enemy's attack 
