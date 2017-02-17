@@ -38,7 +38,7 @@
             this.PlayerName = new System.Windows.Forms.MaskedTextBox();
             this.EnemyName = new System.Windows.Forms.MaskedTextBox();
             this.PotionButton = new System.Windows.Forms.Button();
-            this.EndTurn = new System.Windows.Forms.Button();
+            this.PassTurn = new System.Windows.Forms.Button();
             this.HelpButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -139,15 +139,15 @@
             this.PotionButton.UseVisualStyleBackColor = true;
             this.PotionButton.Click += new System.EventHandler(this.Potion_Click);
             // 
-            // EndTurn
+            // PassTurn
             // 
-            this.EndTurn.Location = new System.Drawing.Point(168, 166);
-            this.EndTurn.Name = "EndTurn";
-            this.EndTurn.Size = new System.Drawing.Size(75, 23);
-            this.EndTurn.TabIndex = 10;
-            this.EndTurn.Text = "Pass Turn";
-            this.EndTurn.UseVisualStyleBackColor = true;
-            this.EndTurn.Click += new System.EventHandler(this.EndTurn_Click);
+            this.PassTurn.Location = new System.Drawing.Point(168, 166);
+            this.PassTurn.Name = "PassTurn";
+            this.PassTurn.Size = new System.Drawing.Size(75, 23);
+            this.PassTurn.TabIndex = 10;
+            this.PassTurn.Text = "Pass Turn";
+            this.PassTurn.UseVisualStyleBackColor = true;
+            this.PassTurn.Click += new System.EventHandler(this.PassTurn_Click);
             // 
             // HelpButton
             // 
@@ -165,7 +165,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(419, 247);
             this.Controls.Add(this.HelpButton);
-            this.Controls.Add(this.EndTurn);
+            this.Controls.Add(this.PassTurn);
             this.Controls.Add(this.PotionButton);
             this.Controls.Add(this.EnemyName);
             this.Controls.Add(this.PlayerName);
@@ -197,7 +197,7 @@
         private System.Windows.Forms.MaskedTextBox PlayerName;
         private System.Windows.Forms.MaskedTextBox EnemyName;
         private System.Windows.Forms.Button PotionButton;
-        private System.Windows.Forms.Button EndTurn;
+        private System.Windows.Forms.Button PassTurn;
         private System.Windows.Forms.Button HelpButton;
     }
 }

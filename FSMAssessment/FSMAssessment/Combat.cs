@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Diagnostics;
 
 namespace FSMAssessment
@@ -11,7 +7,7 @@ namespace FSMAssessment
     {
         //sets turn manager variables
         private int turntoken = 0;
-        public string combatLog;
+        public string combatLog;        
 
         public Combat()
         {
