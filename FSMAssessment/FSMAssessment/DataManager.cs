@@ -9,13 +9,15 @@ namespace FSMAssessment
     /// <typeparam name="T"></typeparam>
     class DataManager<T>
     {
+        public static string folderName = @"Save\";
         //saves called data into an xml file
         public static void Serialize(string filename, T data)
         {
-           //The class "XmlSerializer" comes from the namespace of "System.Xml.Serialization" to change data into save data in an xml format
+            //The class "XmlSerializer" comes from the namespace of "System.Xml.Serialization" to change data into save data in an xml format
             XmlSerializer serializer = new XmlSerializer(typeof(T));
+            Directory.CreateDirectory(folderName);
             //The class "TextWriter" comes from the namespace of "System.IO" to create an xml document for information to be placed
-            TextWriter writer = new StreamWriter(@"" + filename + ".xml");
+            TextWriter writer = new StreamWriter(folderName + filename + ".xml");
             serializer.Serialize(writer, data);
             writer.Close();
         }
@@ -25,7 +27,7 @@ namespace FSMAssessment
         {
             T data;
             XmlSerializer serializer = new XmlSerializer(typeof(T));
-            TextReader reader = new StreamReader(@"" + filename + ".xml");
+            TextReader reader = new StreamReader(folderName + filename + ".xml");
             data = (T)serializer.Deserialize(reader);
             reader.Close();
             return data;

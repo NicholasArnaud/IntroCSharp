@@ -11,6 +11,7 @@ namespace FSMAssessment
     {
         //sets turn manager variables
         private int turntoken = 0;
+        public string combatLog;
 
         public Combat()
         {
@@ -33,6 +34,20 @@ namespace FSMAssessment
                 return;
         }
 
+        public void PassAttack(Player player, Player enemy)
+        {
+            //Runs just the enemy's attack 
+            player.Health -= enemy.Power;
+            turntoken = 0;
+            combatLog += enemy.Name + " has attacked " + player.Name + " for " + enemy.Power.ToString() + " damage \n";
+            Debug.WriteLine("Attacked");
+            if (player.Health == 0)
+            {
+                ToDeath(player);
+                return;
+            }
+            ToExit();
+        }
         public void ToAttack(Player current, Player target)
         {
             //sets a dmg value for the current player
@@ -42,55 +57,37 @@ namespace FSMAssessment
             int crit = rnd.Next(0, 10);
             int enemyCrit = rnd.Next(0, 22);
 
-            //first checks to see if player decided to just end his turn by pressing the "Pass Turn" button
-            if (Form1._Form1.CheckEndButton() == true)
+            //checks to make sure current player and target enemy isn't dead
+            if (current.Health != 0 && target.Health != 0)
             {
-                //Runs just the enemy's attack 
+                dmg += crit;
+                target.Health -= dmg;
+                combatLog += current.Name + " has attacked " + target.Name + " for " + dmg.ToString() + " damage \n";
+                turntoken += 1;
+            }
+
+            //runs the enemy's turn to attack
+            if (turntoken >= 1)
+            {
                 current.Health -= (enemyCrit + target.Power);
                 turntoken = 0;
-                Form1._Form1.UpdateLog(target.Name + " has attacked " + current.Name + " for " + (enemyCrit + target.Power).ToString() + " damage");
-                Form1._Form1.UpdateHealthBar(current, "PlayerHealth");
-                Debug.WriteLine("Attacked");
-                if (current.Health == 0)
-                {
-                    ToDeath(current);
-                    return;
-                }
+                combatLog += target.Name + " has attacked " + current.Name + " for " + (enemyCrit + target.Power).ToString() + " damage \n";
             }
-            else
+            
+            Debug.WriteLine("Attacked");
+
+
+            //runs death function if the current player is dead or the enemy is dead
+            if (target.Health == 0)
             {
-                //checks to make sure current player and target enemy isn't dead
-                if (current.Health != 0 && target.Health != 0)
-                {
-                    dmg += crit;
-                    target.Health -= dmg;
-                    Form1._Form1.UpdateLog(current.Name + " has attacked " + target.Name + " for " + dmg.ToString() + " damage");
-                    turntoken += 1;
-                }
-
-                //runs the enemy's turn to attack
-                if (turntoken >= 1)
-                {
-                    current.Health -= (enemyCrit + target.Power);
-                    turntoken = 0;
-                    Form1._Form1.UpdateLog(target.Name + " has attacked " + current.Name + " for " + (enemyCrit + target.Power).ToString() + " damage");
-                }
-                Form1._Form1.UpdateHealthBar(current, "PlayerHealth");
-                Debug.WriteLine("Attacked");
-
-
-                //runs death function if the current player is dead or the enemy is dead
-                if (target.Health == 0)
-                {
-                    current.Health = current.MaxHealth;
-                    ToDeath(target);
-                    return;
-                }
-                else if (current.Health == 0)
-                {
-                    ToDeath(current);
-                    return;
-                }
+                current.Health = current.MaxHealth;
+                ToDeath(target);
+                return;
+            }
+            else if (current.Health == 0)
+            {
+                ToDeath(current);
+                return;
             }
             //goes to the exit combat function if the current player isnt dead
             if (current.Health != 0)
@@ -100,8 +97,8 @@ namespace FSMAssessment
         public void ToDeath(Player current)
         {
             Debug.WriteLine("A player is Dead");
-            Form1._Form1.UpdateLog(current.Name + " is dead");
-            GameManager.Instance.Players.Remove(current);
+            combatLog += current.Name + " is dead \n";
+          //  GameManager.Instance.Players.Remove(current);
             //Goes to function to leave the combat state
             ToExit();
         }
@@ -109,7 +106,8 @@ namespace FSMAssessment
         public void ToExit()
         {
             //simply states that the combat state is over
-            Form1._Form1.UpdateLog("End of combat turn...");
+            combatLog += "End of combat turn... \n";
+            combatLog += "-------------------------- \n";
             Debug.WriteLine("End of Combat");
         }
     }

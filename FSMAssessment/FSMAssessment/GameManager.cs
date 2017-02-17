@@ -27,7 +27,7 @@ namespace FSMAssessment
         public Player Aries;
         public Player Swine;
         public Player Jingles;
-        public StateSystem<TurnStates> fsm;
+        public StateSystem<TurnStates> stateSystem;
         public string currentState;
         public List<Player> Players;
     }

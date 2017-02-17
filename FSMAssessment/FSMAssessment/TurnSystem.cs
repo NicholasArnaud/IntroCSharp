@@ -15,12 +15,17 @@ namespace FSMAssessment
         {
             Debug.WriteLine("Starting Up");
             GameManager.Instance.currentState = "IDLE";
+            GameManager.Instance.CurrentPlayer = GameManager.Instance.Aries;
         }
 
         public void Idle()
         {
             Debug.WriteLine("Waiting...");
-            GameManager.Instance.CurrentPlayer = GameManager.Instance.Players[0];
+            if(GameManager.Instance.CurrentPlayer.Health == 0)
+            {
+                GameManager.Instance.CurrentPlayer = GameManager.Instance.Jingles;
+               // GameManager.Instance.CurrentPlayer = GameManager.Instance.Players[i];
+            }
         }
 
         public void ToChoosePlayer()
@@ -37,8 +42,10 @@ namespace FSMAssessment
 
         public void ToEndTurn()
         {
+            GameManager.Instance.currentState = "IDLE";
             Form1._Form1.UpdateLog("\n" + "End of Turn" + "\n");
             Debug.WriteLine("Ending Turn");
+            
         }
     }
 }
