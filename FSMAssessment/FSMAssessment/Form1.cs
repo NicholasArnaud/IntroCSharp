@@ -115,7 +115,7 @@ namespace FSMAssessment
             UpdateLog("-To Attack your enemy, just press the attack button in the center.");
             UpdateLog("-You can also choose to pass your turn and not attack.");
             UpdateLog("-To heal your currrent player, just press the potion button to heal");
-            UpdateLog("-To save or load the game, you can press the 2 buttom buttons on the far left and right");
+            UpdateLog("-To save or load the game, you can press the two bottom buttons on the far left and right");
             UpdateLog("-You can also restart your current game by pressing the reset button.");
         }
 
@@ -126,8 +126,6 @@ namespace FSMAssessment
         public void PotionUse(Player player)
         {
             potionlimit += 1;
-            if (PlayerName.Text == player.Name)
-            {
                 if (potionlimit < 3)
                 {
                     player.Heal(player.MaxHealth - player.Health);
@@ -135,9 +133,6 @@ namespace FSMAssessment
                 }
                 else
                     PotionButton.Enabled = false;
-            }
-            else
-                return;
             TextLog.AppendText("Player has healed and now has used " + (potionlimit) + " potions. \n");
         }
 
@@ -253,11 +248,15 @@ namespace FSMAssessment
             potionlimit = DataManager<int>.Deserialize("PotionUse");
             if (potionlimit <= 2) PotionButton.Enabled = true;
 
+            gm.CurrentPlayer = DataManager<Player>.Deserialize("CurrentPlayer");
+            gm.CurrentEnemy = DataManager<Player>.Deserialize("CurrentEnemy");
             SetMaxHealthBar();
             UpdateHealthBar();
             UpdateNames();
             TextLog.AppendText("Previous Save Loaded... \n");
             Debug.WriteLine("Previous Save Loaded");
+            TextLog.SelectionStart = TextLog.Text.Length;
+            TextLog.ScrollToCaret();
         }
 
         /// <summary>
@@ -272,10 +271,18 @@ namespace FSMAssessment
             //Saves information on an xml file to be read later to be loaded
             Debug.WriteLine("Saving current progress...");
             DataManager<List<Player>>.Serialize("ListofPlayers", gm.Players);
+            DataManager<Player>.Serialize("CurrentPlayer", gm.CurrentPlayer);
+            DataManager<Player>.Serialize("CurrentEnemy", gm.CurrentEnemy);
+
+            //Lambda version of serializing all the players
+            //"x" represents a "token" player and goes through the entire list of players to serialize with the file name being
+            // "x.name" which will be the players name and saves the player of the class 
             // gm.Players.ForEach(x => DataManager<Player>.Serialize(x.Name, x));
 
             DataManager<int>.Serialize("PotionUse", potionlimit);
             DataManager<string>.Serialize("TextLog", TextLog.Text);
+            TextLog.SelectionStart = TextLog.Text.Length;
+            TextLog.ScrollToCaret();
         }
 
         /// <summary>
@@ -288,8 +295,7 @@ namespace FSMAssessment
             GameManager gm = GameManager.Instance;
 
             //Resets data
-            DataManager<Player>.Serialize("CurrentPlayer", gm.CurrentPlayer);
-            DataManager<Player>.Serialize("CurrentEnemy", gm.CurrentEnemy);
+
 
             DataManager<string>.Serialize("Textlog", TextLog.Text = "");
             DataManager<int>.Serialize("PotionUse", potionlimit = 0);
@@ -297,6 +303,7 @@ namespace FSMAssessment
             //Loads the reseted data
             gm.CurrentPlayer = DataManager<Player>.Deserialize("CurrentPlayer");
             gm.CurrentEnemy = DataManager<Player>.Deserialize("CurrentEnemy");
+            gm.Players = DataManager<List<Player>>.Deserialize("ListofPlayers");
 
             SetMaxHealthBar();
             UpdateHealthBar();

@@ -44,7 +44,7 @@
             // 
             // PlayerHealth
             // 
-            this.PlayerHealth.Location = new System.Drawing.Point(12, 131);
+            this.PlayerHealth.Location = new System.Drawing.Point(12, 166);
             this.PlayerHealth.Name = "PlayerHealth";
             this.PlayerHealth.Size = new System.Drawing.Size(100, 12);
             this.PlayerHealth.TabIndex = 0;
@@ -52,7 +52,7 @@
             // 
             // EnemyHealth
             // 
-            this.EnemyHealth.Location = new System.Drawing.Point(307, 130);
+            this.EnemyHealth.Location = new System.Drawing.Point(329, 166);
             this.EnemyHealth.Name = "EnemyHealth";
             this.EnemyHealth.Size = new System.Drawing.Size(100, 12);
             this.EnemyHealth.TabIndex = 1;
@@ -64,15 +64,15 @@
             this.TextLog.Name = "TextLog";
             this.TextLog.ReadOnly = true;
             this.TextLog.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.TextLog.Size = new System.Drawing.Size(395, 86);
+            this.TextLog.Size = new System.Drawing.Size(417, 86);
             this.TextLog.TabIndex = 2;
             this.TextLog.Text = "";
             // 
             // AtkButton
             // 
-            this.AtkButton.Location = new System.Drawing.Point(168, 119);
+            this.AtkButton.Location = new System.Drawing.Point(177, 132);
             this.AtkButton.Name = "AtkButton";
-            this.AtkButton.Size = new System.Drawing.Size(75, 23);
+            this.AtkButton.Size = new System.Drawing.Size(75, 34);
             this.AtkButton.TabIndex = 3;
             this.AtkButton.Text = "Attack";
             this.AtkButton.UseVisualStyleBackColor = true;
@@ -80,9 +80,9 @@
             // 
             // LoadButton
             // 
-            this.LoadButton.Location = new System.Drawing.Point(12, 212);
+            this.LoadButton.Location = new System.Drawing.Point(12, 248);
             this.LoadButton.Name = "LoadButton";
-            this.LoadButton.Size = new System.Drawing.Size(75, 23);
+            this.LoadButton.Size = new System.Drawing.Size(75, 27);
             this.LoadButton.TabIndex = 4;
             this.LoadButton.Text = "Load";
             this.LoadButton.UseVisualStyleBackColor = true;
@@ -90,9 +90,9 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(332, 212);
+            this.SaveButton.Location = new System.Drawing.Point(344, 248);
             this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveButton.Size = new System.Drawing.Size(85, 27);
             this.SaveButton.TabIndex = 5;
             this.SaveButton.Text = "Save";
             this.SaveButton.UseVisualStyleBackColor = true;
@@ -100,7 +100,7 @@
             // 
             // ResetButton
             // 
-            this.ResetButton.Location = new System.Drawing.Point(168, 212);
+            this.ResetButton.Location = new System.Drawing.Point(177, 248);
             this.ResetButton.Name = "ResetButton";
             this.ResetButton.Size = new System.Drawing.Size(75, 23);
             this.ResetButton.TabIndex = 6;
@@ -110,25 +110,25 @@
             // 
             // PlayerName
             // 
-            this.PlayerName.Location = new System.Drawing.Point(12, 105);
+            this.PlayerName.Location = new System.Drawing.Point(12, 140);
             this.PlayerName.Name = "PlayerName";
             this.PlayerName.ReadOnly = true;
             this.PlayerName.Size = new System.Drawing.Size(100, 20);
-            this.PlayerName.TabIndex = 7;            
+            this.PlayerName.TabIndex = 7;
             // 
             // EnemyName
             // 
-            this.EnemyName.Location = new System.Drawing.Point(307, 104);
+            this.EnemyName.Location = new System.Drawing.Point(329, 140);
             this.EnemyName.Name = "EnemyName";
             this.EnemyName.ReadOnly = true;
             this.EnemyName.Size = new System.Drawing.Size(100, 20);
-            this.EnemyName.TabIndex = 8;            
+            this.EnemyName.TabIndex = 8;
             // 
             // PotionButton
             // 
-            this.PotionButton.Location = new System.Drawing.Point(12, 149);
+            this.PotionButton.Location = new System.Drawing.Point(12, 194);
             this.PotionButton.Name = "PotionButton";
-            this.PotionButton.Size = new System.Drawing.Size(75, 23);
+            this.PotionButton.Size = new System.Drawing.Size(86, 34);
             this.PotionButton.TabIndex = 9;
             this.PotionButton.Text = "Potion";
             this.PotionButton.UseVisualStyleBackColor = true;
@@ -136,7 +136,7 @@
             // 
             // PassTurn
             // 
-            this.PassTurn.Location = new System.Drawing.Point(168, 166);
+            this.PassTurn.Location = new System.Drawing.Point(177, 194);
             this.PassTurn.Name = "PassTurn";
             this.PassTurn.Size = new System.Drawing.Size(75, 23);
             this.PassTurn.TabIndex = 10;
@@ -146,9 +146,9 @@
             // 
             // HelpButton
             // 
-            this.HelpButton.Location = new System.Drawing.Point(332, 149);
+            this.HelpButton.Location = new System.Drawing.Point(329, 194);
             this.HelpButton.Name = "HelpButton";
-            this.HelpButton.Size = new System.Drawing.Size(75, 23);
+            this.HelpButton.Size = new System.Drawing.Size(100, 34);
             this.HelpButton.TabIndex = 11;
             this.HelpButton.Text = "Help";
             this.HelpButton.UseVisualStyleBackColor = true;
@@ -158,7 +158,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(419, 247);
+            this.ClientSize = new System.Drawing.Size(441, 287);
             this.Controls.Add(this.HelpButton);
             this.Controls.Add(this.PassTurn);
             this.Controls.Add(this.PotionButton);

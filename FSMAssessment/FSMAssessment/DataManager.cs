@@ -10,6 +10,7 @@ namespace FSMAssessment
     class DataManager<T>
     {
         public static string folderName = @"Save\";
+        
         //saves called data into an xml file
         public static void Serialize(string filename, T data)
         {
