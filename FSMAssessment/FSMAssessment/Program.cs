@@ -16,12 +16,12 @@ namespace FSMAssessment
         {
             GameManager.Instance.Players = new List<Player>();
             //creates all the needed entities on the start of the process
-            Player Swine = new Player("Infested Swine", 100, 22, 3.4f, 15);
-            Player Doomsday = new Player("Doomsday", 100, 10, 5.5f, 10);
-            Player Aries = new Player("Aries", 100, 12, 7.8f, 13);
-            Player Jingles = new Player("Jester", 100, 25, 10.3f, 25);
-            Player Vyral = new Player("Vyral", 100, 15, 6, 9);
-            Player Syran = new Player("Syran", 100, 20, 8.7f, 5);
+            Player Swine = new Player("Infested Swine", 100, 5, 3.4f, 6);
+            Player Doomsday = new Player("Doomsday", 100, 6, 5.5f, 4);
+            Player Aries = new Player("Aries", 100, 2, 7.8f, 7);
+            Player Jingles = new Player("Jester", 100, 3, 10.3f, 5);
+            Player Vyral = new Player("Vyral", 100, 4, 6, 2);
+            Player Syran = new Player("Syran", 100, 5, 8.7f, 4);
             Player CurrentPlayer = new Player();
             Player CurrentEnemy = new Player();
             StateSystem<TurnStates> fsm = new StateSystem<TurnStates>();

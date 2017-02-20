@@ -5,7 +5,8 @@ namespace FSMAssessment
 {
     public class TurnManager
     {
-        int i = 0;
+        int pCountCheck = 0;
+        int playernum = 0;
         public TurnManager()
         {
             //Constructor
@@ -13,6 +14,7 @@ namespace FSMAssessment
 
         public void ToStartUp()
         {
+
             Debug.WriteLine("Starting Up");
             GameManager.Instance.currentState = "IDLE";
             GameManager.Instance.CurrentPlayer = GameManager.Instance.Players[0];
@@ -21,31 +23,61 @@ namespace FSMAssessment
 
         public void ToIdle()
         {
+            GameManager gm = GameManager.Instance;
             Debug.WriteLine("Waiting...");
-            if(GameManager.Instance.CurrentPlayer.IsDead)
+            if (gm.CurrentPlayer.IsDead && playernum !=gm.Players.Count -1)
             {
-                GameManager.Instance.combat.ChangePlayer(GameManager.Instance.Players[2]);
+                playernum += 1;
+                gm.combat.ChangePlayer(gm.Players[playernum]);
+                if (gm.CurrentEnemy.Name == gm.CurrentPlayer.Name || gm.CurrentPlayer.Name == gm.CurrentPlayer.Name && playernum != gm.Players.Count - 1)
+                {
+                    playernum += 1;
+                    gm.combat.ChangePlayer(gm.Players[playernum]);
+                }
                 Form1._Form1.SetMaxHealthBar();
             }
-            if(GameManager.Instance.CurrentEnemy.IsDead)
+            if (gm.CurrentEnemy.IsDead && playernum != gm.Players.Count -1)
             {
-                GameManager.Instance.combat.ChangeEnemy(GameManager.Instance.Players[3]);
+                playernum += 1;
+                gm.combat.ChangeEnemy(gm.Players[playernum]);
+                if (gm.CurrentEnemy.Name == gm.CurrentPlayer.Name || gm.CurrentEnemy.Name == gm.CurrentEnemy.Name && playernum != gm.Players.Count - 1)
+                {
+                    playernum += 1;
+                    gm.combat.ChangeEnemy(gm.Players[playernum]);
+                }
                 Form1._Form1.SetMaxHealthBar();
+            }
+            if (playernum == gm.Players.Count -1)
+            {
+                CheckDead();
             }
         }
 
         public void ToChoosePlayer()
         {
-            i++;
-            if (i == GameManager.Instance.Players.Count) i = 0;
+            pCountCheck++;
+            if (pCountCheck == GameManager.Instance.Players.Count) pCountCheck = 0;
             Debug.WriteLine("Choosing Player Turns");
             Debug.WriteLine("Turn Order: ");
             // Lambda function to iterate through the entire length of the list and prints the order of 
             //players in the debugger
-            GameManager.Instance.Players.ForEach((x => 
+            GameManager.Instance.Players.ForEach((x =>
                 Debug.WriteLine(GameManager.Instance.Players.IndexOf(x) + " " + x.ToString())));
             Debug.WriteLine("Current Player is: " + GameManager.Instance.CurrentPlayer.Name);
-            Debug.WriteLine("Current Player is: " + GameManager.Instance.CurrentEnemy.Name);
+            Debug.WriteLine("Current Enemy is: " + GameManager.Instance.CurrentEnemy.Name);
+        }
+
+        public bool CheckDead()
+        {
+            if (GameManager.Instance.CurrentPlayer.IsDead == true)
+            {
+                return true;
+            }
+            if (GameManager.Instance.CurrentEnemy.IsDead == true)
+            {
+                return true;
+            }
+            return false;
         }
 
         public void ToEndTurn()
@@ -53,7 +85,7 @@ namespace FSMAssessment
             GameManager.Instance.currentState = "IDLE";
             ToIdle();
             Form1._Form1.UpdateLog("\n" + "End of Turn" + "\n");
-            Debug.WriteLine("Ending Turn");            
+            Debug.WriteLine("Ending Turn");
         }
     }
 }

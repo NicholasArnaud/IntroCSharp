@@ -40,11 +40,11 @@ namespace FSMAssessment
             //Runs just the enemy's attack 
             target.Attack(player);
             turntoken = 0;
-            combatLog += target.Name + " has attacked " + player.Name + " for " + target.Power.ToString() + " damage \n";
+            combatLog += target.Name + " has attacked " + player.Name + " for " + (target.crit + target.Power).ToString() + " damage \n";
             Debug.WriteLine("Attacked");
             if (player.IsDead)
             {
-                ToDeath(player);
+                ToDeath(player, target);
                 return;
             }
             ToExit();
@@ -71,12 +71,12 @@ namespace FSMAssessment
             //runs death function if the current player is dead or the enemy is dead
             if (target.IsDead)
             {
-                ToDeath(target);
+                ToDeath(target, current);
                 return;
             }
             else if (current.IsDead)
             {
-                ToDeath(current);
+                ToDeath(current, target);
                 return;
             }
             //goes to the exit combat function if the current player isnt dead
@@ -84,11 +84,14 @@ namespace FSMAssessment
                 ToExit();
         }
 
-        public void ToDeath(Player current)
+        public void ToDeath(Player current,Player target)
         {
             Debug.WriteLine("A player is Dead");
             combatLog += current.Name + " is dead \n";
             //Goes to function to leave the combat state
+            target.Lvl++;
+
+            target.Lvling();
             ToExit();
         }
 

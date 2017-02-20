@@ -21,6 +21,7 @@ namespace FSMAssessment
             m_speed = Speed;
             m_maxHealth = m_health;
             m_critMax = CritMax;
+            m_lvl = 1;
             GameManager.Instance.Players.Add(this);
         }
 
@@ -66,6 +67,12 @@ namespace FSMAssessment
             get { return m_isDead; }
             set { m_isDead = value; }
         }
+        public int Lvl
+        {
+            get { return m_lvl; }
+            set { m_lvl = value; }
+        }
+
 
         public override string ToString()
         {
@@ -91,11 +98,23 @@ namespace FSMAssessment
         public void Attack(Player target)
         {
             Random rnd = new Random();
-             crit = rnd.Next(0, CritMax);
+            crit = rnd.Next(0, CritMax);
             int damage = m_power + crit;
             target.TakeDamage(damage);
         }
 
+        public void Lvling()
+        {
+            m_health = m_maxHealth;
+            if (Lvl % 2 == 0)
+            {
+                CritMax += 4;
+                Power += 1;
+            }
+        }
+
+
+        private int m_lvl;
         public int crit;
         private int m_critMax;
         private bool m_isDead;

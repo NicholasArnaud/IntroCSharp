@@ -40,6 +40,8 @@
             this.PotionButton = new System.Windows.Forms.Button();
             this.PassTurn = new System.Windows.Forms.Button();
             this.HelpButton = new System.Windows.Forms.Button();
+            this.Playerlvl = new System.Windows.Forms.TextBox();
+            this.Enemylvl = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // PlayerHealth
@@ -60,17 +62,18 @@
             // 
             // TextLog
             // 
+            this.TextLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TextLog.Location = new System.Drawing.Point(12, 13);
             this.TextLog.Name = "TextLog";
             this.TextLog.ReadOnly = true;
             this.TextLog.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.TextLog.Size = new System.Drawing.Size(417, 86);
+            this.TextLog.Size = new System.Drawing.Size(439, 113);
             this.TextLog.TabIndex = 2;
             this.TextLog.Text = "";
             // 
             // AtkButton
             // 
-            this.AtkButton.Location = new System.Drawing.Point(177, 132);
+            this.AtkButton.Location = new System.Drawing.Point(187, 132);
             this.AtkButton.Name = "AtkButton";
             this.AtkButton.Size = new System.Drawing.Size(75, 34);
             this.AtkButton.TabIndex = 3;
@@ -100,7 +103,7 @@
             // 
             // ResetButton
             // 
-            this.ResetButton.Location = new System.Drawing.Point(177, 248);
+            this.ResetButton.Location = new System.Drawing.Point(187, 248);
             this.ResetButton.Name = "ResetButton";
             this.ResetButton.Size = new System.Drawing.Size(75, 23);
             this.ResetButton.TabIndex = 6;
@@ -136,7 +139,7 @@
             // 
             // PassTurn
             // 
-            this.PassTurn.Location = new System.Drawing.Point(177, 194);
+            this.PassTurn.Location = new System.Drawing.Point(187, 194);
             this.PassTurn.Name = "PassTurn";
             this.PassTurn.Size = new System.Drawing.Size(75, 23);
             this.PassTurn.TabIndex = 10;
@@ -154,11 +157,29 @@
             this.HelpButton.UseVisualStyleBackColor = true;
             this.HelpButton.Click += new System.EventHandler(this.HelpButton_Click);
             // 
+            // Playerlvl
+            // 
+            this.Playerlvl.Location = new System.Drawing.Point(118, 132);
+            this.Playerlvl.Name = "Playerlvl";
+            this.Playerlvl.ReadOnly = true;
+            this.Playerlvl.Size = new System.Drawing.Size(53, 20);
+            this.Playerlvl.TabIndex = 12;
+            // 
+            // Enemylvl
+            // 
+            this.Enemylvl.Location = new System.Drawing.Point(268, 132);
+            this.Enemylvl.Name = "Enemylvl";
+            this.Enemylvl.ReadOnly = true;
+            this.Enemylvl.Size = new System.Drawing.Size(55, 20);
+            this.Enemylvl.TabIndex = 13;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(441, 287);
+            this.ClientSize = new System.Drawing.Size(463, 287);
+            this.Controls.Add(this.Enemylvl);
+            this.Controls.Add(this.Playerlvl);
             this.Controls.Add(this.HelpButton);
             this.Controls.Add(this.PassTurn);
             this.Controls.Add(this.PotionButton);
@@ -194,6 +215,8 @@
         private System.Windows.Forms.Button PotionButton;
         private System.Windows.Forms.Button PassTurn;
         private new System.Windows.Forms.Button HelpButton;
+        private System.Windows.Forms.TextBox Playerlvl;
+        private System.Windows.Forms.TextBox Enemylvl;
     }
 }
 
